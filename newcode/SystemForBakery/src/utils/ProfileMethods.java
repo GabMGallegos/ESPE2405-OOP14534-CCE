@@ -8,6 +8,8 @@ package utils;
  *
  * @author plusm
  */
-public class FileManager {
-    
+public class ProfileMethods {
+    public ProfileMethods(){
+        
+    }
 }
