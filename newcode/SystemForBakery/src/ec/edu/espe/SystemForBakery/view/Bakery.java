@@ -5,13 +5,13 @@ import ec.edu.espe.SystemForBakery.model.Profile;
 
 import java.io.IOException;
 import java.util.Scanner;
-import utils.FileManage;
+import utils.FileManager;
 
 
 
 
 public class Bakery{
-    //bfgnn
+    
     public static void main(String[] args) {
         System.out.println("Team Code Crafting");
         Scanner scanner = new Scanner(System.in);
@@ -39,7 +39,7 @@ public class Bakery{
             Profile profile = new Profile(profile_id, nameProfile, description);
             String data = profile.toCSV();
             try {
-                FileManage.save(data, "profile", fileType);
+                FileManager.save(data, "profile", fileType);
             } catch (IOException e) {
                 System.err.println("An error occurred while saving the data: " + e.getMessage());
             }

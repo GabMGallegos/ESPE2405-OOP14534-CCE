@@ -9,7 +9,7 @@ import java.io.IOException;
  *
  * @author Leydi Oña, Lenovo, DCCO-ESPE
  */
-public class FileManage {
+public class FileManager {
     public static void save(String data, String fileName, String type) throws IOException {
         // Verifica que el tipo sea CSV o TXT
         if (!type.equalsIgnoreCase("csv") && !type.equalsIgnoreCase("txt")) {
