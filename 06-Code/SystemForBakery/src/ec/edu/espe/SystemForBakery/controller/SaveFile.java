@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * @author CODE_CRAFTING_ENGINEERS
  */
-public class SaveiFle {
+public class SaveFile {
     
     public static Set<Integer> loadChickenIdsFromFile(String filename) throws IOException {
         Set<Integer> chickenIds = new HashSet<>();
