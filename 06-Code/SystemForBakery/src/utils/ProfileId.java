@@ -6,7 +6,7 @@ package utils;
 
 /**
  *
- * @author CODE_CRAFTING_ENGINEERS
+ * @author plusm
  */
 public class ProfileId {
     

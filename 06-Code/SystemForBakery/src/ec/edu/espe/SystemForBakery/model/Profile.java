@@ -1,5 +1,7 @@
 package ec.edu.espe.SystemForBakery.model;
 
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author CODE_CRAFTING_ENGINEERS
@@ -10,8 +12,8 @@ public class Profile {
     private String nameProfile;
     private String description;
 
-    public Profile() {
-    }
+    //public Profile() {
+    //}
 
     public Profile(int profile_id, String nameProfile, String description) {
         this.profile_id = profile_id;
@@ -19,6 +21,10 @@ public class Profile {
         this.description = description;
     }
 
+    public String toCSV() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return profile_id + "," + nameProfile + "," + description + ",";
+    } 
     @Override
     public String toString() {
         return "Profile{" + "profile_id=" + profile_id + ", nameProfile=" + nameProfile + ", description=" + description + '}';
