@@ -21,8 +21,8 @@ public class Bakery{
         List<Supplier> suppliers = new ArrayList<>();
 
         while (true) {
-            System.out.println("Team Code Crafting");
-            System.out.println("1. Produc");
+            System.out.println("Team CodeCrafting Engineers");
+            System.out.println("1. Product");
             System.out.println("2. Suppliers");
             System.out.println("3. Stock");
             System.out.println("4. Purchase Order ");
@@ -61,10 +61,15 @@ public class Bakery{
         String suppliername = scanner.next();
         System.out.println("Enter the supplier contact");
         String numbercontact = scanner.next();
-
+        
+        System.out.println("Enter file type to save (csv/txt): ");
+        String fileType = scanner.next().toLowerCase();
+        
         Supplier supplier = new Supplier(suppliername, numbercontact);
         suppliers.add(supplier);
         FileManager.saveSupplierToCSV(supplier);
+        
+        
     }
     
 }
