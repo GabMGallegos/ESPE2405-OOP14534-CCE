@@ -6,46 +6,23 @@ package ec.edu.espe.SystemForBakery.model;
  * @author CODE_CRAFTING_ENGINEERS
  */
 public class KindOfPayment {
-    private double digitalPayment;
-    private double cashPayment;
+    private String paymentType;
 
-    public KindOfPayment(double digitalPayment, double cashPayment) {
-        this.digitalPayment = digitalPayment;
-        this.cashPayment = cashPayment;
+    public KindOfPayment(String paymentType) {
+        this.paymentType = paymentType;
     }
 
     @Override
     public String toString() {
-        return "KindOfPayment{" + "digitalPayment=" + digitalPayment + ", cashPayment=" + cashPayment + '}';
+        return "KindOfPayment{" + "paymentType='" + paymentType + '\'' + '}';
     }
 
-    /**
-     * @return the digitalPayment
-     */
-    public double getDigitalPayment() {
-        return digitalPayment;
+    public String getPaymentType() {
+        return paymentType;
     }
 
-    /**
-     * @param digitalPayment the digitalPayment to set
-     */
-    public void setDigitalPayment(double digitalPayment) {
-        this.digitalPayment = digitalPayment;
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
-
-    /**
-     * @return the cashPayment
-     */
-    public double getCashPayment() {
-        return cashPayment;
-    }
-
-    /**
-     * @param cashPayment the cashPayment to set
-     */
-    public void setCashPayment(double cashPayment) {
-        this.cashPayment = cashPayment;
-    }
-    
     
 }

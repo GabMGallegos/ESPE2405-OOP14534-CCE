@@ -1,5 +1,8 @@
 package ec.edu.espe.SystemForBakery.view;
 
+import ec.edu.espe.SystemForBakery.model.Bills;
+import ec.edu.espe.SystemForBakery.model.Consumer;
+import ec.edu.espe.SystemForBakery.model.KindOfPayment;
 import ec.edu.espe.SystemForBakery.model.Supplier;
 import ec.edu.espe.SystemForBakery.model.SystemProfile;
 import ec.edu.espe.SystemForBakery.model.Product;
@@ -47,7 +50,7 @@ public class Bakery{
                     manageoutputproducts(products);
                     break;
                 case 4:
-
+                    createOrder(scanner, products);
                     break;
                 case 5:
                     System.out.println("Leaving the system...");
@@ -102,4 +105,74 @@ public class Bakery{
             System.out.println(product);
         }
     }
+    
+    private static void createOrder(Scanner scanner, List<Product> products) {
+        Bills bill = null;
+        
+        System.out.print("Invoice client, consumer: (F/C)");
+        String consumerName = scanner.nextLine();
+        Consumer consumer;
+        
+        if (consumerName.equalsIgnoreCase("f")) {
+            System.out.print("Enter customer name:");
+            String customerName = scanner.nextLine();
+            System.out.print("Enter customer contact: ");
+            String contact = scanner.nextLine();
+            consumer= new Consumer(consumerName, 0, bill);
+        } else {
+            consumer= new Consumer(consumerName, 0, bill);
+        }
+
+        System.out.print("Enter the payment type (Cash/Transfer):  ");
+        String paymentType = scanner.nextLine();
+        KindOfPayment payment = new KindOfPayment(paymentType);
+
+        List<Product> orderProducts = new ArrayList<>();
+        double totalOrderPrice = 0;
+
+        while (true) {
+            System.out.print("Enter the product ID ");
+            int productId = scanner.nextInt();
+            System.out.print("Enter the amount: ");
+            int quantity = scanner.nextInt();
+            scanner.nextLine();  // Consumir la nueva línea
+
+            Product product = products.stream()
+                                      .filter(p -> p.getProductId()== productId)
+                                      .findFirst()
+                                      .orElse(null);
+
+            if (product == null) {
+                System.out.println("Product not found. Try again.");
+                continue;
+            }
+
+            double totalPrice = product.getPrice() * quantity;
+            for (int i = 0; i < quantity; i++) {
+                orderProducts.add(product);
+            }
+            totalOrderPrice += totalPrice;
+
+            System.out.print(" Do you want to add another product to the order? (y/n):");
+            String addMore = scanner.nextLine();
+            if (!addMore.equalsIgnoreCase("s")) {
+                break;
+            }
+        }
+
+        int billNumber = (int) (Math.random() * 10000); // Número de factura aleatorio
+        Date date = new Date();
+        bill = new Bills(billNumber, totalOrderPrice, consumerName, date);
+        for (Product product : orderProducts) {
+            bill.addProduct(product);
+        }
+
+        consumer = new Consumer(consumerName, totalOrderPrice, bill);
+        
+                
+        FileManager.saveOrderToCSV(bill);
+
+        System.out.println("Orden creada:\n" + consumer);
+    }
+    
 }

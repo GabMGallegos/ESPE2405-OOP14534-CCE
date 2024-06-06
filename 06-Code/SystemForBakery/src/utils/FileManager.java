@@ -1,6 +1,7 @@
 
 package utils;
 
+import ec.edu.espe.SystemForBakery.model.Bills;
 import ec.edu.espe.SystemForBakery.model.Product;
 import ec.edu.espe.SystemForBakery.model.Supplier;
 import java.io.BufferedWriter;
@@ -43,8 +44,19 @@ public class FileManager {
     }
     public static void saveProductToCSV(Product product) {
         try (FileWriter writer = new FileWriter("products.csv", true)) {
-            writer.append(product.toCSV());
-            writer.append("\n");
+            writer.append(String.format("%d,%s,%.2f,%d,%s\n", 
+                                    product.getProductId(), 
+                                    product.getName(), 
+                                    product.getPrice(), 
+                                    product.getAmount(), 
+                                    product.getDate()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void saveOrderToCSV(Bills bill) {
+        try (FileWriter writer = new FileWriter("orders.csv", true)) {
+            writer.append(bill.toCSV());
         } catch (IOException e) {
             e.printStackTrace();
         }

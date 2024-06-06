@@ -9,26 +9,38 @@ import java.util.Date;
  *
  * @author CODE_CRAFTING_ENGINEERS
  */
-class Bills {
+public class Bills {
     private int billNumber;
-    private ArrayList  <Product> delivery = new ArrayList<>();
+    private ArrayList  <Product> delivery ;
     private double amount;
     private String consumerName;
     public Date date;
     
     
+    public void addProduct(Product product) {
+        delivery.add(product);
+    }
     
     public Bills(int billNumber, double amount, String consumerName, Date date) {
         this.billNumber = billNumber;
         this.amount = amount;
         this.consumerName = consumerName;
         this.date = date;
+        this.delivery = new ArrayList<>();
     }
 
     @Override
     public String toString() {
         return "Bills{" + "billNumber=" + billNumber + ", delivery=" + delivery + ", amount=" + amount + ", consumerName=" + consumerName + ", date=" + date + '}';
     }
+    public String toCSV() {
+        StringBuilder csv = new StringBuilder();
+        csv.append(billNumber).append(",").append(amount).append(",").append(consumerName).append(",").append(date).append("\n");
+        for (Product product : delivery) {
+            csv.append(product.toCSV()).append("\n");
+        }
+        return csv.toString();
+    } 
       
     
     /**
