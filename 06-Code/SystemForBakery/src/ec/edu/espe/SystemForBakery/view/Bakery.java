@@ -44,7 +44,7 @@ public class Bakery{
                     
                     break;
                 case 3:
-
+                    manageoutputproducts(products);
                     break;
                 case 4:
 
@@ -96,4 +96,10 @@ public class Bakery{
         
     }
     
+    private static void manageoutputproducts(List<Product> products){
+        System.out.println("\nList of products:");
+        for (Product product: products){
+            System.out.println(product);
+        }
+    }
 }
