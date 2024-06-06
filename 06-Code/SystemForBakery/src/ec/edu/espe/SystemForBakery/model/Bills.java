@@ -2,6 +2,7 @@
 package ec.edu.espe.SystemForBakery.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -11,20 +12,24 @@ class Bills {
     private int billNumber;
     private ArrayList  <Product> delivery = new ArrayList<>();
     private double amount;
+    private String consumerName;
+    public Date date;
     
-    //don't have delivery
-    public Bills(int billNumber, double amount) {
+    
+    
+    public Bills(int billNumber, double amount, String consumerName, Date date) {
         this.billNumber = billNumber;
         this.amount = amount;
+        this.consumerName = consumerName;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "Bills{" + "billNumber=" + billNumber + ", delivery=" + delivery + ", amount=" + amount + '}';
+        return "Bills{" + "billNumber=" + billNumber + ", delivery=" + delivery + ", amount=" + amount + ", consumerName=" + consumerName + ", date=" + date + '}';
     }
+      
     
-    
-
     /**
      * @return the billNumber
      */
@@ -65,6 +70,34 @@ class Bills {
      */
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    /**
+     * @return the consumerName
+     */
+    public String getConsumerName() {
+        return consumerName;
+    }
+
+    /**
+     * @param consumerName the consumerName to set
+     */
+    public void setConsumerName(String consumerName) {
+        this.consumerName = consumerName;
+    }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
     }
     
     

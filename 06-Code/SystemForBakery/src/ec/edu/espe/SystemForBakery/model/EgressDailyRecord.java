@@ -11,23 +11,19 @@ import java.util.Date;
 public class EgressDailyRecord {
     private Date date;
     private ArrayList<Suppliers> person = new ArrayList<>();
-    private double totalBill;
     private ArrayList<Product> products = new ArrayList<>();
-    private double totalMiscellaneousProducts;
     private double egressRecord;
 
-    // don't have person and products
-    public EgressDailyRecord(Date date, double totalBill, double totalMiscellaneousProducts, double egressRecord) {
+    public EgressDailyRecord(Date date, double egressRecord) {
         this.date = date;
-        this.totalBill = totalBill;
-        this.totalMiscellaneousProducts = totalMiscellaneousProducts;
         this.egressRecord = egressRecord;
     }
 
     @Override
     public String toString() {
-        return "EgressDailyRecord{" + "date=" + date + ", person=" + person + ", totalBill=" + totalBill + ", products=" + products + ", totalMiscellaneousProducts=" + totalMiscellaneousProducts + ", egressRecord=" + egressRecord + '}';
+        return "EgressDailyRecord{" + "date=" + date + ", person=" + person + ", products=" + products + ", egressRecord=" + egressRecord + '}';
     }
+    
 
     /**
      * @return the date
@@ -58,20 +54,6 @@ public class EgressDailyRecord {
     }
 
     /**
-     * @return the totalBill
-     */
-    public double getTotalBill() {
-        return totalBill;
-    }
-
-    /**
-     * @param totalBill the totalBill to set
-     */
-    public void setTotalBill(double totalBill) {
-        this.totalBill = totalBill;
-    }
-
-    /**
      * @return the products
      */
     public ArrayList<Product> getProducts() {
@@ -83,20 +65,6 @@ public class EgressDailyRecord {
      */
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
-    }
-
-    /**
-     * @return the totalMiscellaneousProducts
-     */
-    public double getTotalMiscellaneousProducts() {
-        return totalMiscellaneousProducts;
-    }
-
-    /**
-     * @param totalMiscellaneousProducts the totalMiscellaneousProducts to set
-     */
-    public void setTotalMiscellaneousProducts(double totalMiscellaneousProducts) {
-        this.totalMiscellaneousProducts = totalMiscellaneousProducts;
     }
 
     /**
@@ -112,6 +80,6 @@ public class EgressDailyRecord {
     public void setEgressRecord(double egressRecord) {
         this.egressRecord = egressRecord;
     }
-    
+
     
 }

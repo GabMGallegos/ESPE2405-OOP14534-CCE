@@ -6,63 +6,45 @@ package ec.edu.espe.SystemForBakery.model;
  * @author CODE_CRAFTING_ENGINEERS
  */
 public class SystemProfile {
-    private int profileId;
-    private String nameProfile;
-    private String description;
+    private static String user = "admin";
+    private static String password = "admin";
 
-    public SystemProfile(int profileId, String nameProfile, String description) {
-        this.profileId = profileId;
-        this.nameProfile = nameProfile;
-        this.description = description;
+    public SystemProfile() {
     }
 
-    @Override
-    public String toString() {
-        return "SystemProfile{" + "profileId=" + profileId + ", nameProfile=" + nameProfile + ", description=" + description + '}';
+    /**
+     * @return the user
+     */
+    public static String getUser() {
+        return user;
+    }
+
+    /**
+     * @param aUser the user to set
+     */
+    public static void setUser(String aUser) {
+        user = aUser;
+    }
+
+    /**
+     * @return the password
+     */
+    public static String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param aPassword the password to set
+     */
+    public static void setPassword(String aPassword) {
+        password = aPassword;
+    }
+
+    public String toCSV() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     
-
-    /**
-     * @return the profileId
-     */
-    public int getProfileId() {
-        return profileId;
-    }
-
-    /**
-     * @param profileId the profileId to set
-     */
-    public void setProfileId(int profileId) {
-        this.profileId = profileId;
-    }
-
-    /**
-     * @return the nameProfile
-     */
-    public String getNameProfile() {
-        return nameProfile;
-    }
-
-    /**
-     * @param nameProfile the nameProfile to set
-     */
-    public void setNameProfile(String nameProfile) {
-        this.nameProfile = nameProfile;
-    }
-
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    
     
 }

@@ -1,6 +1,6 @@
 package ec.edu.espe.SystemForBakery.view;
 
-import ec.edu.espe.SystemForBakery.model.Profile;
+import ec.edu.espe.SystemForBakery.model.SystemProfile;
 
 
 import java.io.IOException;
@@ -13,7 +13,7 @@ import utils.FileManager;
 public class Bakery{
     
     public static void main(String[] args) {
-        System.out.println("Team Code Crafting");
+        System.out.println("CodeCrafting Engineers");
         Scanner scanner = new Scanner(System.in);
         
         
@@ -36,7 +36,7 @@ public class Bakery{
             System.out.println("Description: ");
             String description = scanner.nextLine();
             
-            Profile profile = new Profile(profile_id, nameProfile, description);
+            SystemProfile profile = new SystemProfile();
             String data = profile.toCSV();
             try {
                 FileManager.save(data, "profile", fileType);
