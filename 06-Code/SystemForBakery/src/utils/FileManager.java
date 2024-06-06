@@ -1,6 +1,7 @@
 
 package utils;
 
+import ec.edu.espe.SystemForBakery.model.Supplier;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,21 +32,12 @@ public class FileManager {
         }
     }
 
-    public static void main(String[] args) {
-        // Prueba del método genérico de guardado
-        String data = "1,Leydi,Cajera";
-        String fileName = "profile";
-        
-        try {
-            // Guardar como CSV
-            save(data, fileName, "csv");
-            System.out.println("Data saved successfully as CSV.");
-            
-            // Guardar como TXT
-            save(data, fileName, "txt");
-            System.out.println("Data saved successfully as TXT.");
+    public static void saveSupplierToCSV(Supplier supplier) {
+        try (FileWriter writer = new FileWriter("providers.csv", true)) {
+            writer.append(supplier.toCSV());
+            writer.append("\n");
         } catch (IOException e) {
-            System.err.println("An error occurred while saving the data: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
