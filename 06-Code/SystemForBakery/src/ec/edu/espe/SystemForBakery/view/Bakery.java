@@ -1,9 +1,12 @@
 package ec.edu.espe.SystemForBakery.view;
 
+import ec.edu.espe.SystemForBakery.model.Supplier;
 import ec.edu.espe.SystemForBakery.model.SystemProfile;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import utils.FileManager;
 
@@ -13,36 +16,55 @@ import utils.FileManager;
 public class Bakery{
     
     public static void main(String[] args) {
-        System.out.println("CodeCrafting Engineers");
         Scanner scanner = new Scanner(System.in);
-        
-        
-        System.out.println("Enter file type to save (csv/txt): ");
-        String fileType = scanner.nextLine().toLowerCase();
-        
-        StringBuilder csvData = new StringBuilder();
-        csvData.append("IDProfile,NameProfile,Description\n");
-        
-        for (int i = 0; i < 2; i++) {
-            System.out.println("Enter profile data " + (i + 1) + ":");
-            System.out.println("ID: ");
-            int profile_id = scanner.nextInt();
-            
+        //List<Product> product = new ArrayList<>();
+        List<Supplier> suppliers = new ArrayList<>();
+
+        while (true) {
+            System.out.println("Team Code Crafting");
+            System.out.println("1. Produc");
+            System.out.println("2. Suppliers");
+            System.out.println("3. Stock");
+            System.out.println("4. Purchase Order ");
+            System.out.println("5. Get Out");
+            System.out.println("Select an option");
+            int option = scanner.nextInt();
+
             scanner.nextLine();
-            
-            System.out.println("Name Profile: ");
-            String nameProfile = scanner.nextLine();
-            
-            System.out.println("Description: ");
-            String description = scanner.nextLine();
-            
-            SystemProfile profile = new SystemProfile();
-            String data = profile.toCSV();
-            try {
-                FileManager.save(data, "profile", fileType);
-            } catch (IOException e) {
-                System.err.println("An error occurred while saving the data: " + e.getMessage());
+
+            switch (option) {
+                case 1:
+
+                    break;
+                case 2:
+                    manageSuppliers(scanner, suppliers);
+                    
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+                    System.out.println("Leaving the system...");
+                    break;
+                default:
+                    System.out.println("¡¡Invalid option. Try again.!!");
             }
         }
     }
+
+    private static void manageSuppliers(Scanner scanner, List<Supplier> suppliers) {
+
+        System.out.println("Enter the name of the supplier company");
+        String suppliername = scanner.next();
+        System.out.println("Enter the supplier contact");
+        String numbercontact = scanner.next();
+
+        Supplier supplier = new Supplier(suppliername, numbercontact);
+        suppliers.add(supplier);
+        FileManager.saveSupplierToCSV(supplier);
+    }
+    
 }
