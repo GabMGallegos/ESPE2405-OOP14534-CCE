@@ -1,6 +1,7 @@
 
 package ec.edu.espe.SystemForBakery.model;
 
+import ec.edu.espe.SystemForBakery.model.Product;
 import java.util.ArrayList;
 
 /**

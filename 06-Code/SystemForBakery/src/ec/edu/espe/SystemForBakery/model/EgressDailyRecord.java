@@ -1,6 +1,7 @@
 
 package ec.edu.espe.SystemForBakery.model;
 
+import ec.edu.espe.SystemForBakery.model.Product;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,7 +11,7 @@ import java.util.Date;
  */
 public class EgressDailyRecord {
     private Date date;
-    private ArrayList<Suppliers> person = new ArrayList<>();
+    private ArrayList<Supplier> person = new ArrayList<>();
     private ArrayList<Product> products = new ArrayList<>();
     private double egressRecord;
 
@@ -42,14 +43,14 @@ public class EgressDailyRecord {
     /**
      * @return the person
      */
-    public ArrayList<Suppliers> getPerson() {
+    public ArrayList<Supplier> getPerson() {
         return person;
     }
 
     /**
      * @param person the person to set
      */
-    public void setPerson(ArrayList<Suppliers> person) {
+    public void setPerson(ArrayList<Supplier> person) {
         this.person = person;
     }
 

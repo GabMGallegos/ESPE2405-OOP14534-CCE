@@ -11,7 +11,7 @@ import java.util.Date;
 public class RecordSuppliers {
     public Date date;
     private double amount;
-    private ArrayList <Suppliers> suppliers = new ArrayList<>();
+    private ArrayList <Supplier> suppliers = new ArrayList<>();
 
     public RecordSuppliers(Date date, double amount) {
         this.date = date;
@@ -39,21 +39,21 @@ public class RecordSuppliers {
         this.amount = amount;
     }
     
-    public void Suppliers(Suppliers supplier){
+    public void Suppliers(Supplier supplier){
         suppliers.add(supplier);
     }
 
     /**
      * @return the suppliers
      */
-    public ArrayList <Suppliers> getSuppliers() {
+    public ArrayList <Supplier> getSuppliers() {
         return suppliers;
     }
 
     /**
      * @param suppliers the suppliers to set
      */
-    public void setSuppliers(ArrayList <Suppliers> suppliers) {
+    public void setSuppliers(ArrayList <Supplier> suppliers) {
         this.suppliers = suppliers;
     }
 }

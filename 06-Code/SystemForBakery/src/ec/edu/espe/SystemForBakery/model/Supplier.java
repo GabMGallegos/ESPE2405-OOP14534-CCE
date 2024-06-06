@@ -8,11 +8,11 @@ import java.util.Date;
  *
  * @author CODE_CRAFTING_ENGINEERS
  */
-public class Suppliers {
+public class Supplier {
     private String suppierName;
     private String numberContact;
 
-    public Suppliers(String suppierName, String numberContact) {
+    public Supplier(String suppierName, String numberContact) {
         this.suppierName = suppierName;
         this.numberContact = numberContact;
     }

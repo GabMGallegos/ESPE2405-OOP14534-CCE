@@ -1,31 +1,50 @@
 
 package ec.edu.espe.SystemForBakery.model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author CODE_CRAFTING_ENGINEERS
  */
-class Product {
+public class Product {
+    private int productId;
     private String name;
     private double price;
     private int amount;
-    private int productId;
+    private LocalDate date;
 
-    public Product(String name, double price, int amount, int productId) {
+    public Product(int productId, String name, double price, int amount, LocalDate date) {
+        this.productId = productId;
         this.name = name;
         this.price = price;
         this.amount = amount;
-        this.productId = productId;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "name=" + name + ", price=" + price + ", amount=" + amount + ", productId=" + productId + '}';
+        return "Product{" + "productId=" + productId + ", name=" + name + ", price=" + price + ", amount=" + amount + ", date=" + date + '}';
     }
     
     
+    
     public String toCSV() {
-        return name + "," + price + "," + amount + "," + productId; 
+        return getProductId() + "," + getName() + "," + getPrice() + "," + getAmount() + "," + getDate(); 
+    }
+
+    /**
+     * @return the productId
+     */
+    public int getProductId() {
+        return productId;
+    }
+
+    /**
+     * @param productId the productId to set
+     */
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     /**
@@ -71,18 +90,20 @@ class Product {
     }
 
     /**
-     * @return the productId
+     * @return the date
      */
-    public int getProductId() {
-        return productId;
+    public LocalDate getDate() {
+        return date;
     }
 
     /**
-     * @param productId the productId to set
+     * @param date the date to set
      */
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
+
+    
     
     
 }
