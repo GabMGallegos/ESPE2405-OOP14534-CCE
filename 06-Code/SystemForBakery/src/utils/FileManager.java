@@ -41,7 +41,7 @@ public class FileManager {
             e.printStackTrace();
         }
     }
-    private static void saveProductToCSV(Product product) {
+    public static void saveProductToCSV(Product product) {
         try (FileWriter writer = new FileWriter("products.csv", true)) {
             writer.append(product.toCSV());
             writer.append("\n");

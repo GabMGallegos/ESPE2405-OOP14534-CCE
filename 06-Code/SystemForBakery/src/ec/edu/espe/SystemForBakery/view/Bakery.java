@@ -37,7 +37,7 @@ public class Bakery{
 
             switch (option) {
                 case 1:
-
+                    manageProduct(scanner, products);
                     break;
                 case 2:
                     manageSuppliers(scanner, suppliers);
@@ -51,6 +51,7 @@ public class Bakery{
                     break;
                 case 5:
                     System.out.println("Leaving the system...");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("¡¡Invalid option. Try again.!!");
@@ -74,6 +75,7 @@ public class Bakery{
         
         Product product = new Product(idProduct, name, price, amount, date);
         products.add(product);
+        FileManager.saveProductToCSV(product);
         
     }
 
