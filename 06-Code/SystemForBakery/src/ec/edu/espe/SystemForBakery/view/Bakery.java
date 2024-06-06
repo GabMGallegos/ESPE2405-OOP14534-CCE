@@ -2,10 +2,13 @@ package ec.edu.espe.SystemForBakery.view;
 
 import ec.edu.espe.SystemForBakery.model.Supplier;
 import ec.edu.espe.SystemForBakery.model.SystemProfile;
+import ec.edu.espe.SystemForBakery.model.Product;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import utils.FileManager;
@@ -17,7 +20,7 @@ public class Bakery{
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        //List<Product> product = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         List<Supplier> suppliers = new ArrayList<>();
 
         while (true) {
@@ -53,6 +56,25 @@ public class Bakery{
                     System.out.println("¡¡Invalid option. Try again.!!");
             }
         }
+    }
+    
+    private static void manageProduct (Scanner scanner,List<Product> products){
+        System.out.println("Enter the product Id");
+        int idProduct =scanner.nextInt();
+        System.out.println("Enter the name");
+        String name = scanner.next();
+        System.out.println("Enter the price");
+        double price = scanner.nextDouble();
+        System.out.println("Enter the amount");
+        int amount = scanner.nextInt();
+        LocalDate date = LocalDate.now();
+        
+        System.out.println("Enter file type to save (csv/txt): ");
+        String fileType = scanner.next().toLowerCase();
+        
+        Product product = new Product(idProduct, name, price, amount, date);
+        products.add(product);
+        
     }
 
     private static void manageSuppliers(Scanner scanner, List<Supplier> suppliers) {
