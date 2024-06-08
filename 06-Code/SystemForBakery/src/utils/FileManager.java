@@ -4,9 +4,15 @@ package utils;
 import ec.edu.espe.SystemForBakery.model.Bills;
 import ec.edu.espe.SystemForBakery.model.Product;
 import ec.edu.espe.SystemForBakery.model.Supplier;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -42,6 +48,7 @@ public class FileManager {
             e.printStackTrace();
         }
     }
+    
     public static void saveProductToCSV(Product product) {
         try (FileWriter writer = new FileWriter("products.csv", true)) {
             writer.append(String.format("%d,%s,%.2f,%d,%s\n", 
@@ -58,6 +65,25 @@ public class FileManager {
         try (FileWriter writer = new FileWriter("orders.csv", true)) {
             writer.append(bill.toCSV());
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void loadProductToCSV(List<Product> products) {
+        String[] productString;
+        
+        try (BufferedReader r = new BufferedReader(new FileReader("products.csv"))){
+            String line;
+            while((line = r.readLine()) != null){
+                productString = line.split(",");
+                Product product = new Product( Integer.parseInt(productString[0])
+                        , productString[1]
+                        , Double.parseDouble(productString[2])
+                        , Integer.parseInt(productString[3])
+                        , LocalDate.parse(productString[4], DateTimeFormatter.ISO_DATE));
+                products.add(product);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

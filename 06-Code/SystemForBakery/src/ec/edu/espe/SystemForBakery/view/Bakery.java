@@ -25,6 +25,8 @@ public class Bakery{
         Scanner scanner = new Scanner(System.in);
         List<Product> products = new ArrayList<>();
         List<Supplier> suppliers = new ArrayList<>();
+        
+        FileManager.loadProductToCSV(products);
 
         while (true) {
             System.out.println("Team CodeCrafting Engineers");

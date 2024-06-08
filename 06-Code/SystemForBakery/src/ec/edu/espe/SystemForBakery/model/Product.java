@@ -14,6 +14,9 @@ public class Product {
     private int amount;
     private LocalDate date;
 
+    public Product() {
+    }
+
     public Product(int productId, String name, double price, int amount, LocalDate date) {
         this.productId = productId;
         this.name = name;
@@ -24,7 +27,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productId=" + productId + ", name=" + name + ", price=" + price + ", amount=" + amount + ", date=" + date + '}';
+        return "name:" + name + ", productId: " + productId + ", price: $" + price + ", amount: " + amount + ", date: " + date;
     }
     
     

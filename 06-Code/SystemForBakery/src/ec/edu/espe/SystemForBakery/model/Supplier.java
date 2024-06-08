@@ -9,35 +9,38 @@ import java.util.Date;
  * @author CODE_CRAFTING_ENGINEERS
  */
 public class Supplier {
-    private String suppierName;
+    private String supplierName;
     private String numberContact;
 
+    public Supplier() {
+    }
+    
     public Supplier(String suppierName, String numberContact) {
-        this.suppierName = suppierName;
+        this.supplierName = suppierName;
         this.numberContact = numberContact;
     }
 
     @Override
     public String toString() {
-        return "Suppliers{" + "suppierName=" + suppierName + ", numberContact=" + numberContact + '}';
+        return "Suppliers{" + "suppierName=" + supplierName + ", numberContact=" + numberContact + '}';
     }
     
     public String toCSV() {
-        return suppierName + "," + numberContact;
+        return supplierName + "," + numberContact;
     }
 
     /**
-     * @return the suppierName
+     * @return the supplierName
      */
-    public String getSuppierName() {
-        return suppierName;
+    public String getSupplierName() {
+        return supplierName;
     }
 
     /**
-     * @param suppierName the suppierName to set
+     * @param supplierName the supplierName to set
      */
-    public void setSuppierName(String suppierName) {
-        this.suppierName = suppierName;
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
     /**
