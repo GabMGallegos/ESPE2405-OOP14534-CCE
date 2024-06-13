@@ -3,7 +3,7 @@ package ec.edu.espe.SystemForBakery.view;
 import ec.edu.espe.SystemForBakery.model.Bills;
 import ec.edu.espe.SystemForBakery.model.Product;
 import ec.edu.espe.SystemForBakery.model.Supplier;
-import ec.edu.espe.SystemForBakery.model.SystemProfile;
+import utils.SystemProfile;
 import utils.FileManager;
 
 import java.math.BigDecimal;
@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import utils.JsonGenerator;
 
 public class Bakery {
 
@@ -104,9 +105,9 @@ public class Bakery {
         int idProduct = scanner.nextInt();
         scanner.nextLine(); // Consumir la nueva línea
         System.out.println("Enter the name");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         System.out.println("Enter the price");
-        double price = scanner.nextDouble();
+        double price = Double.parseDouble(scanner.next());
         System.out.println("Enter the amount");
         int amount = scanner.nextInt();
         scanner.nextLine(); // Consumir la nueva línea
@@ -115,6 +116,8 @@ public class Bakery {
         Product product = new Product(idProduct, name, priceBigDecimal, amount, LocalDate.now());
         products.add(product);
         FileManager.saveProductToCSV(product);
+        
+        JsonGenerator.generateStockJson(product);
         System.out.println("Product added successfully!");
     }
 

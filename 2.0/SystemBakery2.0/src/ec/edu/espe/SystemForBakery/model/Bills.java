@@ -1,4 +1,3 @@
-
 package ec.edu.espe.SystemForBakery.model;
 
 import java.math.BigDecimal;
@@ -10,6 +9,7 @@ import java.util.List;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Bills {
+
     private int billNumber;
     private List<Product> delivery;
     private BigDecimal amount;
@@ -17,10 +17,16 @@ public class Bills {
     private LocalDateTime date;
 
     public Bills(int billNumber, String consumerName, LocalDateTime date) {
-        if (billNumber <= 0) throw new IllegalArgumentException("The invoice number must be positive");
-        if (consumerName == null || consumerName.isEmpty()) throw new IllegalArgumentException("Consumer name cannot be empty");
-        if (date == null) throw new IllegalArgumentException("Date cannot be null");
-        
+        if (billNumber <= 0) {
+            throw new IllegalArgumentException("The invoice number must be positive");
+        }
+        if (consumerName == null || consumerName.isEmpty()) {
+            throw new IllegalArgumentException("Consumer name cannot be empty");
+        }
+        if (date == null) {
+            throw new IllegalArgumentException("Date cannot be null");
+        }
+
         this.billNumber = billNumber;
         this.consumerName = consumerName;
         this.date = date;
@@ -29,7 +35,9 @@ public class Bills {
     }
 
     public void addProduct(Product product) {
-        if (product == null) throw new IllegalArgumentException("The product cannot be null");
+        if (product == null) {
+            throw new IllegalArgumentException("The product cannot be null");
+        }
         delivery.add(product);
         amount = amount.add(product.getPrice());
     }
@@ -59,7 +67,9 @@ public class Bills {
     }
 
     public void setBillNumber(int billNumber) {
-        if (billNumber <= 0) throw new IllegalArgumentException("The invoice number must be positive");
+        if (billNumber <= 0) {
+            throw new IllegalArgumentException("The invoice number must be positive");
+        }
         this.billNumber = billNumber;
     }
 
@@ -68,7 +78,9 @@ public class Bills {
     }
 
     public void setDelivery(List<Product> delivery) {
-        if (delivery == null) throw new IllegalArgumentException("The delivery list cannot be null");
+        if (delivery == null) {
+            throw new IllegalArgumentException("The delivery list cannot be null");
+        }
         this.delivery = new ArrayList<>(delivery);
         this.amount = delivery.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
@@ -78,7 +90,9 @@ public class Bills {
     }
 
     public void setAmount(BigDecimal amount) {
-        if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) throw new IllegalArgumentException("The amount cannot be negative");
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("The amount cannot be negative");
+        }
         this.amount = amount;
     }
 
@@ -87,7 +101,9 @@ public class Bills {
     }
 
     public void setConsumerName(String consumerName) {
-        if (consumerName == null || consumerName.isEmpty()) throw new IllegalArgumentException("Consumer name cannot be empty");
+        if (consumerName == null || consumerName.isEmpty()) {
+            throw new IllegalArgumentException("Consumer name cannot be empty");
+        }
         this.consumerName = consumerName;
     }
 
@@ -96,7 +112,9 @@ public class Bills {
     }
 
     public void setDate(LocalDateTime date) {
-        if (date == null) throw new IllegalArgumentException("Date cannot be null");
+        if (date == null) {
+            throw new IllegalArgumentException("Date cannot be null");
+        }
         this.date = date;
     }
 }
