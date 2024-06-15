@@ -1,4 +1,3 @@
-
 package ec.edu.espe.SystemForBakery.model;
 
 import java.math.BigDecimal;
@@ -6,10 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-
+ *
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Stock {
+
     private List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product) {
@@ -58,10 +58,8 @@ public class Stock {
 
     @Override
     public String toString() {
-        return "Stock{" +
-                "products=" + products +
-                ", totalQuantity=" + getTotalQuantity() +
-                ", totalValue=$" + getTotalValue() +
-                '}';
+        return "List Stock \n" + "Products:" + products
+                + "\ntotalQuantity=" + getTotalQuantity()
+                + "\ntotalValue=$" + getTotalValue();
     }
 }

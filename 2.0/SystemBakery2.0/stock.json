@@ -1,0 +1,11 @@
+{
+  "products": [
+    {
+      "id": 75,
+      "name": "harina",
+      "price": 45.0,
+      "amount": 2,
+      "date": "2024-06-12"
+    }
+  ]
+}

@@ -1,20 +1,21 @@
 package ec.edu.espe.SystemForBakery.view;
 
-import ec.edu.espe.SystemForBakery.model.Bills;
-import ec.edu.espe.SystemForBakery.model.Product;
-import ec.edu.espe.SystemForBakery.model.Supplier;
-import utils.SystemProfile;
-import utils.FileManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import ec.edu.espe.SystemForBakery.model.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import utils.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import utils.JsonGenerator;
+import java.time.*;
+import java.util.*;
 
 public class Bakery {
+
+    Scanner scanner = new Scanner(System.in);
 
     public void someMethod() {
         int billNumber = 1;
@@ -23,84 +24,69 @@ public class Bakery {
         Bills bill = new Bills(billNumber, consumerName, now);
     }
 
-    public static void main(String[] args) {
+    public static void displayMenu() {
         Scanner scanner = new Scanner(System.in);
-        List<Product> products = new ArrayList<>();
+        Stock stock = new Stock();
         List<Supplier> suppliers = new ArrayList<>();
 
-        FileManager.loadProductToCSV(products);
-        Bakery bakery = new Bakery();
-        bakery.login();
+        FileManager.loadProductToCSV(stock.getProducts());
 
-        
+        SystemProfile profile = new SystemProfile();
+        profile.login();
+        int option = 0;
 
-        while (true) {
-            displayMenu();
-            int option = scanner.nextInt();
-            scanner.nextLine(); // Consumir la nueva línea
+        while (true){
 
-            switch (option) {
-                case 1:
-                    manageProduct(scanner, products);
-                    break;
-                case 2:
-                    manageSuppliers(scanner, suppliers);
-                    break;
-                case 3:
-                    manageOutputProducts(products);
-                    break;
-                case 4:
-                    createOrder(scanner, products);
-                    break;
-                case 5:
-                    System.out.println("Leaving the system...");
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Invalid option. Try again.");
+            try {
+                System.out.println("-------Main Menu------");
+                System.out.println("1. Product");
+                System.out.println("2. Suppliers");
+                System.out.println("3. Stock");
+                System.out.println("4. Purchase Order ");
+                System.out.println("5. Exit");
+                System.out.println("Select an option:");
+                option = scanner.nextInt();
+                scanner.nextLine();
+                switch (option) {
+                    case 1:
+                        manageProduct(scanner, stock);
+                        break;
+                    case 2:
+                        SupplierMenu supplierMenu = new SupplierMenu();
+                        supplierMenu.displaySupplierMenu();
+//manageSuppliers(scanner, suppliers);
+                        break;
+                    case 3:
+                        manageOutputProducts("stock.json");
+                        break;
+                    case 4:
+                        createOrder(scanner, stock);
+                        break;
+                    case 5:
+                        System.out.println("Leaving the system...");
+                        System.exit(0);
+                        break;
+                    default:
+                        System.out.println("Invalid option. Try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Opción inválida. Debe ingresar un número.");
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("Error: La entrada debe ser un número válido.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error de argumento: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
             }
-        }
+            System.out.println();
+        } 
     }
 
-    public void login(){
-        Scanner scanner = new Scanner(System.in);
-        SystemProfile systemProfile = new SystemProfile();       
+    
 
-        int intentosRestantes = 3;
-        boolean accesoConcedido = false;
-
-        while (intentosRestantes > 0 && !accesoConcedido) {
-            System.out.println("Ingrese el usuario:");
-            String username = scanner.nextLine();
-
-            System.out.println("Ingrese su contrasenia:");
-            String password = scanner.nextLine();
-
-            if (systemProfile.authenticate(username, password)) {
-                accesoConcedido = true;
-            } else {
-                intentosRestantes--;
-                System.out.println("Nombre de usuario o contrasenia incorrectos. Intentos restantes: " + intentosRestantes);
-            }
-        }
-
-        if (accesoConcedido) {
-            System.out.println("Acceso concedido.");
-        } else {
-            System.out.println("Acceso denegado. Ha superado el número de intentos permitidos.");
-        }
-    }
-    private static void displayMenu() {
-        System.out.println("Team CodeCrafting Engineers");
-        System.out.println("1. Product");
-        System.out.println("2. Suppliers");
-        System.out.println("3. Stock");
-        System.out.println("4. Purchase Order ");
-        System.out.println("5. Exit");
-        System.out.println("Select an option:");
-    }
-
-    private static void manageProduct(Scanner scanner, List<Product> products) {
+    
+    private static void manageProduct(Scanner scanner, Stock stock) {
         System.out.println("Enter the product ID");
         int idProduct = scanner.nextInt();
         scanner.nextLine(); // Consumir la nueva línea
@@ -114,11 +100,19 @@ public class Bakery {
 
         BigDecimal priceBigDecimal = BigDecimal.valueOf(price); // Convertir el precio a BigDecimal
         Product product = new Product(idProduct, name, priceBigDecimal, amount, LocalDate.now());
-        products.add(product);
-        FileManager.saveProductToCSV(product);
-        
-        JsonGenerator.generateStockJson(product);
-        System.out.println("Product added successfully!");
+        //products.add(product);
+
+        try {
+            stock.addProduct(product);
+            FileManager.saveProductToCSV(product);
+
+            // Generar JSON para el stock
+            JsonGenerator.generateStockJson(stock);
+
+            System.out.println("Product added successfully!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error adding product: " + e.getMessage());
+        }
     }
 
     private static void manageSuppliers(Scanner scanner, List<Supplier> suppliers) {
@@ -133,14 +127,26 @@ public class Bakery {
         System.out.println("Supplier added successfully!");
     }
 
-    private static void manageOutputProducts(List<Product> products) {
-        System.out.println("\nList of products:");
-        for (Product product : products) {
-            System.out.println(product);
+    private static void manageOutputProducts(String filePath) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .setPrettyPrinting()
+                .create();
+
+        try (FileReader reader = new FileReader(filePath)) {
+            Stock stock = gson.fromJson(reader, Stock.class);
+            List<Product> products = stock.getProducts();
+            System.out.println("\nList of products:");
+            for (Product product : products) {
+                System.out.println(product);
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading JSON file: " + e.getMessage());
         }
     }
 
-    private static void createOrder(Scanner scanner, List<Product> products) {
+    private static void createOrder(Scanner scanner, Stock stock) {
         List<Product> orderProducts = new ArrayList<>();
         BigDecimal totalOrderPrice = BigDecimal.ZERO; // Inicializar totalOrderPrice como BigDecimal
 
@@ -149,7 +155,7 @@ public class Bakery {
             int productId = scanner.nextInt();
             scanner.nextLine(); // Consumir la nueva línea
 
-            Product product = findProductById(products, productId);
+            Product product = stock.findProductById(productId);
             if (product == null) {
                 System.out.println("Product not found. Try again.");
                 continue;
@@ -183,6 +189,8 @@ public class Bakery {
 
         // Save order to CSV file
         FileManager.saveOrderToCSV(bill);
+
+        JsonGenerator.generateBillJson(bill);
 
         System.out.println("Order created successfully:");
         System.out.println(bill);

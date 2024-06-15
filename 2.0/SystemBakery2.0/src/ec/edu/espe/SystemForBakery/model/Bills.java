@@ -12,6 +12,7 @@ public class Bills {
 
     private int billNumber;
     private List<Product> delivery;
+    
     private BigDecimal amount;
     private String consumerName;
     private LocalDateTime date;
