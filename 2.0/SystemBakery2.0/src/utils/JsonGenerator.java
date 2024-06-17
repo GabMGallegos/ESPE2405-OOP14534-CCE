@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *
@@ -48,12 +49,18 @@ public class JsonGenerator {
         }
     }
     
-    public static void generateSupplierJson(Supplier supplier) {
-        try (FileWriter writer = new FileWriter(FILE_SUPPLIER)) {
-            gson.toJson(supplier, writer);
-            System.out.println("Archivo JSON generado exitosamente.");
+    public static void generateSupplierJson(List<Supplier> suppliers) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .setPrettyPrinting()
+                .create();
+
+        try (FileWriter writer = new FileWriter("supplier.json")) {
+            gson.toJson(suppliers, writer);
         } catch (IOException e) {
-            System.out.println("Error al generar el archivo JSON: " + e.getMessage());
+            System.out.println("Error al escribir el archivo JSON: " + e.getMessage());
         }
     }
+    
 }

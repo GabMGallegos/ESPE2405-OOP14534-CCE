@@ -115,17 +115,7 @@ public class Bakery {
         }
     }
 
-    private static void manageSuppliers(Scanner scanner, List<Supplier> suppliers) {
-        System.out.println("Enter the name of the supplier company");
-        String supplierName = scanner.nextLine();
-        System.out.println("Enter the supplier contact");
-        String numberContact = scanner.nextLine();
-
-        Supplier supplier = new Supplier(supplierName, numberContact);
-        suppliers.add(supplier);
-        FileManager.saveSupplierToCSV(supplier);
-        System.out.println("Supplier added successfully!");
-    }
+   
 
     private static void manageOutputProducts(String filePath) {
         Gson gson = new GsonBuilder()
@@ -137,7 +127,7 @@ public class Bakery {
         try (FileReader reader = new FileReader(filePath)) {
             Stock stock = gson.fromJson(reader, Stock.class);
             List<Product> products = stock.getProducts();
-            System.out.println("\nList of products:");
+            System.out.println("\n----- List of products: ------");
             for (Product product : products) {
                 System.out.println(product);
             }

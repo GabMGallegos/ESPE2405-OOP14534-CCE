@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -21,71 +22,35 @@ import utils.LocalDateTimeAdapter;
  */
 public class Supplier {
 
+    private int idSupplier;
     private String supplierName;
     private String numberContact;
     //agregar fecha de entrega del producto
-
-    Scanner scanner = new Scanner(System.in);
-
-    public static void manageSuppliers(Scanner scanner, List<Supplier> suppliers) {
-        System.out.println("Enter the name of the supplier company");
-        String supplierName = scanner.nextLine();
-        System.out.println("Enter the supplier contact");
-        String numberContact = scanner.nextLine();
-
-        Supplier supplier = new Supplier(supplierName, numberContact);
-        suppliers.add(supplier);
-        FileManager.saveSupplierToCSV(supplier);
-        System.out.println("Supplier added successfully!");
-    }
-
-    public static void viewSuppliers(String jsonFile) {
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-                .setPrettyPrinting()
-                .create();
-
-        try (FileReader reader = new FileReader(jsonFile)) {
-            Supplier[] suppliersArray = gson.fromJson(reader, Supplier[].class);
-            List<Supplier> suppliers = Arrays.asList(suppliersArray);
-
-            if (suppliers.isEmpty()) {
-                System.out.println("No hay proveedores disponibles.");
-            } else {
-                System.out.println("--- List of Suppliers ---");
-                for (Supplier supplier : suppliers) {
-                    System.out.println(supplier);
-                }
-            }
-
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo JSON: " + e.getMessage());
-        }
-
-    
-    }
+    private List<Supplier> suppliers = new ArrayList<>();
 
     public Supplier() {
     }
-    
 
-    public Supplier(String supplierName, String numberContact) {
-
+    public Supplier(int idSupplier, String supplierName, String numberContact) {
+        this.idSupplier = idSupplier;
         this.supplierName = supplierName;
         this.numberContact = numberContact;
     }
 
-    @Override
-    public String toString() {
-        return "Supplier{"
-                + "supplierName='" + supplierName + '\''
-                + ", numberContact='" + numberContact + '\''
-                + '}';
+    public int getIdSupplier() {
+        return idSupplier;
     }
 
-    public String toCSV() {
-        return supplierName + "," + numberContact;
+    public void setIdSupplier(int idSupplier) {
+        this.idSupplier = idSupplier;
+    }
+
+    public List<Supplier> getSuppliers() {
+        return suppliers;
+    }
+
+    public void setSuppliers(List<Supplier> suppliers) {
+        this.suppliers = suppliers;
     }
 
     public String getSupplierName() {
@@ -109,4 +74,16 @@ public class Supplier {
         }
         this.numberContact = numberContact;
     }
+
+    public String toCSV() {
+        return supplierName + "," + numberContact;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: "+ idSupplier +
+                "\nSupplier Name: " + supplierName
+                + "\nNumber Contact: " + numberContact;
+    }
+
 }
