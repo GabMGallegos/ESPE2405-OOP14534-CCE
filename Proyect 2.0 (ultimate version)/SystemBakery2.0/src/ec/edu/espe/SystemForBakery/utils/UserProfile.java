@@ -1,27 +1,28 @@
-package utils;
+
+package ec.edu.espe.SystemForBakery.utils;
 
 public class UserProfile {
     private String firstName;
     private String lastName;
     private int age;
     private String gender;
-    private User user; // Referencia al usuario asociado
+    private User user; // Reference to the associated user
 
     public UserProfile(String firstName, String lastName, int age, String gender, User user) {
         if (firstName == null || firstName.isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede ser nulo o vacío");
+            throw new IllegalArgumentException("First name cannot be null or empty");
         }
         if (lastName == null || lastName.isEmpty()) {
-            throw new IllegalArgumentException("El apellido no puede ser nulo o vacío");
+            throw new IllegalArgumentException("Last name cannot be null or empty");
         }
         if (age < 0) {
-            throw new IllegalArgumentException("La edad no puede ser negativa");
+            throw new IllegalArgumentException("Age cannot be negative");
         }
         if (gender == null || gender.isEmpty()) {
-            throw new IllegalArgumentException("El género no puede ser nulo o vacío");
+            throw new IllegalArgumentException("Gender cannot be null or empty");
         }
         if (user == null) {
-            throw new IllegalArgumentException("El usuario no puede ser nulo");
+            throw new IllegalArgumentException("User cannot be null");
         }
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,14 +31,14 @@ public class UserProfile {
         this.user = user;
     }
 
-    // Getters y setters para los atributos
+    // Getters and setters for the attributes
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
         if (firstName == null || firstName.isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede ser nulo o vacío");
+            throw new IllegalArgumentException("First name cannot be null or empty");
         }
         this.firstName = firstName;
     }
@@ -48,7 +49,7 @@ public class UserProfile {
 
     public void setLastName(String lastName) {
         if (lastName == null || lastName.isEmpty()) {
-            throw new IllegalArgumentException("El apellido no puede ser nulo o vacío");
+            throw new IllegalArgumentException("Last name cannot be null or empty");
         }
         this.lastName = lastName;
     }

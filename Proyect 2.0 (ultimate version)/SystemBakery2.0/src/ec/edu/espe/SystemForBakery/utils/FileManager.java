@@ -1,5 +1,4 @@
-
-package utils;
+package ec.edu.espe.SystemForBakery.utils;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -54,13 +53,18 @@ public class FileManager {
     }
 
     public static Product parseProduct(String csv) {
-        String[] parts = csv.split(",");
-        int productId = Integer.parseInt(parts[0]);
-        String name = parts[1];
-        BigDecimal price = new BigDecimal(parts[2]);
-        int amount = Integer.parseInt(parts[3]);
-        LocalDate date = LocalDate.parse(parts[4]);
-        return new Product(productId, name, price, amount, date);
+        try {
+            String[] parts = csv.split(",");
+            int productId = Integer.parseInt(parts[0]);
+            String name = parts[1];
+            BigDecimal price = new BigDecimal(parts[2]);
+            int amount = Integer.parseInt(parts[3]);
+            LocalDate date = LocalDate.parse(parts[4]);
+            return new Product(productId, name, price, amount, date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static void loadProductToCSV(List<Product> products) {
@@ -80,6 +84,5 @@ public class FileManager {
         } catch (IOException e) {
             System.err.println("Error loading products from CSV: " + e.getMessage());
         }
-    
     }
 }

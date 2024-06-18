@@ -1,10 +1,8 @@
-
-package utils;
+package ec.edu.espe.SystemForBakery.utils;
 
 import java.util.Scanner;
 
 /**
- 
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class SystemProfile {
@@ -14,13 +12,13 @@ public class SystemProfile {
     private String user;
     private String password;
 
-    // Constructor para inicializar la instancia de SystemProfile con los valores válidos
+    // Constructor to initialize the instance of SystemProfile with valid values
     public SystemProfile() {
         this.user = VALID_USERNAME;
         this.password = VALID_PASSWORD;
     }
 
-    // Método para validar el nombre de usuario y la contraseña
+    // Method to validate the username and password
     public boolean authenticate(String username, String password) {
         return this.user.equals(username) && this.password.equals(password);
     }
@@ -29,28 +27,28 @@ public class SystemProfile {
         Scanner scanner = new Scanner(System.in);
         SystemProfile systemProfile = new SystemProfile();
 
-        int intentosRestantes = 3;
-        boolean accesoConcedido = false;
+        int remainingAttempts = 3;
+        boolean accessGranted = false;
 
-        while (intentosRestantes > 0 && !accesoConcedido) {
-            System.out.println("Ingrese el usuario:");
+        while (remainingAttempts > 0 && !accessGranted) {
+            System.out.println("Enter the username:");
             String username = scanner.nextLine();
 
-            System.out.println("Ingrese su contrasenia:");
+            System.out.println("Enter the password:");
             String password = scanner.nextLine();
 
             if (systemProfile.authenticate(username, password)) {
-                accesoConcedido = true;
+                accessGranted = true;
             } else {
-                intentosRestantes--;
-                System.out.println("Nombre de usuario o contrasenia incorrectos. Intentos restantes: " + intentosRestantes);
+                remainingAttempts--;
+                System.out.println("Invalid username or password. Remaining attempts: " + remainingAttempts);
             }
         }
 
-        if (accesoConcedido) {
-            System.out.println("Acceso concedido.");
+        if (accessGranted) {
+            System.out.println("Access granted.");
         } else {
-            System.out.println("Acceso denegado. Ha superado el número de intentos permitidos.");
+            System.out.println("Access denied. You have exceeded the allowed number of attempts.");
         }
     }
 }

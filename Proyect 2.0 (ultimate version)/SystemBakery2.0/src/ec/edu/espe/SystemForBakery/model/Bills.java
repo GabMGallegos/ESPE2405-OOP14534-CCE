@@ -1,3 +1,4 @@
+
 package ec.edu.espe.SystemForBakery.model;
 
 import java.math.BigDecimal;
@@ -12,7 +13,6 @@ public class Bills {
 
     private int billNumber;
     private List<Product> delivery;
-    
     private BigDecimal amount;
     private String consumerName;
     private LocalDateTime date;

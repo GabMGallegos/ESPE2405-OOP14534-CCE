@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Stock {

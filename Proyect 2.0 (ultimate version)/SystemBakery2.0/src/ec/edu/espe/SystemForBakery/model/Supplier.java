@@ -1,23 +1,9 @@
 package ec.edu.espe.SystemForBakery.model;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
-import utils.FileManager;
-import utils.JsonGenerator;
-import utils.LocalDateAdapter;
-import utils.LocalDateTimeAdapter;
 
 /**
- *
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Supplier {
@@ -25,7 +11,6 @@ public class Supplier {
     private int idSupplier;
     private String supplierName;
     private String numberContact;
-    //agregar fecha de entrega del producto
     private List<Supplier> suppliers = new ArrayList<>();
 
     public Supplier() {
@@ -33,8 +18,8 @@ public class Supplier {
 
     public Supplier(int idSupplier, String supplierName, String numberContact) {
         this.idSupplier = idSupplier;
-        this.supplierName = supplierName;
-        this.numberContact = numberContact;
+        setSupplierName(supplierName);
+        setNumberContact(numberContact);
     }
 
     public int getIdSupplier() {
@@ -81,9 +66,8 @@ public class Supplier {
 
     @Override
     public String toString() {
-        return "ID: "+ idSupplier +
+        return "ID: " + idSupplier +
                 "\nSupplier Name: " + supplierName
                 + "\nNumber Contact: " + numberContact;
     }
-
 }

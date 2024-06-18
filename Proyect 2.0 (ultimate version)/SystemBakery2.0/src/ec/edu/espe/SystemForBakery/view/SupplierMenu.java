@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ec.edu.espe.SystemForBakery.view;
 
 import com.google.gson.Gson;
@@ -14,18 +10,16 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import utils.FileManager;
-import utils.JsonGenerator;
-import utils.LocalDateAdapter;
-import utils.LocalDateTimeAdapter;
+import ec.edu.espe.SystemForBakery.utils.FileManager;
+import ec.edu.espe.SystemForBakery.utils.JsonGenerator;
+import ec.edu.espe.SystemForBakery.utils.LocalDateAdapter;
+import ec.edu.espe.SystemForBakery.utils.LocalDateTimeAdapter;
 
 /**
- *
- * @author CODE_CRAFTING_ENGINEERS
+ * @autor CODE_CRAFTING_ENGINEERS
  */
 public class SupplierMenu {
 
@@ -38,12 +32,12 @@ public class SupplierMenu {
         while (true) {
             try {
                 System.out.println("--------Option ----------");
-                System.out.println("1. Nuevo Provedor");
-                System.out.println("2. Borrar Provedor");
-                System.out.println("3. Buscar Provedor");
-                System.out.println("4. Ver Provedores");
-                System.out.println("5. Volver al Menu Principal");
-                System.out.print("Ingrese la opción que desea visualizar: ");
+                System.out.println("1. New Supplier");
+                System.out.println("2. Delete Supplier");
+                System.out.println("3. Search Supplier");
+                System.out.println("4. View Suppliers");
+                System.out.println("5. Back to Main Menu");
+                System.out.print("Enter the option you want to view: ");
                 if (scanner.hasNextInt()) {
                     option = scanner.nextInt();
                     scanner.nextLine();
@@ -52,10 +46,10 @@ public class SupplierMenu {
                             manageSuppliers(scanner, suppliers);
                             break;
                         case 2:
-
+                            // Delete supplier logic here
                             break;
                         case 3:
-
+                            // Search supplier logic here
                             break;
                         case 4:
                             viewSuppliers("supplier.json");
@@ -63,15 +57,15 @@ public class SupplierMenu {
                         case 5:
                             return;
                         default:
-                            System.out.println("Opción inválida, ingrese de nuevo: ");
+                            System.out.println("Invalid option, please enter again: ");
                             break;
                     }
                 } else {
                     String input = scanner.nextLine();
-                    System.out.println("Error: La entrada '" + input + "' no es un número válido.");
+                    System.out.println("Error: The input '" + input + "' is not a valid number.");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Error: La entrada debe ser un número válido.");
+                System.out.println("Error: The input must be a valid number.");
                 scanner.nextLine();
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
@@ -83,9 +77,9 @@ public class SupplierMenu {
         System.out.print("Enter the supplier ID: ");
         int supplierId = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Enter the name of the supplier company");
+        System.out.println("Enter the name of the supplier company:");
         String supplierName = scanner.nextLine();
-        System.out.println("Enter the supplier contact");
+        System.out.println("Enter the supplier contact:");
         String numberContact = scanner.nextLine();
 
         Supplier supplier = new Supplier(supplierId, supplierName, numberContact);
@@ -93,11 +87,10 @@ public class SupplierMenu {
         FileManager.saveSupplierToCSV(supplier);
 
         try {
-
             JsonGenerator.generateSupplierJson(suppliers);
             System.out.println("Supplier added successfully!");
         } catch (IllegalArgumentException e) {
-            System.out.println("Error adding suppliers: " + e.getMessage());
+            System.out.println("Error adding supplier: " + e.getMessage());
         }
     }
 
@@ -114,7 +107,7 @@ public class SupplierMenu {
             List<Supplier> suppliers = gson.fromJson(reader, supplierListType);
 
             if (suppliers == null || suppliers.isEmpty()) {
-                System.out.println("No hay proveedores disponibles.");
+                System.out.println("No suppliers available.");
             } else {
                 System.out.println("--- List of Suppliers ---");
                 for (Supplier supplier : suppliers) {
@@ -123,10 +116,9 @@ public class SupplierMenu {
             }
 
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo JSON: " + e.getMessage());
+            System.out.println("Error reading JSON file: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
 }

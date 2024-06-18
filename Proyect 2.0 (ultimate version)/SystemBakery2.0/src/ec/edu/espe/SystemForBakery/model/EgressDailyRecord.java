@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- 
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class EgressDailyRecord {
@@ -23,7 +22,7 @@ public class EgressDailyRecord {
         if (egressRecord == null || egressRecord.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("The expenditure record cannot be negative");
         }
-        
+
         this.date = date;
         this.egressRecord = egressRecord;
         this.suppliers = new ArrayList<>();

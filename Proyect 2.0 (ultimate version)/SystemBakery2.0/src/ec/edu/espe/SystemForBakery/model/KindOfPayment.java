@@ -1,9 +1,7 @@
-
 package ec.edu.espe.SystemForBakery.model;
 
 /**
- 
- * @autor  CODE_CRAFTING_ENGINEERS
+ * @autor CODE_CRAFTING_ENGINEERS
  */
 public class KindOfPayment {
     private final PaymentType paymentType;
@@ -28,7 +26,8 @@ public class KindOfPayment {
         CASH("Cash"),
         CREDIT_CARD("Credit card"),
         DEBIT_CARD("Debit card"),
-        MOBILE_PAYMENT("mobile payment");
+        MOBILE_PAYMENT("Mobile payment"),
+        TRANSFER("Transfer");
 
         private final String description;
 

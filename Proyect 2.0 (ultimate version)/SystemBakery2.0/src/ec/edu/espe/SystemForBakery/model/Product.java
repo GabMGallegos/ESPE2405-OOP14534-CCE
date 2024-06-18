@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
- 
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Product {
@@ -80,12 +79,12 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product\n" +
-                "Id" + id +
-                "\nNname='" + name + '\'' +
-                "\nprice=" + price +
-                "\namount=" + amount +
-                "\ndate=" + date 
-                ;
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", amount=" + amount +
+                ", date=" + date +
+                '}';
     }
 }

@@ -1,11 +1,11 @@
-package utils;
+
+package ec.edu.espe.SystemForBakery.utils;
 
 import java.util.List;
 
 public class ProfileMethods {
     public ProfileMethods() {
     }
-    
     
     public static UserProfile findProfileByUsername(List<UserProfile> profiles, String username) {
         for (UserProfile profile : profiles) {
@@ -15,7 +15,6 @@ public class ProfileMethods {
         }
         return null; 
     }
-    
     
     public static boolean profileExistsByUsername(List<UserProfile> profiles, String username) {
         for (UserProfile profile : profiles) {

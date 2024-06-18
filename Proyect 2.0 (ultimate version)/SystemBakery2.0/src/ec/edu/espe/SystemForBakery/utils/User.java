@@ -1,20 +1,21 @@
-package utils;
+
+package ec.edu.espe.SystemForBakery.utils;
 
 public class User {
     private String username;
     private String password;
     private String email;
-    private int userId; // Este podría ser un identificador único para cada usuario
+    private int userId; // This could be a unique identifier for each user
 
     public User(String username, String password, String email, int userId) {
         if (username == null || username.isEmpty()) {
-            throw new IllegalArgumentException("El nombre de usuario no puede ser nulo o vacío");
+            throw new IllegalArgumentException("Username cannot be null or empty");
         }
         if (password == null || password.isEmpty()) {
-            throw new IllegalArgumentException("La contraseña no puede ser nula o vacía");
+            throw new IllegalArgumentException("Password cannot be null or empty");
         }
         if (email == null || email.isEmpty()) {
-            throw new IllegalArgumentException("El correo electrónico no puede ser nulo o vacío");
+            throw new IllegalArgumentException("Email cannot be null or empty");
         }
         this.username = username;
         this.password = password;
@@ -22,14 +23,14 @@ public class User {
         this.userId = userId;
     }
 
-    // Getters y setters para los atributos
+    // Getters and setters for the attributes
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         if (username == null || username.isEmpty()) {
-            throw new IllegalArgumentException("El nombre de usuario no puede ser nulo o vacío");
+            throw new IllegalArgumentException("Username cannot be null or empty");
         }
         this.username = username;
     }

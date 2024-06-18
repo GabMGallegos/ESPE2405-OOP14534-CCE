@@ -1,16 +1,17 @@
-package utils;
+
+package ec.edu.espe.SystemForBakery.utils;
 
 import java.util.UUID;
 
 public class ProfileId {
-    // Método para generar un identificador único
+    // Method to generate a unique identifier
     public static String generateUniqueId() {
         return UUID.randomUUID().toString();
     }
 
-    // Método para validar un identificador
+    // Method to validate an identifier
     public static boolean isValidId(String id) {
-        // Verifica si el identificador no es nulo ni está vacío
+        // Verify if the identifier is not null and not empty
         return id != null && !id.isEmpty();
     }
 }

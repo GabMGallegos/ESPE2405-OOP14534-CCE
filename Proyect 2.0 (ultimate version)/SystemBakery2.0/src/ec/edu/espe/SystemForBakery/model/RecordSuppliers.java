@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Esta clase que representa un registro de proveedores en la panadería.
- * 
+ * Esta clase representa un registro de proveedores en la panadería.
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class RecordSuppliers {
@@ -18,12 +17,12 @@ public class RecordSuppliers {
 
     public RecordSuppliers(LocalDate date, BigDecimal amount) {
         if (date == null) {
-            throw new IllegalArgumentException("La fecha no puede ser nula");
+            throw new IllegalArgumentException("Date cannot be null");
         }
         if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("El monto no puede ser negativo");
+            throw new IllegalArgumentException("The amount cannot be negative");
         }
-        
+
         this.date = date;
         this.amount = amount;
         this.suppliers = new ArrayList<>();
