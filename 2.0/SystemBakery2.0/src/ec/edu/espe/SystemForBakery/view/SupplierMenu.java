@@ -29,6 +29,7 @@ import utils.LocalDateTimeAdapter;
  */
 public class SupplierMenu {
 
+    ArrayList<Supplier> suppliers = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
     public void displaySupplierMenu() {
@@ -52,9 +53,14 @@ public class SupplierMenu {
                             manageSuppliers(scanner, suppliers);
                             break;
                         case 2:
+                            System.out.println("--- Proveedores Disponibles ---");
+        
+            viewSuppliers("supplier.json");
+            deleteSupplier();
 
                             break;
                         case 3:
+                            searchSupplier();
 
                             break;
                         case 4:
@@ -129,4 +135,64 @@ public class SupplierMenu {
         }
     }
 
+        public void searchSupplier() {
+        //Scanner scanner = new Scanner(System.in);
+try{
+        System.out.println("Ingrese el Id: ");
+        int idsear = scanner.nextInt();
+        scanner.nextLine();
+        Supplier supplierToRemove = null;
+        
+        
+            boolean found = false;
+        for (Supplier supplier : suppliers) {
+            if (supplier.getIdSupplier() == idsear) {
+                supplierToRemove = supplier;
+            
+                System.out.println("Proveedor encontrado:");
+                System.out.println(supplier);
+                found = true;
+                break; 
+            }
+        }
+
+        if (supplierToRemove != null) {
+        suppliers.remove(supplierToRemove);
+        System.out.println("Proveedor eliminado correctamente:");
+        System.out.println("ID: " + supplierToRemove.getIdSupplier());
+        System.out.println("Nombre de la empresa: " + supplierToRemove.getSupplierName());
+        System.out.println("Contacto: " + supplierToRemove.getNumberContact());
+    } else {
+            System.out.println("No se encontró ningún proveedor con ese ID.");
+        }
+        }catch(InputMismatchException e) {
+                System.out.println("Error: La entrada no es un número válido.");
+                scanner.nextLine(); 
+        }
+    }
+        
+        public void deleteSupplier (){
+            System.out.print("Ingrese el ID del proveedor que desea eliminar: ");
+    int idDelete = scanner.nextInt();
+    scanner.nextLine(); 
+    Supplier supplierToRemove = null;
+    for (Supplier supplier : suppliers) {
+        if (supplier.getIdSupplier() == idDelete) {
+            supplierToRemove = supplier;
+            break;
+        }
+    }
+
+    if (supplierToRemove != null) {
+        suppliers.remove(supplierToRemove);
+        System.out.println("Proveedor eliminado correctamente:");
+        System.out.println("ID: " + supplierToRemove.getIdSupplier());
+        System.out.println("Nombre de la empresa: " + supplierToRemove.getSupplierName());
+        System.out.println("Contacto: " + supplierToRemove.getNumberContact());
+    } else {
+        System.out.println("No se encontró ningún proveedor con ese ID.");
+    }
+
+        JsonGenerator.generateSupplierJson(suppliers);
+        }
 }

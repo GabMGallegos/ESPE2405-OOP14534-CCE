@@ -54,7 +54,6 @@ public class Bakery {
                     case 2:
                         SupplierMenu supplierMenu = new SupplierMenu();
                         supplierMenu.displaySupplierMenu();
-//manageSuppliers(scanner, suppliers);
                         break;
                     case 3:
                         manageOutputProducts("stock.json");
@@ -81,11 +80,7 @@ public class Bakery {
             }
             System.out.println();
         } 
-    }
-
-    
-
-    
+    }    
     private static void manageProduct(Scanner scanner, Stock stock) {
         System.out.println("Enter the product ID");
         int idProduct = scanner.nextInt();
@@ -114,9 +109,7 @@ public class Bakery {
             System.out.println("Error adding product: " + e.getMessage());
         }
     }
-
    
-
     private static void manageOutputProducts(String filePath) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
