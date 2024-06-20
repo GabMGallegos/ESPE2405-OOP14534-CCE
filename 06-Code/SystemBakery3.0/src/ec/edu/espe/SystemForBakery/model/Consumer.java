@@ -1,7 +1,7 @@
 package ec.edu.espe.SystemForBakery.model;
 
 import java.math.BigDecimal;
-import utils.JsonGenerator;
+import ec.edu.espe.SystemForBakery.utils.JsonGenerator;
 
 /**
  * @autor CODE_CRAFTING_ENGINEERS

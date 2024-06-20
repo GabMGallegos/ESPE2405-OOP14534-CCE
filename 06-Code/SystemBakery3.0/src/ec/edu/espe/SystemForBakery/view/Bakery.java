@@ -50,7 +50,7 @@ public class Bakery {
                         supplierMenu.displaySupplierMenu();
                         break;
                     case 3:
-                        manageOutputProducts("resources/json/stock.json");
+                        manageOutputProducts("stock.json");
                         break;
                     case 4:
                         createOrder(scanner, stock);

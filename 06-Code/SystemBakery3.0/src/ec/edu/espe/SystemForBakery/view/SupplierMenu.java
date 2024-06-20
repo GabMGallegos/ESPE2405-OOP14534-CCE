@@ -22,12 +22,15 @@ import ec.edu.espe.SystemForBakery.utils.LocalDateTimeAdapter;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class SupplierMenu {
-    ArrayList<Supplier> suppliers = new ArrayList<>();
+    List<Supplier> suppliers = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
+    
 
     public void displaySupplierMenu() {
+        
         int option = 0;
 
+        Supplier supplier = new Supplier();
         while (true) {
             try {
                 System.out.println("--------Option ----------");
@@ -46,13 +49,16 @@ public class SupplierMenu {
                             manageSuppliers(scanner, suppliers);
                             break;
                         case 2:
+                            
+                            viewSuppliers("supplier.json");
                             deleteSupplier();
                             break;
                         case 3:
+                            
                             searchSupplier();
                             break;
                         case 4:
-                            viewSuppliers("resources/json/suppliers.json");
+                            viewSuppliers("supplier.json");
                             break;
                         case 5:
                             return;

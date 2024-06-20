@@ -17,7 +17,7 @@ import java.util.List;
 public class JsonGenerator {
     private static final String FILE_BILL = "resources/json/bills.json";
     private static final String FILE_STOCK = "resources/json/stock.json";
-    private static final String FILE_SUPPLIER = "resources/json/suppliers.json";
+    private static final String FILE_SUPPLIER = "supplier.json";
 
     private static final Gson gson = new GsonBuilder()
         .setPrettyPrinting()
@@ -44,7 +44,13 @@ public class JsonGenerator {
     }
 
     public static void generateSupplierJson(List<Supplier> suppliers) {
-        try (FileWriter writer = new FileWriter(FILE_SUPPLIER)) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .setPrettyPrinting()
+                .create();
+
+        try (FileWriter writer = new FileWriter("supplier.json")) {
             gson.toJson(suppliers, writer);
         } catch (IOException e) {
             System.out.println("Error writing JSON file: " + e.getMessage());
