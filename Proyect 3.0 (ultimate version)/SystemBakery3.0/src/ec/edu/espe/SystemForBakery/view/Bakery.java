@@ -52,7 +52,7 @@ public class Bakery {
                         supplierMenu.displaySupplierMenu();
                         break;
                     case 3:
-                        manageOutputProducts("stock.json");
+                        manageOutputProducts("resources/json/stock.json");
                         break;
                     case 4:
                         makePurchase(scanner, stock, bills);
@@ -132,22 +132,15 @@ public class Bakery {
 
     private static void makePurchase(Scanner scanner, Stock stock, List<Bills> bills) {
         List<Product> orderProducts = new ArrayList<>();
-        List<Integer> quantities = new ArrayList<>();
         BigDecimal totalOrderPrice = BigDecimal.ZERO;
 
         while (true) {
-            System.out.print("Enter the product ID to add to the order (press Enter to finish): ");
-            String input = scanner.nextLine().trim();
-            if (input.isEmpty()) {
-                break;
-            }
+            System.out.print("Enter the product ID to add to the order (enter -1 to finish): ");
+            int productId = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
-            int productId;
-            try {
-                productId = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid product ID. Try again.");
-                continue;
+            if (productId == -1) {
+                break;
             }
 
             Product product = stock.findProductById(productId);
@@ -160,16 +153,19 @@ public class Bakery {
             int quantity = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
-            if (quantity > product.getAmount() || quantity <= 0) {
-                System.out.println("Invalid quantity. Try again.");
+            if (quantity > product.getAmount()) {
+                System.out.println("Not enough stock available. Try again.");
                 continue;
             }
 
             BigDecimal totalPrice = product.getPrice().multiply(BigDecimal.valueOf(quantity));
             totalOrderPrice = totalOrderPrice.add(totalPrice);
 
-            orderProducts.add(product);
-            quantities.add(quantity);
+            for (int i = 0; i < quantity; i++) {
+                orderProducts.add(product);
+            }
+
+            product.setAmount(product.getAmount() - quantity);
         }
 
         if (orderProducts.isEmpty()) {
@@ -195,38 +191,20 @@ public class Bakery {
         Bills bill = new Bills(billNumber, consumerName, LocalDateTime.now());
         bill.setPaymentType(paymentType.toString());
 
-        for (int i = 0; i < orderProducts.size(); i++) {
-            Product product = orderProducts.get(i);
-            int quantity = quantities.get(i);
-            bill.addProduct(product, quantity);
+        for (Product product : orderProducts) {
+            bill.addProduct(product, 1);
         }
 
-        System.out.print("Confirm purchase? (yes/no): ");
-        String confirm = scanner.nextLine().toLowerCase();
-        if (confirm.equals("yes")) {
-            try {
-                for (int i = 0; i < orderProducts.size(); i++) {
-                    Product product = orderProducts.get(i);
-                    int quantity = quantities.get(i);
-                    int newQuantity = product.getAmount() - quantity;
-                    if (newQuantity < 0) {
-                        throw new IllegalArgumentException("The quantity cannot be negative");
-                    }
-                    product.setAmount(newQuantity);
-                }
-                FileManager.saveBillsToCSV(bill);
-                JsonGenerator.generateBillJson(bill);
-                bills.add(bill);
-                JsonGenerator.generateStockJson(stock);
+        try {
+            FileManager.saveBillsToCSV(bill);
+            JsonGenerator.generateBillJson(bill);
+            bills.add(bill);
+            JsonGenerator.generateStockJson(stock);
 
-                System.out.println("Purchase completed successfully:");
-                System.out.println(bill);
-            } catch (Exception e) {
-                System.out.println("Error completing purchase: " + e.getMessage());
-                e.printStackTrace();  // Agregar trazado de pila para la depuración
-            }
-        } else {
-            System.out.println("Purchase canceled.");
+            System.out.println("Purchase completed successfully:");
+            System.out.println(bill);
+        } catch (Exception e) {
+            System.out.println("Error completing purchase: " + e.getMessage());
         }
     }
 
