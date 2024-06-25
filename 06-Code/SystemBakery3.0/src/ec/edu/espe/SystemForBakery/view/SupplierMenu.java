@@ -13,21 +13,23 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import ec.edu.espe.SystemForBakery.utils.FileManager;
-import ec.edu.espe.SystemForBakery.utils.JsonGenerator;
-import ec.edu.espe.SystemForBakery.utils.LocalDateAdapter;
-import ec.edu.espe.SystemForBakery.utils.LocalDateTimeAdapter;
+import ec.edu.espe.SystemForBakery.utils.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class SupplierMenu {
+
     List<Supplier> suppliers = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
-    
+    private static Set<Integer> existingSupplierIds = new HashSet<>();
 
     public void displaySupplierMenu() {
-        
+
         int option = 0;
 
         Supplier supplier = new Supplier();
@@ -40,7 +42,7 @@ public class SupplierMenu {
                 System.out.println("4. View Suppliers");
                 System.out.println("5. Back to Main Menu");
                 System.out.print("Enter the option you want to view: ");
-                
+
                 if (scanner.hasNextInt()) {
                     option = scanner.nextInt();
                     scanner.nextLine();
@@ -49,12 +51,12 @@ public class SupplierMenu {
                             manageSuppliers(scanner, suppliers);
                             break;
                         case 2:
-                            
+
                             viewSuppliers("supplier.json");
                             deleteSupplier();
                             break;
                         case 3:
-                            
+
                             searchSupplier();
                             break;
                         case 4:
@@ -80,9 +82,16 @@ public class SupplierMenu {
     }
 
     public static void manageSuppliers(Scanner scanner, List<Supplier> suppliers) {
+
         System.out.print("Enter the supplier ID: ");
         int supplierId = scanner.nextInt();
         scanner.nextLine();
+
+        if (existingSupplierIds.contains(supplierId)) {
+            System.out.println("Error: Supplier ID already exists. Please enter a unique ID.");
+            return; // Salir del método si el ID ya existe
+        }
+
         System.out.println("Enter the name of the supplier company:");
         String supplierName = scanner.nextLine();
         System.out.println("Enter the supplier contact:");
@@ -90,7 +99,10 @@ public class SupplierMenu {
 
         Supplier supplier = new Supplier(supplierId, supplierName, numberContact);
         suppliers.add(supplier);
+        existingSupplierIds.add(supplierId);
         FileManager.saveSupplierToCSV(supplier);
+        saveSupplierIdToFile(supplierId);
+
 
         try {
             JsonGenerator.generateSupplierJson(suppliers);
@@ -100,6 +112,15 @@ public class SupplierMenu {
         }
     }
 
+    private static void saveSupplierIdToFile(int supplierId) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("supplier.json", true))) {
+            writer.write(Integer.toString(supplierId));
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Could not save supplier ID: " + e.getMessage());
+        }
+    }
+   
     public static void viewSuppliers(String jsonFile) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
@@ -133,17 +154,17 @@ public class SupplierMenu {
             System.out.println("Enter the supplier ID: ");
             int idSearch = scanner.nextInt();
             scanner.nextLine();
-            
+
             Supplier supplierToRemove = null;
             boolean found = false;
-            
+
             for (Supplier supplier : suppliers) {
                 if (supplier.getIdSupplier() == idSearch) {
                     supplierToRemove = supplier;
                     System.out.println("Supplier found:");
                     System.out.println(supplier);
                     found = true;
-                    break; 
+                    break;
                 }
             }
 
@@ -152,14 +173,14 @@ public class SupplierMenu {
             }
         } catch (InputMismatchException e) {
             System.out.println("Error: The input is not a valid number.");
-            scanner.nextLine(); 
+            scanner.nextLine();
         }
     }
 
     public void deleteSupplier() {
         System.out.print("Enter the ID of the supplier you want to delete: ");
         int idDelete = scanner.nextInt();
-        scanner.nextLine(); 
+        scanner.nextLine();
         Supplier supplierToRemove = null;
 
         for (Supplier supplier : suppliers) {

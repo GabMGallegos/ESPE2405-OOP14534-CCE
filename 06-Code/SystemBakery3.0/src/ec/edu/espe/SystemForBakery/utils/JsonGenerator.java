@@ -50,7 +50,7 @@ public class JsonGenerator {
                 .setPrettyPrinting()
                 .create();
 
-        try (FileWriter writer = new FileWriter("supplier.json")) {
+        try (FileWriter writer = new FileWriter(FILE_SUPPLIER)) {
             gson.toJson(suppliers, writer);
         } catch (IOException e) {
             System.out.println("Error writing JSON file: " + e.getMessage());
