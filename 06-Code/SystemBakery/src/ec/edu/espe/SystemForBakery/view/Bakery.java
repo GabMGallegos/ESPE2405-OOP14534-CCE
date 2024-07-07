@@ -1,10 +1,6 @@
 package ec.edu.espe.SystemForBakery.view;
 
-import ec.edu.espe.SystemForBakery.utils.LocalDateAdapter;
-import ec.edu.espe.SystemForBakery.utils.LocalDateTimeAdapter;
-import ec.edu.espe.SystemForBakery.utils.SystemProfile;
-import ec.edu.espe.SystemForBakery.utils.FileManager;
-import ec.edu.espe.SystemForBakery.utils.JsonGenerator;
+import ec.edu.espe.SystemForBakery.utils.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ec.edu.espe.SystemForBakery.model.*;
@@ -15,6 +11,7 @@ import java.time.*;
 import java.util.*;
 
 public class Bakery {
+
     Scanner scanner = new Scanner(System.in);
 
     public void displayMenu() {

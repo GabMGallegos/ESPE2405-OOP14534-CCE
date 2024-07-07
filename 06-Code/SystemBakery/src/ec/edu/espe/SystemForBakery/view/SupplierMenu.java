@@ -103,7 +103,6 @@ public class SupplierMenu {
         FileManager.saveSupplierToCSV(supplier);
         saveSupplierIdToFile(supplierId);
 
-
         try {
             JsonGenerator.generateSupplierJson(suppliers);
             System.out.println("Supplier added successfully!");
@@ -120,7 +119,7 @@ public class SupplierMenu {
             System.out.println("Could not save supplier ID: " + e.getMessage());
         }
     }
-   
+
     public static void viewSuppliers(String jsonFile) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
