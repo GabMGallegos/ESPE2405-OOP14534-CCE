@@ -15,15 +15,16 @@ import java.util.List;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class JsonGenerator {
+
     private static final String FILE_BILL = "resources/json/bills.json";
     private static final String FILE_STOCK = "resources/json/stock.json";
     private static final String FILE_SUPPLIER = "supplier.json";
 
     private static final Gson gson = new GsonBuilder()
-        .setPrettyPrinting()
-        .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-        .create();
+            .setPrettyPrinting()
+            .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .create();
 
     public static void generateBillJson(Bills bill) {
         try (FileWriter writer = new FileWriter(FILE_BILL, true)) { // Append mode

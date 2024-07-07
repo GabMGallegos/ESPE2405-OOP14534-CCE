@@ -6,6 +6,7 @@ import java.util.Scanner;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class SystemProfile {
+
     private static final String VALID_USERNAME = "admin";
     private static final String VALID_PASSWORD = "admin123";
 
@@ -22,7 +23,7 @@ public class SystemProfile {
     public boolean authenticate(String username, String password) {
         return this.user.equals(username) && this.password.equals(password);
     }
-    
+
     public void login() {
         Scanner scanner = new Scanner(System.in);
         SystemProfile systemProfile = new SystemProfile();

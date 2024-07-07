@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 public class FileManager {
+
     public static void saveProducts(String fileName, List<Product> products) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (Product product : products) {

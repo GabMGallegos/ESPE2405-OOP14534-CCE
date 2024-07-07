@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class LocalDateAdapter extends TypeAdapter<LocalDate> {
+
     private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
     @Override
