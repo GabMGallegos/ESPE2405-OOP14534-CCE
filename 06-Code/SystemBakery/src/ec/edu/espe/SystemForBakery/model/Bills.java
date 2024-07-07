@@ -9,6 +9,7 @@ import java.util.List;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Bills {
+
     private int billNumber;
     private List<Product> delivery;
     private BigDecimal amount;

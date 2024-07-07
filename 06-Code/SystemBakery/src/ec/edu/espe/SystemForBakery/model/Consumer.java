@@ -7,6 +7,7 @@ import ec.edu.espe.SystemForBakery.utils.JsonGenerator;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Consumer {
+
     private String consumerName;
     private BigDecimal cash;
     private Bills bill;
@@ -91,7 +92,7 @@ public class Consumer {
         this.cash = this.cash.subtract(amount);
     }
 
-   public void createBill(Bills bill, KindOfPayment.PaymentType paymentType) {
+    public void createBill(Bills bill, KindOfPayment.PaymentType paymentType) {
         this.bill = bill;
         this.paymentType = paymentType;
         if (paymentType == KindOfPayment.PaymentType.TRANSFER) {

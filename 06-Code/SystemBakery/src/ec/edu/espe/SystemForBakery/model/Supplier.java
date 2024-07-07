@@ -7,12 +7,14 @@ import java.util.List;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Supplier {
+
     private int idSupplier;
     private String supplierName;
     private String numberContact;
     private List<Supplier> suppliers = new ArrayList<>();
 
-    public Supplier() {}
+    public Supplier() {
+    }
 
     public Supplier(int idSupplier, String supplierName, String numberContact) {
         this.idSupplier = idSupplier;
@@ -64,8 +66,8 @@ public class Supplier {
 
     @Override
     public String toString() {
-        return "ID: " + idSupplier +
-                "\nSupplier Name: " + supplierName +
-                "\nNumber Contact: " + numberContact;
+        return "ID: " + idSupplier
+                + "\nSupplier Name: " + supplierName
+                + "\nNumber Contact: " + numberContact;
     }
 }

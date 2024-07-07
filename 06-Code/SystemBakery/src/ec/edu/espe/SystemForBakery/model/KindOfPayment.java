@@ -4,6 +4,7 @@ package ec.edu.espe.SystemForBakery.model;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class KindOfPayment {
+
     private final PaymentType paymentType;
 
     public KindOfPayment(PaymentType paymentType) {

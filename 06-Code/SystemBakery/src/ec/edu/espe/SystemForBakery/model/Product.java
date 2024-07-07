@@ -7,6 +7,7 @@ import java.time.LocalDate;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Product {
+
     private int id;
     private String name;
     private BigDecimal price;
@@ -14,11 +15,21 @@ public class Product {
     private LocalDate date;
 
     public Product(int id, String name, BigDecimal price, int amount, LocalDate date) {
-        if (id <= 0) throw new IllegalArgumentException("Product ID must be positive");
-        if (name == null || name.isEmpty()) throw new IllegalArgumentException("Product name cannot be empty");
-        if (price == null || price.compareTo(BigDecimal.ZERO) < 0) throw new IllegalArgumentException("The price cannot be negative");
-        if (amount < 0) throw new IllegalArgumentException("The quantity cannot be negative");
-        if (date == null) throw new IllegalArgumentException("Date cannot be null");
+        if (id <= 0) {
+            throw new IllegalArgumentException("Product ID must be positive");
+        }
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Product name cannot be empty");
+        }
+        if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("The price cannot be negative");
+        }
+        if (amount < 0) {
+            throw new IllegalArgumentException("The quantity cannot be negative");
+        }
+        if (date == null) {
+            throw new IllegalArgumentException("Date cannot be null");
+        }
 
         this.id = id;
         this.name = name;
@@ -32,7 +43,9 @@ public class Product {
     }
 
     public void setId(int id) {
-        if (id <= 0) throw new IllegalArgumentException("Product ID must be positive");
+        if (id <= 0) {
+            throw new IllegalArgumentException("Product ID must be positive");
+        }
         this.id = id;
     }
 
@@ -41,7 +54,9 @@ public class Product {
     }
 
     public void setName(String name) {
-        if (name == null || name.isEmpty()) throw new IllegalArgumentException("Product name cannot be empty");
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Product name cannot be empty");
+        }
         this.name = name;
     }
 
@@ -50,7 +65,9 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
-        if (price == null || price.compareTo(BigDecimal.ZERO) < 0) throw new IllegalArgumentException("The price cannot be negative");
+        if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("The price cannot be negative");
+        }
         this.price = price;
     }
 
@@ -59,7 +76,9 @@ public class Product {
     }
 
     public void setAmount(int amount) {
-        if (amount < 0) throw new IllegalArgumentException("The quantity cannot be negative");
+        if (amount < 0) {
+            throw new IllegalArgumentException("The quantity cannot be negative");
+        }
         this.amount = amount;
     }
 
@@ -68,7 +87,9 @@ public class Product {
     }
 
     public void setDate(LocalDate date) {
-        if (date == null) throw new IllegalArgumentException("Date cannot be null");
+        if (date == null) {
+            throw new IllegalArgumentException("Date cannot be null");
+        }
         this.date = date;
     }
 
@@ -78,12 +99,12 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", amount=" + amount +
-                ", date=" + date +
-                '}';
+        return "Product{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", price=" + price
+                + ", amount=" + amount
+                + ", date=" + date
+                + '}';
     }
 }

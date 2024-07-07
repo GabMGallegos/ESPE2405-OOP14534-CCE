@@ -7,9 +7,11 @@ import java.util.List;
 
 /**
  * Esta clase representa un registro de proveedores en la panadería.
+ *
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class RecordSuppliers {
+
     private LocalDate date;
     private BigDecimal amount;
     private List<Supplier> suppliers;

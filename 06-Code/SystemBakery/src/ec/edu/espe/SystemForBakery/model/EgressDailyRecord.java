@@ -9,6 +9,7 @@ import java.util.List;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class EgressDailyRecord {
+
     private LocalDate date;
     private List<Supplier> suppliers;
     private List<Product> products;

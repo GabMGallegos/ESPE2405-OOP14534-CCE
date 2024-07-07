@@ -8,6 +8,7 @@ import java.util.List;
  * @autor CODE_CRAFTING_ENGINEERS
  */
 public class Stock {
+
     private List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product) {
