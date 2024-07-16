@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Proveedor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Nuevo Proveedor</h2>
+    <form id="supplierForm">
+        <label for="supplierId">Id del Proveedor:</label>
+        <input type="text" id="supplierId" name="supplierId" required>
+        
+        <label for="supplierCompany">Compañía del Proveedor:</label>
+        <input type="text" id="supplierCompany" name="supplierCompany" required>
+        
+        <label for="supplierContact">Contacto del Proveedor:</label>
+        <input type="text" id="supplierContact" name="supplierContact" required>
+        
+        <button type="submit">Añadir Nuevo Proveedor</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('supplierForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const supplierId = document.getElementById('supplierId').value;
+        const supplierCompany = document.getElementById('supplierCompany').value;
+        const supplierContact = document.getElementById('supplierContact').value;
+
+        if (supplierId && supplierCompany && supplierContact) {
+            alert(`Proveedor Añadido:\nId: ${supplierId}\nCompañía: ${supplierCompany}\nContacto: ${supplierContact}`);
+        } else {
+            alert('Por favor, rellene todos los campos.');
+        }
+    });
+</script>
+
+</body>
+</html>
