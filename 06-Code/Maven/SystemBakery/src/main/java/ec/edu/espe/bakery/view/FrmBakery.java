@@ -6,12 +6,12 @@ package ec.edu.espe.bakery.view;
 
 /**
  *
- * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
+ * @author Leydi Oña
  */
 public class FrmBakery extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmCyberPlanet
+     * Creates new form FrmBakery
      */
     public FrmBakery() {
         initComponents();
@@ -26,85 +26,198 @@ public class FrmBakery extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        lbProducto = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        btnProducto = new javax.swing.JButton();
+        btnProducto1 = new javax.swing.JButton();
+        btnProducto2 = new javax.swing.JButton();
+        lbProducto1 = new javax.swing.JLabel();
+        lbProducto2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        mnuBakery = new javax.swing.JMenu();
-        itmLogout = new javax.swing.JMenuItem();
-        itmExit = new javax.swing.JMenuItem();
-        mnuProducts = new javax.swing.JMenu();
-        itmAddNewProduct = new javax.swing.JMenuItem();
-        itmDeleteProduct = new javax.swing.JMenuItem();
-        mnuListProducts = new javax.swing.JMenu();
-        itmFoundProduct = new javax.swing.JMenuItem();
-        mnuSuppliers = new javax.swing.JMenu();
-        mnuPurchases = new javax.swing.JMenu();
-        mnuHelp = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        Mnu = new javax.swing.JMenu();
+        mnuitSignOff = new javax.swing.JMenuItem();
+        mnuitmExit = new javax.swing.JMenuItem();
+        mnuSetting = new javax.swing.JMenu();
+        mnuitUsers = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
 
-        jMenu5.setText("File");
-        jMenuBar2.add(jMenu5);
-
-        jMenu6.setText("Edit");
-        jMenuBar2.add(jMenu6);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        mnuBakery.setText("Panadería");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Main.png"))); // NOI18N
 
-        itmLogout.setText("Logout");
-        itmLogout.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
+        jLabel2.setText("Panaderia El Trigo de Oro");
+
+        jLabel3.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jLabel3.setText("Menu Principal");
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setForeground(new java.awt.Color(0, 0, 0));
+
+        lbProducto.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbProducto.setForeground(new java.awt.Color(255, 255, 255));
+        lbProducto.setText("Crear Orden");
+        lbProducto.setToolTipText("");
+        lbProducto.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnProducto.setBackground(new java.awt.Color(255, 255, 255));
+        btnProducto.setForeground(new java.awt.Color(255, 255, 255));
+        btnProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/botonesMain.png"))); // NOI18N
+        btnProducto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmLogoutActionPerformed(evt);
+                btnProductoActionPerformed(evt);
             }
         });
-        mnuBakery.add(itmLogout);
 
-        itmExit.setText("Exit");
-        itmExit.addActionListener(new java.awt.event.ActionListener() {
+        btnProducto1.setBackground(new java.awt.Color(255, 255, 255));
+        btnProducto1.setForeground(new java.awt.Color(255, 255, 255));
+        btnProducto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/botonesMain.png"))); // NOI18N
+        btnProducto1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnProducto1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmExitActionPerformed(evt);
+                btnProducto1ActionPerformed(evt);
             }
         });
-        mnuBakery.add(itmExit);
 
-        jMenuBar1.add(mnuBakery);
-
-        mnuProducts.setText("Productos");
-
-        itmAddNewProduct.setText("Añadir nuevo(s) producto(s)");
-        itmAddNewProduct.addActionListener(new java.awt.event.ActionListener() {
+        btnProducto2.setBackground(new java.awt.Color(255, 255, 255));
+        btnProducto2.setForeground(new java.awt.Color(255, 255, 255));
+        btnProducto2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/botonesMain.png"))); // NOI18N
+        btnProducto2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnProducto2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmAddNewProductActionPerformed(evt);
+                btnProducto2ActionPerformed(evt);
             }
         });
-        mnuProducts.add(itmAddNewProduct);
 
-        itmDeleteProduct.setText("Eliminar Producto(s)");
-        mnuProducts.add(itmDeleteProduct);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+            .addComponent(btnProducto2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnProducto1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(btnProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnProducto2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnProducto1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        mnuListProducts.setText("Listar Productos");
+        lbProducto1.setBackground(new java.awt.Color(255, 255, 255));
+        lbProducto1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbProducto1.setForeground(new java.awt.Color(255, 255, 255));
+        lbProducto1.setText("Productos");
+        lbProducto1.setToolTipText("");
+        lbProducto1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        itmFoundProduct.setText("Buscar producto");
-        mnuListProducts.add(itmFoundProduct);
+        lbProducto2.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbProducto2.setForeground(new java.awt.Color(255, 255, 255));
+        lbProducto2.setText("Proveedores");
+        lbProducto2.setToolTipText("");
+        lbProducto2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        mnuProducts.add(mnuListProducts);
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbProducto2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbProducto1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(108, 108, 108))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbProducto1)
+                .addGap(64, 64, 64)
+                .addComponent(lbProducto2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(lbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-        jMenuBar1.add(mnuProducts);
+        Mnu.setText("Inicio");
 
-        mnuSuppliers.setText("Proovedores");
-        jMenuBar1.add(mnuSuppliers);
+        mnuitSignOff.setText("Cerrar Sesion");
+        mnuitSignOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuitSignOffActionPerformed(evt);
+            }
+        });
+        Mnu.add(mnuitSignOff);
 
-        mnuPurchases.setText("Compras");
-        jMenuBar1.add(mnuPurchases);
+        mnuitmExit.setText("Salir del sistema");
+        mnuitmExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuitmExitActionPerformed(evt);
+            }
+        });
+        Mnu.add(mnuitmExit);
 
-        mnuHelp.setText("Ayuda");
+        jMenuBar1.add(Mnu);
 
-        jMenuItem1.setText("jMenuItem1");
-        mnuHelp.add(jMenuItem1);
+        mnuSetting.setText("Configuracion");
 
-        jMenuBar1.add(mnuHelp);
+        mnuitUsers.setText("Metodo de Pago");
+        mnuSetting.add(mnuitUsers);
+
+        jMenu2.setText("Usuario");
+
+        jMenuItem3.setText("Ingresar usuario");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("Eliminar usuarios");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jCheckBoxMenuItem1);
+
+        mnuSetting.add(jMenu2);
+
+        jMenuBar1.add(mnuSetting);
 
         setJMenuBar(jMenuBar1);
 
@@ -112,31 +225,73 @@ public class FrmBakery extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void itmLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmLogoutActionPerformed
-        FrmLogin frmLogin = new FrmLogin();
-        this.setVisible(false);
-        frmLogin.setVisible(true);
-    }//GEN-LAST:event_itmLogoutActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void itmAddNewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmAddNewProductActionPerformed
-        FrmAddNewProduct frmAddNewProduct = new FrmAddNewProduct();
-        this.setVisible(false);
-        frmAddNewProduct.setVisible(true);
-    }//GEN-LAST:event_itmAddNewProductActionPerformed
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
-    private void itmExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmExitActionPerformed
+    private void mnuitmExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitmExitActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_itmExitActionPerformed
+    }//GEN-LAST:event_mnuitmExitActionPerformed
+
+    private void mnuitSignOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitSignOffActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuitSignOffActionPerformed
+
+    private void btnProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProductoActionPerformed
+
+    private void btnProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProducto1ActionPerformed
+
+    private void btnProducto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProducto2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProducto2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,21 +330,27 @@ public class FrmBakery extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem itmAddNewProduct;
-    private javax.swing.JMenuItem itmDeleteProduct;
-    private javax.swing.JMenuItem itmExit;
-    private javax.swing.JMenuItem itmFoundProduct;
-    private javax.swing.JMenuItem itmLogout;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu Mnu;
+    private javax.swing.JButton btnProducto;
+    private javax.swing.JButton btnProducto1;
+    private javax.swing.JButton btnProducto2;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenu mnuBakery;
-    private javax.swing.JMenu mnuHelp;
-    private javax.swing.JMenu mnuListProducts;
-    private javax.swing.JMenu mnuProducts;
-    private javax.swing.JMenu mnuPurchases;
-    private javax.swing.JMenu mnuSuppliers;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbProducto;
+    private javax.swing.JLabel lbProducto1;
+    private javax.swing.JLabel lbProducto2;
+    private javax.swing.JMenu mnuSetting;
+    private javax.swing.JMenuItem mnuitSignOff;
+    private javax.swing.JMenuItem mnuitUsers;
+    private javax.swing.JMenuItem mnuitmExit;
     // End of variables declaration//GEN-END:variables
 }
