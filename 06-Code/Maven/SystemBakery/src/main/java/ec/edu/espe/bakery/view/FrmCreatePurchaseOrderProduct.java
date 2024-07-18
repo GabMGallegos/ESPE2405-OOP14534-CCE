@@ -253,6 +253,11 @@ public class FrmCreatePurchaseOrderProduct extends javax.swing.JFrame {
         jMenu1.setText("Inicio");
 
         itmPrincipalMenu.setText("Menú Principal");
+        itmPrincipalMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmPrincipalMenuActionPerformed(evt);
+            }
+        });
         jMenu1.add(itmPrincipalMenu);
 
         itmPurchaseOrderMenu.setText("Menú Ordenes de Compra");
@@ -319,8 +324,12 @@ public class FrmCreatePurchaseOrderProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_itmSaveOrderActionPerformed
 
     private void itmPurchaseOrderMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmPurchaseOrderMenuActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_itmPurchaseOrderMenuActionPerformed
+
+    private void itmPrincipalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmPrincipalMenuActionPerformed
+        
+    }//GEN-LAST:event_itmPrincipalMenuActionPerformed
 
     /**
      * @param args the command line arguments

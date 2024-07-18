@@ -58,6 +58,11 @@ public class FrmCreateBill extends javax.swing.JFrame {
         );
 
         btnConsultPurchaseOrder.setText("Consultar Orden de Compra");
+        btnConsultPurchaseOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultPurchaseOrderActionPerformed(evt);
+            }
+        });
 
         btnCreatePurchaseOrder.setText("Realizar Orden de Compra");
 
@@ -85,6 +90,11 @@ public class FrmCreateBill extends javax.swing.JFrame {
         jMenu1.setText("Inicio");
 
         itmReturnToPrincipalMenu.setText("Regresar al Menú Principal");
+        itmReturnToPrincipalMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmReturnToPrincipalMenuActionPerformed(evt);
+            }
+        });
         jMenu1.add(itmReturnToPrincipalMenu);
 
         jMenuBar1.add(jMenu1);
@@ -116,7 +126,20 @@ public class FrmCreateBill extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnConsultPurchaseOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultPurchaseOrderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultPurchaseOrderActionPerformed
+
+    private void itmReturnToPrincipalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmReturnToPrincipalMenuActionPerformed
+        if (true) { //read users from and compare user name and password
+            FrmBakery frmBakery = new FrmBakery();
+            this.setVisible(false);
+            frmBakery.setVisible(true);
+        }
+    }//GEN-LAST:event_itmReturnToPrincipalMenuActionPerformed
 
     /**
      * @param args the command line arguments
