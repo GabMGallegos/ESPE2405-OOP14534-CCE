@@ -12,4 +12,11 @@
         <exec.mainClass>ec.edu.espe.bakery.view.FrmBakeySystemSplash</exec.mainClass>
     </properties>
     <name>SystemBakery</name>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java/ec/edu/espe/resources</directory>
+            </resource>
+        </resources>
+    </build>
 </project>
