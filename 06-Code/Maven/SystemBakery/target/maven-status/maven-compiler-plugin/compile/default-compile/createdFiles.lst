@@ -36,6 +36,8 @@ ec\edu\espe\bakery\view\FrmBakeySystemSplash$1.class
 ec\edu\espe\bakery\view\FrmCreatePurchaseOrderSupplier$1.class
 ec\edu\espe\bakery\view\FrmBakery$4.class
 ec\edu\espe\bakery\view\FrmSearchSupplier$1.class
+ec\edu\espe\utils\Conection.class
+ec\edu\espe\bakery\view\FrmAddNewProduct$6.class
 ec\edu\espe\bakery\view\FrmLogin$2.class
 ec\edu\espe\bakery\view\FrmCreateBill$2.class
 ec\edu\espe\bakery\view\FrmConsultProduct$2.class
