@@ -7,6 +7,9 @@ package ec.edu.espe.bakery.view;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.utils.Conection;
+import java.lang.Integer;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -212,6 +215,13 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
 
         jLabel11.setText("Existencias");
 
+        txtExistence.setToolTipText("Ingrese solo números enteros");
+        txtExistence.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtExistenceFocusGained(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -314,10 +324,18 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
                 .append("Fecha de Salida", txtDateOutput.getText());
         
         try {
+            int existence = Integer.parseInt(txtExistence.getText());
             colection.insertOne(documento);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ingrese solo enteros!!");
+            //txtExistenceFocusGained(evt);
         }
+        
     }//GEN-LAST:event_btnSaveProductActionPerformed
+
+    private void txtExistenceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtExistenceFocusGained
+        
+    }//GEN-LAST:event_txtExistenceFocusGained
 
     /**
      * @param args the command line arguments
