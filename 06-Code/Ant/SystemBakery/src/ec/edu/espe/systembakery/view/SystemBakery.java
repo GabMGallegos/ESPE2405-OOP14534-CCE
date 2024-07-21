@@ -19,6 +19,7 @@ public class SystemBakery {
                 final int percent = i;
                 javax.swing.SwingUtilities.invokeLater(() -> {
                     splash.setBarValue(percent);
+                    splash.getProgress().setText(percent + " %");
                 });
             }
         } catch (Exception e) {
