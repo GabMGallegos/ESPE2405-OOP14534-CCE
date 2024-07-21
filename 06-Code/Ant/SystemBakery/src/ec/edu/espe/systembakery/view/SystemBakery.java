@@ -4,6 +4,8 @@
  */
 package ec.edu.espe.systembakery.view;
 
+import ec.edu.espe.systembakery.FrmSystemBakerySplash;
+
 /**
  *
  * @author Leydi Oña
@@ -14,7 +16,8 @@ public class SystemBakery {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        FrmSystemBakerySplash bakerySplash = new FrmSystemBakerySplash();
+        bakerySplash.setVisible(true);
     }
     
 }
