@@ -32,7 +32,6 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         bar = new splashscreen.ProgressBarCustom();
-        progress = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -40,6 +39,7 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/login_1.png"))); // NOI18N
         jLabel1.setText("jLabel1");
 
+        jLabel2.setForeground(new java.awt.Color(207, 132, 33));
         jLabel2.setText("Panaderia El Trigo de Oro");
 
         jLabel3.setText("V 1.0.0");
@@ -48,9 +48,6 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
         jLabel4.setText("(c)  2024 CodeCrafting Engineers");
 
         bar.setForeground(new java.awt.Color(59, 41, 5));
-
-        progress.setForeground(new java.awt.Color(255, 255, 255));
-        progress.setText("0");
 
         javax.swing.GroupLayout curvesPanel1Layout = new javax.swing.GroupLayout(curvesPanel1);
         curvesPanel1.setLayout(curvesPanel1Layout);
@@ -71,10 +68,6 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
                             .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 159, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, curvesPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(227, 227, 227))
         );
         curvesPanel1Layout.setVerticalGroup(
             curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,9 +78,7 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(progress)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
@@ -109,79 +100,16 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        FrmSystemBakerySplash splash = new FrmSystemBakerySplash();
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmSystemBakerySplash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmSystemBakerySplash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmSystemBakerySplash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmSystemBakerySplash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                splash.setVisible(true);
-            }
-        });
-        FrmLogin login = new FrmLogin();
-        try {
-            for (int i = 0; i <= 100; i++) {
-                Thread.sleep(40);
-                final int percent = i;
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        splash.bar.setValue(percent);
-                        splash.progress.setText(percent + " %");
-                    }
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                splash.setVisible(false);
-                login.setVisible(true);
-                splash.dispose();
-            }
-        });
+    
+    public javax.swing.JProgressBar getBar() {
+        return bar;
     }
-
+    
+    public void setBarValue(int value) {
+        bar.setValue(value);
+    }
+    
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private splashscreen.ProgressBarCustom bar;
     private splashscreen.CurvesPanel curvesPanel1;
@@ -189,6 +117,5 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel progress;
     // End of variables declaration//GEN-END:variables
 }

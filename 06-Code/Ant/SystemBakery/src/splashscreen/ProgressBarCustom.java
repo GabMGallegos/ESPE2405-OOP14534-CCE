@@ -3,32 +3,47 @@ package splashscreen;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Insets;
+import javax.swing.JComponent;
 import javax.swing.JProgressBar;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
 public class ProgressBarCustom extends JProgressBar {
-    
+
+    private Color colorString = new Color(255, 255, 255); // Color del texto por defecto
+
     public Color getColorString() {
         return colorString;
     }
-    
+
     public void setColorString(Color colorString) {
         this.colorString = colorString;
     }
-    
-    private Color colorString = new Color(0, 0, 0);
-    
+
     public ProgressBarCustom() {
-        setPreferredSize(new Dimension(100, 5));
+        setPreferredSize(new Dimension(100, 10));
         setBackground(new Color(77, 77, 77));
         setForeground(new Color(190, 190, 190));
         setUI(new BasicProgressBarUI() {
-            
+
             @Override
-            protected void paintString(Graphics grphcs, int i, int i1, int i2, int i3, int i4, Insets insets) {
-                grphcs.setColor(getColorString());
-                super.paintString(grphcs, i, i1, i2, i3, i4, insets);
+            public void paint(Graphics g, JComponent c) {
+                // Personaliza la pintura del JProgressBar
+                super.paint(g, c);
+                Graphics g2 = (Graphics) g.create();
+                try {
+                    g2.setColor(getForeground());
+                    int progressWidth = (int) (getWidth() * ((float) getValue() / getMaximum()));
+                    g2.fillRect(0, 0, progressWidth, getHeight());
+
+                    // Dibuja el texto de progreso
+                    g2.setColor(getColorString());
+                    String progressText = getValue() + "%";
+                    int textWidth = g2.getFontMetrics().stringWidth(progressText);
+                    int textHeight = g2.getFontMetrics().getHeight();
+                    g2.drawString(progressText, (getWidth() - textWidth) / 2, (getHeight() + textHeight) / 2 - 2);
+                } finally {
+                    g2.dispose();
+                }
             }
         });
     }
