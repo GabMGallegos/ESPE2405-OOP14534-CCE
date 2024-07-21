@@ -4,7 +4,9 @@
  */
 package ec.edu.espe.systembakery.view;
 
+import ec.edu.espe.systembakery.FrmLogin;
 import ec.edu.espe.systembakery.FrmSystemBakerySplash;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -16,8 +18,37 @@ public class SystemBakery {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FrmSystemBakerySplash bakerySplash = new FrmSystemBakerySplash();
-        bakerySplash.setVisible(true);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                FrmSystemBakerySplash splash = new FrmSystemBakerySplash();
+                splash.setVisible(true);
+
+                // Run progress bar update in a new thread
+                new Thread(new Runnable() {
+                    public void run() {
+                        FrmLogin login = new FrmLogin();
+                        try {
+                            for (int i = 0; i <= 100; i++) {
+                                Thread.sleep(40);
+                                final int percent = i;
+                                
+                                
+                                
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        SwingUtilities.invokeLater(new Runnable() {
+                            public void run() {
+                                splash.setVisible(false);
+                                login.setVisible(true);
+                                splash.dispose();
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
     }
     
 }
