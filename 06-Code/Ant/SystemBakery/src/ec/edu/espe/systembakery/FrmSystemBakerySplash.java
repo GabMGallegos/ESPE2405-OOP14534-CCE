@@ -32,6 +32,7 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         bar = new splashscreen.ProgressBarCustom();
+        progress = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -48,6 +49,9 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
         jLabel4.setText("(c)  2024 CodeCrafting Engineers");
 
         bar.setForeground(new java.awt.Color(59, 41, 5));
+
+        progress.setForeground(new java.awt.Color(255, 255, 255));
+        progress.setText("0");
 
         javax.swing.GroupLayout curvesPanel1Layout = new javax.swing.GroupLayout(curvesPanel1);
         curvesPanel1.setLayout(curvesPanel1Layout);
@@ -68,6 +72,10 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
                             .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 159, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, curvesPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218))
         );
         curvesPanel1Layout.setVerticalGroup(
             curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,7 +86,9 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(progress)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
@@ -109,6 +119,10 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
         bar.setValue(value);
     }
     
+    public javax.swing.JLabel getProgress() {
+        return progress;
+    }
+    
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private splashscreen.ProgressBarCustom bar;
@@ -117,5 +131,6 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel progress;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,8 @@
  */
 package ec.edu.espe.systembakery;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author CodeCrafting Engineers
@@ -15,6 +17,17 @@ public class FrmBakery extends javax.swing.JFrame {
      */
     public FrmBakery() {
         initComponents();
+    }
+    private void cerrar() {
+        String botones[] = {"CERRAR", "CANCELAR"};
+        int eleccion = JOptionPane.showOptionDialog(this, "Desea cerrar el programa", "Titulo",
+                0, 0, null, botones, this);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else if (eleccion == JOptionPane.NO_OPTION) {
+            System.out.println("Se cancelo el cierre");
+        }
+
     }
 
     /**
@@ -30,18 +43,34 @@ public class FrmBakery extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuBar1 = new javax.swing.JMenuBar();
         Mnu = new javax.swing.JMenu();
         mnuitSignOff = new javax.swing.JMenuItem();
         mnuitmExit = new javax.swing.JMenuItem();
+        mnuProduct = new javax.swing.JMenu();
+        mnuAddProducts = new javax.swing.JMenu();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        mnuSuppliers = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        mnuMakeOrder = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        mnuBill = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
         mnuSetting = new javax.swing.JMenu();
         mnuitUsers = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jLabel4 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -55,32 +84,39 @@ public class FrmBakery extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/Main.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 100, 110));
 
-        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(187, 83, 20));
         jLabel2.setText("Panaderia El Trigo de Oro");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 450, 51));
 
+        jInternalFrame1.setBorder(null);
         jInternalFrame1.setVisible(true);
+        jInternalFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jMenu1.setText("File");
-        jMenuBar2.add(jMenu1);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/fondoMenus.jpg"))); // NOI18N
 
-        jMenu3.setText("Edit");
-        jMenuBar2.add(jMenu3);
+        jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jInternalFrame1.setJMenuBar(jMenuBar2);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 674, Short.MAX_VALUE)
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3)
         );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 307, Short.MAX_VALUE)
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 386, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        jInternalFrame1.getContentPane().add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         Mnu.setText("Inicio");
 
@@ -100,7 +136,55 @@ public class FrmBakery extends javax.swing.JFrame {
         });
         Mnu.add(mnuitmExit);
 
-        jMenuBar1.add(Mnu);
+        jMenuBar2.add(Mnu);
+
+        mnuProduct.setText("Producto");
+
+        mnuAddProducts.setText("Agregar Productos");
+        mnuProduct.add(mnuAddProducts);
+        mnuProduct.add(jSeparator1);
+
+        jMenu3.setText("Buscar Producto");
+
+        jMenuItem1.setText("Eliminar Producto");
+        jMenu3.add(jMenuItem1);
+
+        jMenuItem2.setText("Actualizar");
+        jMenu3.add(jMenuItem2);
+
+        mnuProduct.add(jMenu3);
+
+        jMenuBar2.add(mnuProduct);
+
+        mnuSuppliers.setText("Proveedor");
+
+        jMenu1.setText("Agregar Proveedor");
+        mnuSuppliers.add(jMenu1);
+
+        jMenu4.setText("Consultar Proveedor");
+        mnuSuppliers.add(jMenu4);
+
+        jMenuBar2.add(mnuSuppliers);
+
+        mnuMakeOrder.setText("Crear Orden");
+
+        jMenu5.setText("Realizar Orden de Compra");
+        mnuMakeOrder.add(jMenu5);
+
+        jMenu6.setText("Consultar Orden de Compra");
+        mnuMakeOrder.add(jMenu6);
+
+        jMenuBar2.add(mnuMakeOrder);
+
+        mnuBill.setText("Facturas");
+
+        jMenu7.setText("Proveedores");
+        mnuBill.add(jMenu7);
+
+        jMenu8.setText("Clientes");
+        mnuBill.add(jMenu8);
+
+        jMenuBar2.add(mnuBill);
 
         mnuSetting.setText("Configuracion");
 
@@ -128,39 +212,15 @@ public class FrmBakery extends javax.swing.JFrame {
 
         mnuSetting.add(jMenu2);
 
-        jMenuBar1.add(mnuSetting);
+        jMenuBar2.add(mnuSetting);
 
+        jInternalFrame1.setJMenuBar(jMenuBar2);
+
+        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, 425));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/fondoMenu1.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 21, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
 
         pack();
         setLocationRelativeTo(null);
@@ -175,7 +235,7 @@ public class FrmBakery extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     private void mnuitmExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitmExitActionPerformed
-        System.exit(0);
+        cerrar();
     }//GEN-LAST:event_mnuitmExitActionPerformed
 
     private void mnuitSignOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitSignOffActionPerformed
@@ -220,17 +280,33 @@ public class FrmBakery extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Mnu;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu mnuAddProducts;
+    private javax.swing.JMenu mnuBill;
+    private javax.swing.JMenu mnuMakeOrder;
+    private javax.swing.JMenu mnuProduct;
     private javax.swing.JMenu mnuSetting;
+    private javax.swing.JMenu mnuSuppliers;
     private javax.swing.JMenuItem mnuitSignOff;
     private javax.swing.JMenuItem mnuitUsers;
     private javax.swing.JMenuItem mnuitmExit;
