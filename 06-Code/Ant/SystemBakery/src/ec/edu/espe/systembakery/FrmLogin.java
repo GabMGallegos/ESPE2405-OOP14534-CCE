@@ -57,7 +57,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/usuario (2).png"))); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 218, -1, -1));
 
-        txtUser.setBorder(new javax.swing.border.MatteBorder(null));
+        txtUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
@@ -132,11 +132,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartSectionActionPerformed
-        if (true) { //read users from and compare user name and password
-            FrmBakery frmBakery = new FrmBakery();
-            this.setVisible(false);
-            frmBakery.setVisible(true);
-        }
+        
     }//GEN-LAST:event_btnStartSectionActionPerformed
 
     private void lblViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewMouseClicked
@@ -157,6 +153,9 @@ public class FrmLogin extends javax.swing.JFrame {
         contraseña=txtPassword.getText();
         if(usuario.equals("admin") && contraseña.equals("admin")){
             JOptionPane.showMessageDialog(this, "Login completed...");
+            FrmBakery frmBakery = new FrmBakery();
+            this.setVisible(false);
+            frmBakery.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Datos erroneos");
             this.txtPassword.setText("");
