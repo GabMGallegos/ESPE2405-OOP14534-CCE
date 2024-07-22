@@ -8,6 +8,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.utils.BsonDownloadDocument;
+import ec.edu.espe.utils.BsonMethods;
 import ec.edu.espe.utils.Conection;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
@@ -23,7 +24,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
     private Conection conn = new Conection();
     private MongoDatabase database;
-    private DefaultTableModel defaultTMProductList;
+    private DefaultTableModel dtmProductList;
     private String[] productPurchaseList = new String[5];
     private MongoCollection mongoProductCollection;
 
@@ -34,19 +35,12 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
             conn = conn.createConection();
             database = conn.getMongoDatabase();
         }
-        defaultTMProductList = (DefaultTableModel) tblProductList.getModel();
-        ComboBoxInsertItems("Consumers", "Nombres", cmbConsumerName);
-        ComboBoxInsertItems("Products", "Nombre", cmbProductName);
+        dtmProductList = (DefaultTableModel) tblProductList.getModel();
+        BsonMethods.ComboBoxInsertItemsPeople("Consumers", "Nombres", cmbConsumerName,database);
+        BsonMethods.ComboBoxInsertItemsProducts("Products", "Id", "Nombre", cmbProductId,database);
     }
 
-    public void ComboBoxInsertItems(String collection, String item, JComboBox cmbBox) {
-        ArrayList<String> list;
-        list = BsonDownloadDocument.ObtainListItem(BsonDownloadDocument.DownloadMogoCollection(database, collection), item);
-
-        for (String itemList : list) {
-            cmbBox.addItem(itemList);
-        }
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,7 +70,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         btnEnterToOrderList = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtProductAmount = new javax.swing.JTextField();
-        cmbProductName = new javax.swing.JComboBox<>();
+        cmbProductId = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itmPrincipalMenu = new javax.swing.JMenuItem();
@@ -129,6 +123,12 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         jLabel5.setText("RUC / CI:");
 
         cmbConsumerName.setEditable(true);
+        cmbConsumerName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cmbConsumerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbConsumerNameActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -193,7 +193,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblProductList);
 
-        jLabel7.setText("Artículo:");
+        jLabel7.setText("Id:");
 
         btnEnterToOrderList.setText("Ingresar a la Lista de Compras");
         btnEnterToOrderList.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +204,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
         jLabel8.setText("Cantidad:");
 
-        cmbProductName.setEditable(true);
+        cmbProductId.setEditable(true);
+        cmbProductId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -221,7 +222,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbProductId, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -236,7 +237,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                     .addComponent(txtProductAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
-                    .addComponent(cmbProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbProductId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -345,41 +346,25 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
     private void btnEnterToOrderListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterToOrderListActionPerformed
         boolean verificationConsumerName, verificationRucCi, verificationEmitionDate, verificationProductName, verificationProductAmount;
-
+        String firstPartCmbProductId;
+        
         verificationConsumerName = cmbConsumerName.getSelectedItem().toString().matches("^[A-Z][a-z]+ [A-Z][a-z]+$");
         verificationRucCi = txtRucCi.getText().matches("\\d{10}$");
         verificationEmitionDate = true;
-        verificationProductName = cmbProductName.getSelectedItem().toString().matches("^[A-Z][a-z]*([ ]+[A-Za-z]+)*$");
+        //split and take the first of cmbProductId
+        firstPartCmbProductId = cmbProductId.getSelectedItem().toString().split(" --> ")[0];
+        verificationProductName = firstPartCmbProductId.matches("^[A-Z]\\d{3}$");
         verificationProductAmount = txtProductAmount.getText().matches("^\\d{1,3}$");
 
         try {
 
             if (verificationConsumerName && verificationRucCi && verificationEmitionDate && verificationProductName && verificationProductAmount) {
-                mongoProductCollection = BsonDownloadDocument.DownloadMogoCollection(database, "Products");
-                MongoCursor<Document> cursor = mongoProductCollection.find().iterator();
-
-                while (cursor.hasNext()) {
-                    Document document = cursor.next();
-                    String namedItem = document.get("Nombre", cmbProductName.getSelectedItem().toString());
-                    
-                    
-                    if (cmbProductName.getSelectedItem().toString().equals(namedItem)) {
-                        productPurchaseList[0] = document.getString("Id");
-                        productPurchaseList[1] = document.getString("Nombre");
-                        productPurchaseList[2] = txtProductAmount.getText().trim();
-                        //add method to rest in the MongoDB document
-                        productPurchaseList[3] = document.getString("Precio U.");
-                        productPurchaseList[4] = "4";//realizar calculo para el total
-                        
-                        defaultTMProductList.addRow(productPurchaseList);
-                        
-                        break;        
-                    }
-                }
+                BsonMethods.addElemenToTable(database, mongoProductCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
             } else {
                 JOptionPane.showMessageDialog(null, "Verifique");
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
         }
     }//GEN-LAST:event_btnEnterToOrderListActionPerformed
 
@@ -390,11 +375,15 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
             cmbConsumerName.setSelectedItem("");
             txtRucCi.setText("");
             txtOrderDate.setText("");
-            cmbProductName.setSelectedItem("");
+            cmbProductId.setSelectedItem("");
             txtProductAmount.setText("");
-            defaultTMProductList.setRowCount(0);
+            dtmProductList.setRowCount(0);
         }
     }//GEN-LAST:event_itmDeleteFieldsActionPerformed
+
+    private void cmbConsumerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbConsumerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbConsumerNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -449,7 +438,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnterToOrderList;
     private javax.swing.JComboBox<String> cmbConsumerName;
-    private javax.swing.JComboBox<String> cmbProductName;
+    private javax.swing.JComboBox<String> cmbProductId;
     private javax.swing.JMenuItem itmDeleteFields;
     private javax.swing.JMenuItem itmPrincipalMenu;
     private javax.swing.JMenuItem itmPrintOrder;

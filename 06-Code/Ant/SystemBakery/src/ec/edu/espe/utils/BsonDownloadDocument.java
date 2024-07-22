@@ -15,10 +15,7 @@ import org.bson.Document;
 public class BsonDownloadDocument {
     
     
-    public static MongoCollection DownloadMogoCollection(MongoDatabase database, String collectionToDownload){
-        MongoCollection collection;
-        return  collection = database.getCollection(collectionToDownload);
-    }
+    
     
     public static ArrayList ObtainListItem(MongoCollection collection,String findItem){
         ArrayList items;
