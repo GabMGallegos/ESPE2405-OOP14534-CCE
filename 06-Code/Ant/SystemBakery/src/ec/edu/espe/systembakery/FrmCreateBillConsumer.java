@@ -5,14 +5,15 @@
 package ec.edu.espe.systembakery;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.utils.BsonDownloadDocument;
 import ec.edu.espe.utils.Conection;
-import java.awt.List;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
 
 /**
  *
@@ -20,30 +21,33 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
-    Conection conn = new Conection();
-    MongoDatabase database;
+    private Conection conn = new Conection();
+    private MongoDatabase database;
+    private DefaultTableModel defaultTMProductList;
+    private String[] productPurchaseList = new String[5];
+    private MongoCollection mongoProductCollection;
 
     public FrmCreateBillConsumer() {
         initComponents();
-        
+
         if (conn != null) {
             conn = conn.createConection();
             database = conn.getMongoDatabase();
         }
-        
-        ComboBoxInsertItems("Consumers","Nombres",cmbConsumerName);
+        defaultTMProductList = (DefaultTableModel) tblProductList.getModel();
+        ComboBoxInsertItems("Consumers", "Nombres", cmbConsumerName);
         ComboBoxInsertItems("Products", "Nombre", cmbProductName);
     }
-    
-    public void ComboBoxInsertItems(String collection, String item, JComboBox cmbBox){
+
+    public void ComboBoxInsertItems(String collection, String item, JComboBox cmbBox) {
         ArrayList<String> list;
-        list = BsonDownloadDocument.ObtainListItem( BsonDownloadDocument.DownloadMogoCollection(database, collection),item );
-        
+        list = BsonDownloadDocument.ObtainListItem(BsonDownloadDocument.DownloadMogoCollection(database, collection), item);
+
         for (String itemList : list) {
             cmbBox.addItem(itemList);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,15 +177,20 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
         tblProductList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Artículo", "Cantidad", "Precio U.", "Precio Total"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblProductList);
 
         jLabel7.setText("Artículo:");
@@ -340,13 +349,35 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         verificationConsumerName = cmbConsumerName.getSelectedItem().toString().matches("^[A-Z][a-z]+ [A-Z][a-z]+$");
         verificationRucCi = txtRucCi.getText().matches("\\d{10}$");
         verificationEmitionDate = true;
-        verificationProductName = cmbProductName.getSelectedItem().toString().matches("^[a-z]+( [a-z]+)*$");
-        verificationProductAmount = txtProductAmount.getText().matches("^\\d+\\.\\d{2}$");
+        verificationProductName = cmbProductName.getSelectedItem().toString().matches("^[A-Z][a-z]*([ ]+[A-Za-z]+)*$");
+        verificationProductAmount = txtProductAmount.getText().matches("^\\d{1,3}$");
 
         try {
 
-            if (verificationConsumerName && verificationRucCi) {
+            if (verificationConsumerName && verificationRucCi && verificationEmitionDate && verificationProductName && verificationProductAmount) {
+                mongoProductCollection = BsonDownloadDocument.DownloadMogoCollection(database, "Products");
+                MongoCursor<Document> cursor = mongoProductCollection.find().iterator();
 
+                while (cursor.hasNext()) {
+                    Document document = cursor.next();
+                    String namedItem = document.get("Nombre", cmbProductName.getSelectedItem().toString());
+                    
+                    
+                    if (cmbProductName.getSelectedItem().toString().equals(namedItem)) {
+                        productPurchaseList[0] = document.getString("Id");
+                        productPurchaseList[1] = document.getString("Nombre");
+                        productPurchaseList[2] = txtProductAmount.getText().trim();
+                        //add method to rest in the MongoDB document
+                        productPurchaseList[3] = document.getString("Precio U.");
+                        productPurchaseList[4] = "4";//realizar calculo para el total
+                        
+                        defaultTMProductList.addRow(productPurchaseList);
+                        
+                        break;        
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Verifique");
             }
         } catch (Exception e) {
         }
@@ -361,8 +392,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
             txtOrderDate.setText("");
             cmbProductName.setSelectedItem("");
             txtProductAmount.setText("");
-            DefaultTableModel model = (DefaultTableModel) tblProductList.getModel();
-            model.setRowCount(0);
+            defaultTMProductList.setRowCount(0);
         }
     }//GEN-LAST:event_itmDeleteFieldsActionPerformed
 
