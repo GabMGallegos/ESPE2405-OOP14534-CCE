@@ -6,7 +6,11 @@ package ec.edu.espe.systembakery;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.utils.BsonDownloadDocument;
 import ec.edu.espe.utils.Conection;
+import java.awt.List;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,20 +22,26 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
     Conection conn = new Conection();
     MongoDatabase database;
-    MongoCollection mongoProductCollection;
-    MongoCollection mongoComsumerCollection;
-    MongoCollection mongoBillCollection;
 
     public FrmCreateBillConsumer() {
+        initComponents();
+        
         if (conn != null) {
             conn = conn.createConection();
             database = conn.getMongoDatabase();
         }
-        mongoProductCollection = database.getCollection("Products");
-        mongoComsumerCollection = database.getCollection("Consumer");
-        mongoBillCollection = database.getCollection("Bills");
         
-        initComponents();
+        ComboBoxInsertItems("Consumers","Nombres",cmbConsumerName);
+        ComboBoxInsertItems("Products", "Nombre", cmbProductName);
+    }
+    
+    public void ComboBoxInsertItems(String collection, String item, JComboBox cmbBox){
+        ArrayList<String> list;
+        list = BsonDownloadDocument.ObtainListItem( BsonDownloadDocument.DownloadMogoCollection(database, collection),item );
+        
+        for (String itemList : list) {
+            cmbBox.addItem(itemList);
+        }
     }
     
     /**
@@ -62,7 +72,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         btnEnterToOrderList = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtProductAmount = new javax.swing.JTextField();
-        txtProductName = new javax.swing.JTextField();
+        cmbProductName = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itmPrincipalMenu = new javax.swing.JMenuItem();
@@ -185,6 +195,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
         jLabel8.setText("Cantidad:");
 
+        cmbProductName.setEditable(true);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -200,7 +212,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -214,8 +226,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtProductAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(cmbProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -328,7 +340,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         verificationConsumerName = cmbConsumerName.getSelectedItem().toString().matches("^[A-Z][a-z]+ [A-Z][a-z]+$");
         verificationRucCi = txtRucCi.getText().matches("\\d{10}$");
         verificationEmitionDate = true;
-        verificationProductName = txtProductName.getText().matches("^[a-z]+( [a-z]+)*$");
+        verificationProductName = cmbProductName.getSelectedItem().toString().matches("^[a-z]+( [a-z]+)*$");
         verificationProductAmount = txtProductAmount.getText().matches("^\\d+\\.\\d{2}$");
 
         try {
@@ -347,7 +359,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
             cmbConsumerName.setSelectedItem("");
             txtRucCi.setText("");
             txtOrderDate.setText("");
-            txtProductName.setText("");
+            cmbProductName.setSelectedItem("");
             txtProductAmount.setText("");
             DefaultTableModel model = (DefaultTableModel) tblProductList.getModel();
             model.setRowCount(0);
@@ -407,6 +419,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnterToOrderList;
     private javax.swing.JComboBox<String> cmbConsumerName;
+    private javax.swing.JComboBox<String> cmbProductName;
     private javax.swing.JMenuItem itmDeleteFields;
     private javax.swing.JMenuItem itmPrincipalMenu;
     private javax.swing.JMenuItem itmPrintOrder;
@@ -433,7 +446,6 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
     private javax.swing.JTable tblProductList;
     private javax.swing.JTextField txtOrderDate;
     private javax.swing.JTextField txtProductAmount;
-    private javax.swing.JTextField txtProductName;
     private javax.swing.JTextField txtRucCi;
     // End of variables declaration//GEN-END:variables
 }
