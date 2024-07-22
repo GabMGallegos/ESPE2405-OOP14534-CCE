@@ -4,19 +4,36 @@
  */
 package ec.edu.espe.systembakery;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.utils.Conection;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
  */
 public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmCreatePurchaseOrder
-     */
+    Conection conn = new Conection();
+    MongoDatabase database;
+    MongoCollection mongoProductCollection;
+    MongoCollection mongoComsumerCollection;
+    MongoCollection mongoBillCollection;
+
     public FrmCreateBillConsumer() {
+        if (conn != null) {
+            conn = conn.createConection();
+            database = conn.getMongoDatabase();
+        }
+        mongoProductCollection = database.getCollection("Products");
+        mongoComsumerCollection = database.getCollection("Consumer");
+        mongoBillCollection = database.getCollection("Bills");
+        
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,22 +49,20 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        cmbConsumer = new javax.swing.JComboBox<>();
         txtOrderDate = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         lblPurchaseOrderNumber = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtOrderDate1 = new javax.swing.JTextField();
+        txtRucCi = new javax.swing.JTextField();
+        cmbConsumerName = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProductList = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        cmbProducts = new javax.swing.JComboBox<>();
         btnEnterToOrderList = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        txtAmount = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtUnitaryPrice = new javax.swing.JTextField();
+        txtProductAmount = new javax.swing.JTextField();
+        txtProductName = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itmPrincipalMenu = new javax.swing.JMenuItem();
@@ -56,6 +71,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         itmPrintOrder = new javax.swing.JMenuItem();
         itmSaveOrder = new javax.swing.JMenuItem();
         itmDeleteFields = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,7 +90,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(0, 474, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -97,6 +114,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
         jLabel5.setText("RUC / CI:");
 
+        cmbConsumerName.setEditable(true);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -115,9 +134,9 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtOrderDate1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtRucCi, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtOrderDate)
-                    .addComponent(cmbConsumer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmbConsumerName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -130,11 +149,11 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cmbConsumer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbConsumerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtOrderDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRucCi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -142,7 +161,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -153,57 +172,52 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                 "Id", "Artículo", "Cantidad", "Precio U.", "Precio Total"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProductList);
 
         jLabel7.setText("Artículo:");
 
         btnEnterToOrderList.setText("Ingresar a la Lista de Compras");
+        btnEnterToOrderList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnterToOrderListActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Cantidad:");
-
-        jLabel9.setText("Precio Unit.:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbProducts, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtAmount))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUnitaryPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnEnterToOrderList)
                 .addGap(182, 182, 182))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtProductAmount)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtProductAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(cmbProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtUnitaryPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                    .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEnterToOrderList)
                 .addContainerGap())
@@ -244,9 +258,21 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
         itmDeleteFields.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         itmDeleteFields.setText("Borrar Campos");
+        itmDeleteFields.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmDeleteFieldsActionPerformed(evt);
+            }
+        });
         jMenu2.add(itmDeleteFields);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Ayuda");
+
+        jMenuItem1.setText("Sobre");
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -260,7 +286,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
@@ -272,8 +298,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -295,6 +321,38 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         frmBakery.setVisible(true);
 
     }//GEN-LAST:event_itmPrincipalMenuActionPerformed
+
+    private void btnEnterToOrderListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterToOrderListActionPerformed
+        boolean verificationConsumerName, verificationRucCi, verificationEmitionDate, verificationProductName, verificationProductAmount;
+
+        verificationConsumerName = cmbConsumerName.getSelectedItem().toString().matches("^[A-Z][a-z]+ [A-Z][a-z]+$");
+        verificationRucCi = txtRucCi.getText().matches("\\d{10}$");
+        verificationEmitionDate = true;
+        verificationProductName = txtProductName.getText().matches("^[a-z]+( [a-z]+)*$");
+        verificationProductAmount = txtProductAmount.getText().matches("^\\d+\\.\\d{2}$");
+
+        try {
+
+            if (verificationConsumerName && verificationRucCi) {
+
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnEnterToOrderListActionPerformed
+
+    private void itmDeleteFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmDeleteFieldsActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "¿Desea cancelar la factura?", "Cancelar Factura", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.YES_OPTION) {
+            cmbConsumerName.setSelectedItem("");
+            txtRucCi.setText("");
+            txtOrderDate.setText("");
+            txtProductName.setText("");
+            txtProductAmount.setText("");
+            DefaultTableModel model = (DefaultTableModel) tblProductList.getModel();
+            model.setRowCount(0);
+        }
+    }//GEN-LAST:event_itmDeleteFieldsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,8 +406,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnterToOrderList;
-    private javax.swing.JComboBox<String> cmbConsumer;
-    private javax.swing.JComboBox<String> cmbProducts;
+    private javax.swing.JComboBox<String> cmbConsumerName;
     private javax.swing.JMenuItem itmDeleteFields;
     private javax.swing.JMenuItem itmPrincipalMenu;
     private javax.swing.JMenuItem itmPrintOrder;
@@ -363,19 +420,20 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblPurchaseOrderNumber;
-    private javax.swing.JTextField txtAmount;
+    private javax.swing.JTable tblProductList;
     private javax.swing.JTextField txtOrderDate;
-    private javax.swing.JTextField txtOrderDate1;
-    private javax.swing.JTextField txtUnitaryPrice;
+    private javax.swing.JTextField txtProductAmount;
+    private javax.swing.JTextField txtProductName;
+    private javax.swing.JTextField txtRucCi;
     // End of variables declaration//GEN-END:variables
 }
