@@ -4,7 +4,7 @@ import java.awt.Color;
 
 /**
  *
- * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
+ * @author CodeCrafting Engineers
  */
 public class FrmBillMenu extends javax.swing.JFrame {
 

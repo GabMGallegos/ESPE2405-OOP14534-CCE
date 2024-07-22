@@ -6,7 +6,7 @@ package ec.edu.espe.systembakery;
 
 /**
  *
- * @author leydi
+ * @author CodeCrafting Engineers
  */
 public class NewJPanel extends javax.swing.JPanel {
 

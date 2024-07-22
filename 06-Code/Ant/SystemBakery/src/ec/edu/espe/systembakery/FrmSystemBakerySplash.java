@@ -6,7 +6,7 @@ package ec.edu.espe.systembakery;
 
 /**
  *
- * @author Leydi Oña
+ * @author CodeCrafting Engineers
  */
 public class FrmSystemBakerySplash extends javax.swing.JFrame {
 

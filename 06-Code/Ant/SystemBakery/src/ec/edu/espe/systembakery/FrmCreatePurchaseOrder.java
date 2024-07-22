@@ -3,7 +3,7 @@ package ec.edu.espe.systembakery;
 
 /**
  *
- * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
+ * @author CodeCrafting Engineers
  */
 public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
 

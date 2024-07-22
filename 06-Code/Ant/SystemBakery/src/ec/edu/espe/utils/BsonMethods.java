@@ -13,7 +13,7 @@ import org.bson.Document;
 
 /**
  *
- * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
+ * @author CodeCrafting Engineers
  */
 public class BsonMethods {
 

@@ -5,7 +5,7 @@ import com.mongodb.client.MongoCollection;
 
 /**
  *
- * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
+ * @author CodeCrafting Engineers
  */
 public class BsonUpdateDocument {
     public void ProductBsonDocument(){
