@@ -271,11 +271,6 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
         jMenu2.add(itmPrintOrder);
 
         itmSaveOrder.setText("Guardar Orden");
-        itmSaveOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmSaveOrderActionPerformed(evt);
-            }
-        });
         jMenu2.add(itmSaveOrder);
 
         itmDeleteFields.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -326,10 +321,6 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void itmSaveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmSaveOrderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_itmSaveOrderActionPerformed
 
     private void itmPurchaseOrderMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmPurchaseOrderMenuActionPerformed
         FrmBillMenu frmBillMenu = new FrmBillMenu();

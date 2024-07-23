@@ -18,6 +18,7 @@ public class FrmBakery extends javax.swing.JFrame {
     public FrmBakery() {
         initComponents();
     }
+
     private void cerrar() {
         String botones[] = {"CERRAR", "CANCELAR"};
         int eleccion = JOptionPane.showOptionDialog(this, "Desea cerrar el programa", "Titulo",
@@ -29,16 +30,26 @@ public class FrmBakery extends javax.swing.JFrame {
         }
 
     }
-    
+
     private void showFrmBillMenu() {
         if (jTabbedPane1.getSelectedComponent() == jPanel4) {
-        jTabbedPane1.setSelectedComponent(jPanel2);
-    } else {
-        FrmCreateBillConsumer bill = new FrmCreateBillConsumer();
-        jPanel4.add("Bill Menu", bill.getContentPane());
-        bill.setVisible(false);
-        jTabbedPane1.setSelectedComponent(jPanel4);
+            jTabbedPane1.setSelectedComponent(jPanel2);
+        } else {
+            FrmCreateBillConsumer bill = new FrmCreateBillConsumer();
+            jPanel4.add( bill.getContentPane());
+            bill.setVisible(false);
+            jTabbedPane1.setSelectedComponent(jPanel4);
+        }
     }
+    private void showFrmBillMake() {
+        if (jTabbedPane1.getSelectedComponent() == jPanel3) {
+            jTabbedPane1.setSelectedComponent(jPanel2);
+        } else {
+            FrmCreatePurchaseOrder bill = new FrmCreatePurchaseOrder ();
+            jPanel3.add( bill.getContentPane());
+            bill.setVisible(false);
+            jTabbedPane1.setSelectedComponent(jPanel3);
+        }
     }
 
     /**
@@ -58,6 +69,7 @@ public class FrmBakery extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         Mnu = new javax.swing.JMenu();
         mnuitSignOff = new javax.swing.JMenuItem();
@@ -72,8 +84,18 @@ public class FrmBakery extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         mnuMakeOrder = new javax.swing.JMenu();
+        itmMakePurchaseOrderToSupplier = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        itmMakeBillToConsumer = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         mnuBill = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
@@ -122,9 +144,9 @@ public class FrmBakery extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(336, 336, 336)
+                .addGap(324, 324, 324)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addContainerGap(355, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,17 +171,25 @@ public class FrmBakery extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab2", jPanel4);
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 780, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 415, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab3", jPanel3);
+
         jInternalFrame1.getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 450));
         jTabbedPane1.getAccessibleContext().setAccessibleName("");
 
         Mnu.setText("Inicio");
 
         mnuitSignOff.setText("Cerrar Sesion");
-        mnuitSignOff.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuitSignOffActionPerformed(evt);
-            }
-        });
         Mnu.add(mnuitSignOff);
 
         mnuitmExit.setText("Salir del sistema");
@@ -201,32 +231,58 @@ public class FrmBakery extends javax.swing.JFrame {
         jMenuBar2.add(mnuSuppliers);
 
         mnuMakeOrder.setText("Crear Orden");
-        mnuMakeOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+
+        itmMakePurchaseOrderToSupplier.setText("Realizar Orden de Compra a Proveedor");
+        itmMakePurchaseOrderToSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mnuMakeOrderMouseClicked(evt);
+                itmMakePurchaseOrderToSupplierMouseClicked(evt);
             }
         });
-        mnuMakeOrder.addActionListener(new java.awt.event.ActionListener() {
+        itmMakePurchaseOrderToSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuMakeOrderActionPerformed(evt);
+                itmMakePurchaseOrderToSupplierActionPerformed(evt);
             }
         });
 
-        jMenu5.setText("Realizar Orden de Compra");
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenuItem6.setText("Imprimir Orden");
+        itmMakePurchaseOrderToSupplier.add(jMenuItem6);
+
+        jMenuItem7.setText("Guardar Orden");
+        itmMakePurchaseOrderToSupplier.add(jMenuItem7);
+
+        jMenuItem8.setText("Borrar Campos");
+        itmMakePurchaseOrderToSupplier.add(jMenuItem8);
+
+        mnuMakeOrder.add(itmMakePurchaseOrderToSupplier);
+
+        itmMakeBillToConsumer.setText("Realizar Factura a Consumidor");
+        itmMakeBillToConsumer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu5MouseClicked(evt);
+                itmMakeBillToConsumerMouseClicked(evt);
             }
         });
-        jMenu5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu5ActionPerformed(evt);
-            }
-        });
+
+        jMenuItem9.setText("Imprimir Orden");
+        itmMakeBillToConsumer.add(jMenuItem9);
+
+        jMenuItem10.setText("Guardar Orden");
+        itmMakeBillToConsumer.add(jMenuItem10);
+
+        jMenuItem11.setText("Borrar Campos");
+        itmMakeBillToConsumer.add(jMenuItem11);
+
+        mnuMakeOrder.add(itmMakeBillToConsumer);
+        mnuMakeOrder.add(jSeparator2);
+
+        jMenu5.setText("Consultar");
+
+        jMenuItem4.setText("Orden de Compras");
+        jMenu5.add(jMenuItem4);
+
+        jMenuItem5.setText("Facturas");
+        jMenu5.add(jMenuItem5);
+
         mnuMakeOrder.add(jMenu5);
-
-        jMenu6.setText("Consultar Orden de Compra");
-        mnuMakeOrder.add(jMenu6);
 
         jMenuBar2.add(mnuMakeOrder);
 
@@ -242,26 +298,16 @@ public class FrmBakery extends javax.swing.JFrame {
 
         mnuSetting.setText("Configuracion");
 
-        mnuitUsers.setText("Metodo de Pago");
+        mnuitUsers.setText("Sobre");
         mnuSetting.add(mnuitUsers);
 
         jMenu2.setText("Usuario");
 
         jMenuItem3.setText("Ingresar usuario");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
         jMenu2.add(jMenuItem3);
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Eliminar usuarios");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
-            }
-        });
         jMenu2.add(jCheckBoxMenuItem1);
 
         mnuSetting.add(jMenu2);
@@ -280,38 +326,22 @@ public class FrmBakery extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
-
     private void mnuitmExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitmExitActionPerformed
         cerrar();
     }//GEN-LAST:event_mnuitmExitActionPerformed
 
-    private void mnuitSignOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitSignOffActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuitSignOffActionPerformed
+    private void itmMakePurchaseOrderToSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itmMakePurchaseOrderToSupplierMouseClicked
+        showFrmBillMake();
 
-    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+    }//GEN-LAST:event_itmMakePurchaseOrderToSupplierMouseClicked
+
+    private void itmMakePurchaseOrderToSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmMakePurchaseOrderToSupplierActionPerformed
         //showFrmBillMenu();
-        
-    }//GEN-LAST:event_jMenu5MouseClicked
+    }//GEN-LAST:event_itmMakePurchaseOrderToSupplierActionPerformed
 
-    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu5ActionPerformed
-
-    private void mnuMakeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuMakeOrderMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuMakeOrderMouseClicked
-
-    private void mnuMakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMakeOrderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mnuMakeOrderActionPerformed
+    private void itmMakeBillToConsumerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itmMakeBillToConsumerMouseClicked
+        showFrmBillMenu();
+    }//GEN-LAST:event_itmMakeBillToConsumerMouseClicked
 
     /**
      * @param args the command line arguments
@@ -354,6 +384,8 @@ public class FrmBakery extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Mnu;
     private javax.swing.JLabel bill;
+    private javax.swing.JMenu itmMakeBillToConsumer;
+    private javax.swing.JMenu itmMakePurchaseOrderToSupplier;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
@@ -364,18 +396,27 @@ public class FrmBakery extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenu mnuAddProducts;
     private javax.swing.JMenu mnuBill;
