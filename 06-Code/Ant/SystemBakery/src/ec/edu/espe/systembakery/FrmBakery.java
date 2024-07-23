@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author CodeCrafting Engineers
+ * @author Leydi Oña
  */
 public class FrmBakery extends javax.swing.JFrame {
 
@@ -29,6 +29,17 @@ public class FrmBakery extends javax.swing.JFrame {
         }
 
     }
+    
+    private void showFrmBillMenu() {
+        if (jTabbedPane1.getSelectedComponent() == jPanel4) {
+        jTabbedPane1.setSelectedComponent(jPanel2);
+    } else {
+        FrmCreateBillConsumer bill = new FrmCreateBillConsumer();
+        jPanel4.add("Bill Menu", bill.getContentPane());
+        bill.setVisible(false);
+        jTabbedPane1.setSelectedComponent(jPanel4);
+    }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,8 +54,10 @@ public class FrmBakery extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         Mnu = new javax.swing.JMenu();
         mnuitSignOff = new javax.swing.JMenuItem();
@@ -69,7 +82,7 @@ public class FrmBakery extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        jLabel4 = new javax.swing.JLabel();
+        bill = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -88,35 +101,56 @@ public class FrmBakery extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/Main.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 100, 110));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 100, 110));
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(187, 83, 20));
         jLabel2.setText("Panaderia El Trigo de Oro");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 450, 51));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 460, 60));
 
         jInternalFrame1.setBorder(null);
         jInternalFrame1.setVisible(true);
         jInternalFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/fondoMenus.jpg"))); // NOI18N
+        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
-        jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1492617962-yumminkyskyconsmix01_83457_1.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(336, 336, 336)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(343, Short.MAX_VALUE))
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 386, Short.MAX_VALUE)
-                .addContainerGap())
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(jLabel3)
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
-        jInternalFrame1.getContentPane().add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jTabbedPane1.addTab("tab1", jPanel2);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 780, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 415, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel4);
+
+        jInternalFrame1.getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 450));
+        jTabbedPane1.getAccessibleContext().setAccessibleName("");
 
         Mnu.setText("Inicio");
 
@@ -167,8 +201,28 @@ public class FrmBakery extends javax.swing.JFrame {
         jMenuBar2.add(mnuSuppliers);
 
         mnuMakeOrder.setText("Crear Orden");
+        mnuMakeOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuMakeOrderMouseClicked(evt);
+            }
+        });
+        mnuMakeOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuMakeOrderActionPerformed(evt);
+            }
+        });
 
         jMenu5.setText("Realizar Orden de Compra");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu5MouseClicked(evt);
+            }
+        });
+        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu5ActionPerformed(evt);
+            }
+        });
         mnuMakeOrder.add(jMenu5);
 
         jMenu6.setText("Consultar Orden de Compra");
@@ -216,10 +270,10 @@ public class FrmBakery extends javax.swing.JFrame {
 
         jInternalFrame1.setJMenuBar(jMenuBar2);
 
-        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, 425));
+        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 780, 460));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/fondoMenu1.png"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        bill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/fondoMenu1.png"))); // NOI18N
+        getContentPane().add(bill, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, -1));
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -241,6 +295,23 @@ public class FrmBakery extends javax.swing.JFrame {
     private void mnuitSignOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitSignOffActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuitSignOffActionPerformed
+
+    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        //showFrmBillMenu();
+        
+    }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu5ActionPerformed
+
+    private void mnuMakeOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuMakeOrderMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuMakeOrderMouseClicked
+
+    private void mnuMakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMakeOrderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuMakeOrderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,6 +339,9 @@ public class FrmBakery extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmBakery.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -279,13 +353,12 @@ public class FrmBakery extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Mnu;
+    private javax.swing.JLabel bill;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -300,7 +373,10 @@ public class FrmBakery extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenu mnuAddProducts;
     private javax.swing.JMenu mnuBill;
     private javax.swing.JMenu mnuMakeOrder;
