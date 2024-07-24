@@ -7,6 +7,7 @@ import java.awt.Cursor;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
@@ -17,7 +18,8 @@ import org.bson.Document;
  */
 public class BsonMethods {
 
-    public static void addElemenToTable(MongoDatabase database, MongoCollection collection, String firstPartCmbProductId, JTextField txtProductAmount, String[] productPurchaseList, DefaultTableModel dtmProductList) {
+    public static void addElemenToTable(MongoDatabase database, MongoCollection collection, String firstPartCmbProductId, 
+            JTextField txtProductAmount, String[] productPurchaseList, DefaultTableModel dtmProductList) {
         collection = database.getCollection("Products");
         MongoCursor<Document> cursor = collection.find().iterator();
 
@@ -36,7 +38,7 @@ public class BsonMethods {
                     productPurchaseList[4] = "4";//realizar calculo para el total
 
                     dtmProductList.addRow(productPurchaseList);
-
+                    
                     break;
                 }
             }

@@ -403,6 +403,11 @@ public class FrmBakery extends javax.swing.JFrame {
         });
 
         jMenuItem9.setText("Imprimir Orden");
+        jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem9MouseClicked(evt);
+            }
+        });
         itmMakeBillToConsumer.add(jMenuItem9);
 
         jMenuItem10.setText("Guardar Orden");
@@ -557,6 +562,10 @@ public class FrmBakery extends javax.swing.JFrame {
     private void mnuSettingMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnuSettingMenuSelected
         jTabbedPane1.setSelectedComponent(jPanel2);
     }//GEN-LAST:event_mnuSettingMenuSelected
+
+    private void jMenuItem9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MouseClicked
+        
+    }//GEN-LAST:event_jMenuItem9MouseClicked
 
     /**
      * @param args the command line arguments
