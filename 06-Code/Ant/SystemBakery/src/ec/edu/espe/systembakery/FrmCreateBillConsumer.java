@@ -8,7 +8,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.utils.BsonDownloadDocument;
-import ec.edu.espe.utils.BsonMethods;
+import ec.edu.espe.utils.Methods;
 import ec.edu.espe.utils.Conection;
 import java.awt.Container;
 import java.awt.Graphics;
@@ -45,8 +45,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
             database = conn.getMongoDatabase();
         }
         dtmProductList = (DefaultTableModel) tblProductList.getModel();
-        BsonMethods.ComboBoxInsertItemsPeople("Consumers", "Nombres", cmbConsumerName,database);
-        BsonMethods.ComboBoxInsertItemsProducts("Products", "Id", "Nombre", cmbProductId,database);
+        Methods.ComboBoxInsertItemsPeople("Consumers", "Nombres", cmbConsumerName,database);
+        Methods.ComboBoxInsertItemsProducts("Products", "Id", "Nombre", cmbProductId,database);
         btnEditProductList.setVisible(false);
     }
 
@@ -409,7 +409,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 lblErrorEmitionDate.setText("");
                 lblErrorProductId.setText("");
                 lblErrorProductAmount.setText("");
-                BsonMethods.addElemenToTable(database, mongoProductCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
+                Methods.addElemenToTable(database, mongoProductCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
             } else {
                 if(!verificationConsumerName){
                     lblErrorConsumer.setText("Elija un cliente de la lista");

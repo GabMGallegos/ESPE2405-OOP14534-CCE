@@ -16,7 +16,7 @@ import org.bson.Document;
  *
  * @author CodeCrafting Engineers
  */
-public class BsonMethods {
+public class Methods {
 
     public static void addElemenToTable(MongoDatabase database, MongoCollection collection, String firstPartCmbProductId, 
             JTextField txtProductAmount, String[] productPurchaseList, DefaultTableModel dtmProductList) {
