@@ -93,14 +93,21 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         tblProductList = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 204));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Panadería: El Trigo de Oro");
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("RTN: 00121-00");
 
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("FACTURA:");
 
+        lblPurchaseOrderNumber.setForeground(new java.awt.Color(0, 0, 0));
         lblPurchaseOrderNumber.setText("No. 000-000-000000000");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -133,13 +140,26 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Cliente:");
 
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha de Emisión:");
 
+        txtOrderDate.setBackground(new java.awt.Color(204, 204, 204));
+        txtOrderDate.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("RUC / CI:");
 
+        txtRucCi.setBackground(new java.awt.Color(204, 204, 204));
+        txtRucCi.setForeground(new java.awt.Color(0, 0, 0));
+
+        cmbConsumerName.setBackground(new java.awt.Color(204, 204, 204));
         cmbConsumerName.setEditable(true);
+        cmbConsumerName.setForeground(new java.awt.Color(0, 0, 0));
         cmbConsumerName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         lblErrorConsumer.setForeground(new java.awt.Color(255, 0, 0));
@@ -196,13 +216,24 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 .addContainerGap())
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Id:");
 
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Cantidad:");
 
+        txtProductAmount.setBackground(new java.awt.Color(204, 204, 204));
+        txtProductAmount.setForeground(new java.awt.Color(0, 0, 0));
+
+        cmbProductId.setBackground(new java.awt.Color(204, 204, 204));
         cmbProductId.setEditable(true);
+        cmbProductId.setForeground(new java.awt.Color(0, 0, 0));
         cmbProductId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
+        btnEditProductList.setBackground(new java.awt.Color(255, 204, 153));
+        btnEditProductList.setForeground(new java.awt.Color(0, 0, 0));
         btnEditProductList.setText("Editar Lista");
         btnEditProductList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +241,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
             }
         });
 
+        btnDeleteProductInTheList.setBackground(new java.awt.Color(255, 204, 153));
+        btnDeleteProductInTheList.setForeground(new java.awt.Color(0, 0, 0));
         btnDeleteProductInTheList.setText("Borrar Producto Seleccionado");
         btnDeleteProductInTheList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,6 +306,10 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 204));
+
+        btnEnterToOrderList.setBackground(new java.awt.Color(255, 204, 153));
+        btnEnterToOrderList.setForeground(new java.awt.Color(0, 0, 0));
         btnEnterToOrderList.setText("Ingresar a la Lista de Compras");
         btnEnterToOrderList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,6 +317,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
             }
         });
 
+        btnPrintBill.setBackground(new java.awt.Color(255, 204, 153));
+        btnPrintBill.setForeground(new java.awt.Color(0, 0, 0));
         btnPrintBill.setText("Imprimir");
         btnPrintBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,6 +347,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 .addContainerGap())
         );
 
+        tblProductList.setBackground(new java.awt.Color(155, 155, 124));
+        tblProductList.setForeground(new java.awt.Color(0, 0, 0));
         tblProductList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

@@ -89,7 +89,12 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 204));
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 204));
+
+        btnSaveProduct.setBackground(new java.awt.Color(255, 204, 153));
+        btnSaveProduct.setForeground(new java.awt.Color(0, 0, 0));
         btnSaveProduct.setText("Guardar");
         btnSaveProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +102,8 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(255, 204, 153));
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Eliminar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +111,8 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setBackground(new java.awt.Color(255, 204, 153));
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Menu Principal");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,26 +144,54 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Image Product");
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Agregar Productos ");
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel3.setBackground(new java.awt.Color(153, 153, 0));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nombre Producto");
 
+        txtProductName.setBackground(new java.awt.Color(204, 204, 204));
+        txtProductName.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha Ingreso");
 
+        txtIncomeDate.setBackground(new java.awt.Color(204, 204, 204));
+        txtIncomeDate.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Cantidad en Stock");
 
+        txtStockCuantity.setBackground(new java.awt.Color(204, 204, 204));
+        txtStockCuantity.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Salida de Producto");
 
+        txtProductOutput.setBackground(new java.awt.Color(204, 204, 204));
+        txtProductOutput.setForeground(new java.awt.Color(0, 0, 0));
         txtProductOutput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtProductOutputActionPerformed(evt);
             }
         });
 
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Fecha de Salida");
+
+        txtDateOutput.setBackground(new java.awt.Color(204, 204, 204));
+        txtDateOutput.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -205,16 +242,22 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Proveedor ");
 
+        txtSupplier.setBackground(new java.awt.Color(204, 204, 204));
+        txtSupplier.setForeground(new java.awt.Color(0, 0, 0));
         txtSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSupplierActionPerformed(evt);
             }
         });
 
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Existencias");
 
+        txtExistence.setBackground(new java.awt.Color(204, 204, 204));
+        txtExistence.setForeground(new java.awt.Color(0, 0, 0));
         txtExistence.setToolTipText("Ingrese solo números enteros");
         txtExistence.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -262,6 +305,9 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 204));
+        jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
 
         jMenu1.setText("Inicio");
 

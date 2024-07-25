@@ -56,17 +56,32 @@ public class FrmConsultProduct extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 204));
 
+        jPanel2.setBackground(new java.awt.Color(173, 173, 138));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 204));
+
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Consulta de datos");
 
+        jButton8.setBackground(new java.awt.Color(255, 204, 153));
+        jButton8.setForeground(new java.awt.Color(0, 0, 0));
         jButton8.setText("Buscar");
 
+        jButton9.setBackground(new java.awt.Color(255, 204, 153));
+        jButton9.setForeground(new java.awt.Color(0, 0, 0));
         jButton9.setText("N Codigo");
 
+        jButton10.setBackground(new java.awt.Color(255, 204, 153));
+        jButton10.setForeground(new java.awt.Color(0, 0, 0));
         jButton10.setText("Total Registros");
 
+        jButton11.setBackground(new java.awt.Color(255, 204, 153));
+        jButton11.setForeground(new java.awt.Color(0, 0, 0));
         jButton11.setText("Proveedor");
 
+        jButton12.setBackground(new java.awt.Color(255, 204, 153));
+        jButton12.setForeground(new java.awt.Color(0, 0, 0));
         jButton12.setText("Producto");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,26 +129,51 @@ public class FrmConsultProduct extends javax.swing.JFrame {
                 .addContainerGap(70, Short.MAX_VALUE))
         );
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Image Product");
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Consultar Productos ");
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nombre Producto");
 
+        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha Ingreso");
 
+        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Cantidad en Stock");
 
+        jTextField3.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Salida de Producto");
 
+        jTextField4.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField4.setForeground(new java.awt.Color(0, 0, 0));
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
 
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Fecha de Salida");
+
+        jTextField5.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField5.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -184,15 +224,22 @@ public class FrmConsultProduct extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Proveedor ");
 
+        jTextField6.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField6.setForeground(new java.awt.Color(0, 0, 0));
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
 
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Existencias");
+
+        jTextField7.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField7.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,6 +281,9 @@ public class FrmConsultProduct extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 204));
+        jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
 
         jMenu1.setText("Inicio");
 

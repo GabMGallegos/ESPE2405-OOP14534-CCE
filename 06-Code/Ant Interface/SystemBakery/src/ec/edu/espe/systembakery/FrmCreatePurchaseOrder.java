@@ -61,11 +61,17 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
         itmDeleteFields = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 204));
         setPreferredSize(new java.awt.Dimension(780, 415));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Panadería: El Trigo de Oro");
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("RTN: 00121-00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -89,12 +95,25 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Proveedor:");
 
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha de Pedido:");
 
+        cmbSuppliers.setBackground(new java.awt.Color(204, 204, 204));
+        cmbSuppliers.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtOrderDate.setBackground(new java.awt.Color(204, 204, 204));
+        txtOrderDate.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("ORDEN DE COMPRA:");
 
+        lblPurchaseOrderNumber.setForeground(new java.awt.Color(0, 0, 0));
         lblPurchaseOrderNumber.setText("No. 0000");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -135,15 +154,36 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel3.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Artículo:");
 
+        cmbProducts.setBackground(new java.awt.Color(204, 204, 204));
+        cmbProducts.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnEnterToOrderList.setBackground(new java.awt.Color(255, 204, 153));
+        btnEnterToOrderList.setForeground(new java.awt.Color(0, 0, 0));
         btnEnterToOrderList.setText("Ingresar a la Lista de Pedidos");
 
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Cantidad:");
 
+        txtAmount.setBackground(new java.awt.Color(204, 204, 204));
+        txtAmount.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Precio Unit.:");
 
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Precio Total:");
+
+        txtUnitaryPrice.setBackground(new java.awt.Color(204, 204, 204));
+        txtUnitaryPrice.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtTotalPrice.setBackground(new java.awt.Color(204, 204, 204));
+        txtTotalPrice.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -193,9 +233,21 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel4.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Autorizado por:");
 
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Recibido por:");
+
+        txtAutorizedPerson.setBackground(new java.awt.Color(204, 204, 204));
+        txtAutorizedPerson.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtReceivedPerson.setBackground(new java.awt.Color(204, 204, 204));
+        txtReceivedPerson.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -207,10 +259,10 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtReceivedPerson, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                    .addComponent(txtAutorizedPerson))
-                .addContainerGap())
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtAutorizedPerson, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                    .addComponent(txtReceivedPerson))
+                .addContainerGap(451, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,6 +278,11 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel5.setForeground(new java.awt.Color(0, 0, 0));
+
+        jTable1.setBackground(new java.awt.Color(211, 211, 169));
+        jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -258,6 +315,9 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(97, Short.MAX_VALUE))
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 204));
+        jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
 
         jMenu1.setText("Inicio");
 
@@ -317,6 +377,9 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,9 +387,6 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(6, 6, 6))))
         );
