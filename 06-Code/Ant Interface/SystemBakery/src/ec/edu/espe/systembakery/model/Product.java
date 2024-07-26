@@ -38,6 +38,11 @@ public class Product {
         this.date = date;
     }
 
+    public Product() {
+    }
+    
+    
+
     public int getId() {
         return id;
     }

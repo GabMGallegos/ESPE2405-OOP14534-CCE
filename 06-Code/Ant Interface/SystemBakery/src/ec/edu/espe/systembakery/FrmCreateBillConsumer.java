@@ -7,6 +7,9 @@ package ec.edu.espe.systembakery;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.systembakery.model.Bills;
+import ec.edu.espe.systembakery.model.Consumer;
+import ec.edu.espe.systembakery.model.Product;
 import ec.edu.espe.utils.BsonDownloadDocument;
 import ec.edu.espe.utils.Methods;
 import ec.edu.espe.utils.Conection;
@@ -34,8 +37,9 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
     private DefaultTableModel dtmProductList;
     private String[] productPurchaseList = new String[5];
     private MongoCollection mongoProductCollection;
-    
-    
+    private ArrayList<Consumer> consumers = new ArrayList<>();
+    private ArrayList<Product> products = new ArrayList<>();
+    private Bills consumerBill = new Bills();
 
     public FrmCreateBillConsumer() {
         initComponents();
@@ -608,5 +612,49 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         
         jPanel3.printAll(graphics);
         return PAGE_EXISTS;
+    }
+
+    
+
+    /**
+     * @return the products
+     */
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    /**
+     * @param products the products to set
+     */
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+    /**
+     * @return the consumerBill
+     */
+    public Bills getConsumerBill() {
+        return consumerBill;
+    }
+
+    /**
+     * @param consumerBill the consumerBill to set
+     */
+    public void setConsumerBill(Bills consumerBill) {
+        this.consumerBill = consumerBill;
+    }
+
+    /**
+     * @return the consumers
+     */
+    public ArrayList<Consumer> getConsumers() {
+        return consumers;
+    }
+
+    /**
+     * @param consumers the consumers to set
+     */
+    public void setConsumers(ArrayList<Consumer> consumers) {
+        this.consumers = consumers;
     }
 }

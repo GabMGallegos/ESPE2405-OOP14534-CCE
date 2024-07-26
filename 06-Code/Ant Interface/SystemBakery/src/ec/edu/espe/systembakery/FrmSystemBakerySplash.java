@@ -4,17 +4,25 @@
  */
 package ec.edu.espe.systembakery;
 
+import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.utils.Conection;
+
 /**
  *
  * @author CodeCrafting Engineers
  */
 public class FrmSystemBakerySplash extends javax.swing.JFrame {
 
-    /**
-     * Creates new form systembakery
-     */
+    private Conection conn = new Conection(); 
+    private MongoDatabase database;
+    
     public FrmSystemBakerySplash() {
         initComponents();
+        
+        if (conn != null) {
+            conn = conn.createConection();
+            database = conn.getMongoDatabase();
+        }
     }
 
     /**
@@ -133,4 +141,18 @@ public class FrmSystemBakerySplash extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel progress;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @param conn the conn to set
+     */
+    public void setConn(Conection conn) {
+        this.conn = conn;
+    }
+
+    /**
+     * @param database the database to set
+     */
+    public void setDatabase(MongoDatabase database) {
+        this.database = database;
+    }
 }

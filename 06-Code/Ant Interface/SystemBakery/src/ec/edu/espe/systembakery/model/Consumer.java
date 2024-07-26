@@ -33,6 +33,9 @@ public class Consumer {
         this.paymentType = paymentType;
     }
 
+    public Consumer() {
+    }
+    
     @Override
     public String toString() {
         return "Consumer{" + "consumerName=" + consumerName + ", cash=" + cash + ", bill=" + bill + ", paymentType=" + paymentType + '}';

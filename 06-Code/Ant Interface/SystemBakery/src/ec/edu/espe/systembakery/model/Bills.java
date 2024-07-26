@@ -35,6 +35,9 @@ public class Bills {
         this.amount = BigDecimal.ZERO;
     }
 
+    public Bills() {
+    }
+
     public void addProduct(Product product, int quantity) {
         if (product == null) {
             throw new IllegalArgumentException("The product cannot be null");
