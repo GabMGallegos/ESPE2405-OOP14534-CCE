@@ -4,6 +4,7 @@
  */
 package ec.edu.espe.systembakery;
 
+import com.mongodb.client.MongoDatabase;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +14,10 @@ import javax.swing.JOptionPane;
  */
 public class FrmLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form nuevo
-     */
-    public FrmLogin() {
+    private static MongoDatabase database;
+    public FrmLogin(MongoDatabase database) {
         initComponents();
+        this.database = database;
     }
 
     /**
@@ -51,7 +51,6 @@ public class FrmLogin extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/Login.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 140, 150));
 
@@ -95,11 +94,6 @@ public class FrmLogin extends javax.swing.JFrame {
                 btnStartSectionMouseClicked(evt);
             }
         });
-        btnStartSection.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartSectionActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnStartSection, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 84, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 1, 24)); // NOI18N
@@ -132,10 +126,6 @@ public class FrmLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnStartSectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartSectionActionPerformed
-        
-    }//GEN-LAST:event_btnStartSectionActionPerformed
-
     private void lblViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblViewMouseClicked
         lblView.setVisible(false);
         lblDisguise.setVisible(true);
@@ -154,7 +144,7 @@ public class FrmLogin extends javax.swing.JFrame {
         contraseña=txtPassword.getText();
         if(usuario.equals("admin") && contraseña.equals("admin")){
             JOptionPane.showMessageDialog(this, "Login completed...");
-            FrmBakery frmBakery = new FrmBakery();
+            FrmBakery frmBakery = new FrmBakery(database);
             this.setVisible(false);
             frmBakery.setVisible(true);
         }else{
@@ -201,7 +191,7 @@ public class FrmLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmLogin().setVisible(true);
+                new FrmLogin(database).setVisible(true);
             }
         });
     }

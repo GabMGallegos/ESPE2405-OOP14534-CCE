@@ -310,11 +310,7 @@ public class FrmSearchSupplier extends javax.swing.JFrame {
     }//GEN-LAST:event_itmMenuSuppliersActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        if (true) { //read users from and compare user name and password
-            FrmBakery frmBakery = new FrmBakery();
-            this.setVisible(false);
-            frmBakery.setVisible(true);
-        }
+        
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed

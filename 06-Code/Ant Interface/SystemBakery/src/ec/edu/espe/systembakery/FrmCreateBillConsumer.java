@@ -40,14 +40,16 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
     private ArrayList<Consumer> consumers = new ArrayList<>();
     private ArrayList<Product> products = new ArrayList<>();
     private Bills consumerBill = new Bills();
-
+    
     public FrmCreateBillConsumer() {
+    }
+    
+    public FrmCreateBillConsumer(boolean initialize) {
         initComponents();
-
-        if (conn != null) {
-            conn = conn.createConection();
-            database = conn.getMongoDatabase();
-        }
+        if(initialize)InitializeDatabase();
+    }
+    
+    public void InitializeDatabase(){
         dtmProductList = (DefaultTableModel) tblProductList.getModel();
         Methods.ComboBoxInsertItemsPeople("Consumers", "Nombres", cmbConsumerName,database);
         Methods.ComboBoxInsertItemsProducts("Products", "Id", "Nombre", cmbProductId,database);
@@ -454,7 +456,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 lblErrorEmitionDate.setText("");
                 lblErrorProductId.setText("");
                 lblErrorProductAmount.setText("");
-                Methods.addElemenToTable(database, mongoProductCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
+                Methods.addElemenToTable(getDatabase(), mongoProductCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
             } else {
                 if(!verificationConsumerName){
                     lblErrorConsumer.setText("Elija un cliente de la lista");
@@ -656,5 +658,33 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
      */
     public void setConsumers(ArrayList<Consumer> consumers) {
         this.consumers = consumers;
+    }
+
+    /**
+     * @return the conn
+     */
+    public Conection getConn() {
+        return conn;
+    }
+
+    /**
+     * @param conn the conn to set
+     */
+    public void setConn(Conection conn) {
+        this.conn = conn;
+    }
+
+    /**
+     * @return the database
+     */
+    public MongoDatabase getDatabase() {
+        return database;
+    }
+
+    /**
+     * @param database the database to set
+     */
+    public void setDatabase(MongoDatabase database) {
+        this.database = database;
     }
 }

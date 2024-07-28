@@ -4,6 +4,7 @@
  */
 package ec.edu.espe.systembakery;
 
+import com.mongodb.client.MongoDatabase;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,11 +13,10 @@ import javax.swing.JOptionPane;
  */
 public class FrmBakery extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmBakery
-     */
-    public FrmBakery() {
+    private static MongoDatabase database;
+    public FrmBakery(MongoDatabase database) {
         initComponents();
+        this.database = database;
     }
 
     private void cerrar() {
@@ -35,7 +35,7 @@ public class FrmBakery extends javax.swing.JFrame {
         if (jTabbedPane1.getSelectedComponent() == jPanel4) {
             jTabbedPane1.setSelectedComponent(jPanel2);
         } else {
-            FrmCreateBillConsumer bill = new FrmCreateBillConsumer();
+            FrmCreateBillConsumer bill = new FrmCreateBillConsumer(true);
             jPanel4.add( bill.getContentPane());
             bill.setVisible(false);
             jTabbedPane1.setSelectedComponent(jPanel4);
@@ -499,6 +499,7 @@ public class FrmBakery extends javax.swing.JFrame {
     }//GEN-LAST:event_itmMakePurchaseOrderToSupplierMouseClicked
 
     private void itmMakeBillToConsumerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itmMakeBillToConsumerMouseClicked
+        
         showFrmBillMenu();
     }//GEN-LAST:event_itmMakeBillToConsumerMouseClicked
 
@@ -600,7 +601,7 @@ public class FrmBakery extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmBakery().setVisible(true);
+                new FrmBakery(database).setVisible(true);
             }
         });
     }
