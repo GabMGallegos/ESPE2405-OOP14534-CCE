@@ -32,8 +32,8 @@ import org.bson.Document;
  */
 public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printable {
 
-    private Conection conn = new Conection(); 
-    private MongoDatabase database;
+ 
+    private static MongoDatabase database;
     private DefaultTableModel dtmProductList;
     private String[] productPurchaseList = new String[5];
     private MongoCollection mongoProductCollection;
@@ -41,15 +41,13 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
     private ArrayList<Product> products = new ArrayList<>();
     private Bills consumerBill = new Bills();
     
-    public FrmCreateBillConsumer() {
-    }
-    
-    public FrmCreateBillConsumer(boolean initialize) {
+    public FrmCreateBillConsumer(MongoDatabase database) {
         initComponents();
-        if(initialize)InitializeDatabase();
+        this.database = database;
+        InitializeDatabase(this.database);
     }
     
-    public void InitializeDatabase(){
+    public void InitializeDatabase(MongoDatabase database){
         dtmProductList = (DefaultTableModel) tblProductList.getModel();
         Methods.ComboBoxInsertItemsPeople("Consumers", "Nombres", cmbConsumerName,database);
         Methods.ComboBoxInsertItemsProducts("Products", "Id", "Nombre", cmbProductId,database);
@@ -565,7 +563,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCreateBillConsumer().setVisible(true);
+                new FrmCreateBillConsumer(database).setVisible(true);
             }
         });
     }
@@ -658,20 +656,6 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
      */
     public void setConsumers(ArrayList<Consumer> consumers) {
         this.consumers = consumers;
-    }
-
-    /**
-     * @return the conn
-     */
-    public Conection getConn() {
-        return conn;
-    }
-
-    /**
-     * @param conn the conn to set
-     */
-    public void setConn(Conection conn) {
-        this.conn = conn;
     }
 
     /**

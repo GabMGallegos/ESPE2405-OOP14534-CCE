@@ -35,7 +35,7 @@ public class FrmBakery extends javax.swing.JFrame {
         if (jTabbedPane1.getSelectedComponent() == jPanel4) {
             jTabbedPane1.setSelectedComponent(jPanel2);
         } else {
-            FrmCreateBillConsumer bill = new FrmCreateBillConsumer(true);
+            FrmCreateBillConsumer bill = new FrmCreateBillConsumer(database);
             jPanel4.add( bill.getContentPane());
             bill.setVisible(false);
             jTabbedPane1.setSelectedComponent(jPanel4);
