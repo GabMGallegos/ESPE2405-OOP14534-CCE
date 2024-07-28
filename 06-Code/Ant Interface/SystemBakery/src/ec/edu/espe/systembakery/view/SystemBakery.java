@@ -25,7 +25,7 @@ public class SystemBakery {
             // Simulate progress and update the splash screen
             try {
                 for (int i = 0; i <= 100; i++) {
-                    Thread.sleep(40);  // Simulate time-consuming task
+                    Thread.sleep(45);  // Simulate time-consuming task
                     final int percent = i;
                     javax.swing.SwingUtilities.invokeLater(() -> {
                         splash.setBarValue(percent);

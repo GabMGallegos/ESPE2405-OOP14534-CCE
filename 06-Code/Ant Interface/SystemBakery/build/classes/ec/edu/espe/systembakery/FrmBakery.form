@@ -309,6 +309,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cerrar Sesion"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuitSignOffActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="mnuitmExit">
                   <Properties>
