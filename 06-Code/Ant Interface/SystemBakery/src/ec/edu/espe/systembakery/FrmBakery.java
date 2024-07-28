@@ -28,7 +28,6 @@ public class FrmBakery extends javax.swing.JFrame {
         } else if (eleccion == JOptionPane.NO_OPTION) {
             System.out.println("Se cancelo el cierre");
         }
-
     }
 
     private void showFrmBillMenu() {
@@ -272,6 +271,11 @@ public class FrmBakery extends javax.swing.JFrame {
         });
 
         mnuitSignOff.setText("Cerrar Sesion");
+        mnuitSignOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuitSignOffActionPerformed(evt);
+            }
+        });
         Mnu.add(mnuitSignOff);
 
         mnuitmExit.setText("Salir del sistema");
@@ -495,11 +499,9 @@ public class FrmBakery extends javax.swing.JFrame {
 
     private void itmMakePurchaseOrderToSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itmMakePurchaseOrderToSupplierMouseClicked
         showFrmBillMake();
-
     }//GEN-LAST:event_itmMakePurchaseOrderToSupplierMouseClicked
 
     private void itmMakeBillToConsumerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itmMakeBillToConsumerMouseClicked
-        
         showFrmBillMenu();
     }//GEN-LAST:event_itmMakeBillToConsumerMouseClicked
 
@@ -511,7 +513,7 @@ public class FrmBakery extends javax.swing.JFrame {
         if (jTabbedPane1.getSelectedComponent() == jPanel6) {
             jTabbedPane1.setSelectedComponent(jPanel2);
         } else {
-            FrmSearchSupplier bill = new FrmSearchSupplier();
+            FrmSearchSupplier bill = new FrmSearchSupplier(database);
             jPanel6.add( bill.getContentPane());
             bill.setVisible(false);
             jTabbedPane1.setSelectedComponent(jPanel6);
@@ -522,7 +524,7 @@ public class FrmBakery extends javax.swing.JFrame {
         if (jTabbedPane1.getSelectedComponent() == jPanel7) {
             jTabbedPane1.setSelectedComponent(jPanel2);
         } else {
-            FrmAddNewProduct bill = new FrmAddNewProduct();
+            FrmAddNewProduct bill = new FrmAddNewProduct(database);
             jPanel7.add( bill.getContentPane());
             bill.setVisible(false);
             jTabbedPane1.setSelectedComponent(jPanel7);
@@ -533,7 +535,7 @@ public class FrmBakery extends javax.swing.JFrame {
         if (jTabbedPane1.getSelectedComponent() == jPanel8) {
             jTabbedPane1.setSelectedComponent(jPanel2);
         } else {
-            FrmConsultProduct bill = new FrmConsultProduct();
+            FrmConsultProduct bill = new FrmConsultProduct(database);
             jPanel8.add( bill.getContentPane());
             bill.setVisible(false);
             jTabbedPane1.setSelectedComponent(jPanel8);
@@ -567,6 +569,19 @@ public class FrmBakery extends javax.swing.JFrame {
     private void jMenuItem9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MouseClicked
         
     }//GEN-LAST:event_jMenuItem9MouseClicked
+
+    private void mnuitSignOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitSignOffActionPerformed
+        String botones[] = {"CAMBIAR", "CANCELAR"};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cambiar de usuario?", "Cambio de Usuario",
+                0, JOptionPane.QUESTION_MESSAGE, null, botones, this);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            FrmLogin login = new FrmLogin(database);
+            this.dispose();
+            login.setVisible(true);
+        } else if (eleccion == JOptionPane.NO_OPTION) {
+            System.out.println("Se cancelo el cierre");
+        }
+    }//GEN-LAST:event_mnuitSignOffActionPerformed
 
     /**
      * @param args the command line arguments

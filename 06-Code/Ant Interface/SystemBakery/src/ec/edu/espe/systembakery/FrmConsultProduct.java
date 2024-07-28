@@ -4,17 +4,18 @@
  */
 package ec.edu.espe.systembakery;
 
+import com.mongodb.client.MongoDatabase;
+
 /**
  *
  * @author plusm
  */
 public class FrmConsultProduct extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmConsultProduct
-     */
-    public FrmConsultProduct() {
+    private static MongoDatabase database;
+    public FrmConsultProduct(MongoDatabase database) {
         initComponents();
+        this.database = database;
     }
 
     /**
@@ -359,7 +360,7 @@ public class FrmConsultProduct extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmConsultProduct().setVisible(true);
+                new FrmConsultProduct(database).setVisible(true);
             }
         });
     }

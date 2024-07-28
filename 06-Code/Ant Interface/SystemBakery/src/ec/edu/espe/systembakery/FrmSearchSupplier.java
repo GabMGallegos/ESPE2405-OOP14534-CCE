@@ -4,17 +4,18 @@
  */
 package ec.edu.espe.systembakery;
 
+import com.mongodb.client.MongoDatabase;
+
 /**
  *
  * @author CodeCrafting Engineers
  */
 public class FrmSearchSupplier extends javax.swing.JFrame {
 
-    /**
-     * Creates new form searchSupplier
-     */
-    public FrmSearchSupplier() {
+    private static MongoDatabase database;
+    public FrmSearchSupplier(MongoDatabase database) {
         initComponents();
+        this.database = database;
     }
 
     /**
@@ -350,7 +351,7 @@ public class FrmSearchSupplier extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmSearchSupplier().setVisible(true);
+                new FrmSearchSupplier(database).setVisible(true);
             }
         });
     }

@@ -17,16 +17,12 @@ import javax.swing.JPanel;
  */
 public class FrmAddNewProduct extends javax.swing.JFrame {
 
-    Conection conn = new Conection();
-    MongoDatabase database;
     
-    public FrmAddNewProduct() {
-        if (conn != null) {
-            conn = conn.createConection();
-            database = conn.getMongoDatabase();
-            
-        }
+    private static MongoDatabase database;
+    
+    public FrmAddNewProduct(MongoDatabase database) {
         initComponents();
+        this.database = database;
     }
 
     /**
@@ -416,7 +412,7 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAddNewProduct().setVisible(true);
+                new FrmAddNewProduct(database).setVisible(true);
             }
         });
     }
