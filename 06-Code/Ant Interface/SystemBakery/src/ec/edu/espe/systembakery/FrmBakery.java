@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 public class FrmBakery extends javax.swing.JFrame {
 
     private static MongoDatabase database;
+    FrmCreateBillConsumer bill;
+    
     public FrmBakery(MongoDatabase database) {
         initComponents();
         this.database = database;
@@ -34,12 +36,17 @@ public class FrmBakery extends javax.swing.JFrame {
         if (jTabbedPane1.getSelectedComponent() == jPanel4) {
             jTabbedPane1.setSelectedComponent(jPanel2);
         } else {
-            FrmCreateBillConsumer bill = new FrmCreateBillConsumer(database);
+            bill = new FrmCreateBillConsumer(database);
             jPanel4.add( bill.getContentPane());
             bill.setVisible(false);
             jTabbedPane1.setSelectedComponent(jPanel4);
         }
     }
+    
+    private void cleanFields(){
+        
+    }
+    
     private void showFrmBillMake() {
         if (jTabbedPane1.getSelectedComponent() == jPanel3) {
             jTabbedPane1.setSelectedComponent(jPanel2);
@@ -119,7 +126,7 @@ public class FrmBakery extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        bill = new javax.swing.JLabel();
+        lblBackground = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -485,8 +492,8 @@ public class FrmBakery extends javax.swing.JFrame {
 
         getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 780, 460));
 
-        bill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/fondoMenu1.png"))); // NOI18N
-        getContentPane().add(bill, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, -1));
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/imagenes/fondoMenu1.png"))); // NOI18N
+        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, -1));
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -623,7 +630,6 @@ public class FrmBakery extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu Mnu;
-    private javax.swing.JLabel bill;
     private javax.swing.JMenu itmMakeBillToConsumer;
     private javax.swing.JMenu itmMakePurchaseOrderToSupplier;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -660,6 +666,7 @@ public class FrmBakery extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblBackground;
     private javax.swing.JMenu mnuAddProducts;
     private javax.swing.JMenu mnuAddSuppliers;
     private javax.swing.JMenu mnuBill;

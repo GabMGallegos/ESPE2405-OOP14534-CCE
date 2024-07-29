@@ -3,6 +3,7 @@ package ec.edu.espe.utils;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.systembakery.model.Consumer;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
@@ -18,7 +19,7 @@ import org.bson.Document;
  */
 public class Methods {
 
-    public static void addElemenToTable(MongoDatabase database, MongoCollection collection, String firstPartCmbProductId, 
+    public static void addElemenToTable(MongoDatabase database, MongoCollection collection, String firstPartCmbProductId,
             JTextField txtProductAmount, String[] productPurchaseList, DefaultTableModel dtmProductList) {
         collection = database.getCollection("Products");
         MongoCursor<Document> cursor = collection.find().iterator();
@@ -38,7 +39,7 @@ public class Methods {
                     productPurchaseList[4] = "4";//realizar calculo para el total
 
                     dtmProductList.addRow(productPurchaseList);
-                    
+
                     break;
                 }
             }
@@ -49,19 +50,19 @@ public class Methods {
         }
     }
 
-    public static void ComboBoxInsertItemsPeople(String collectionName, String item, JComboBox cmbBox, MongoDatabase database) {
+    public static void ComboBoxInsertItems(MongoCollection collection, String item, JComboBox cmbBox) {
         ArrayList<String> list;
-        list = BsonDownloadDocument.ObtainListItem(database.getCollection(collectionName), item);
+        list = BsonDownloadDocument.ObtainListItem(collection, item);
 
         for (String itemList : list) {
             cmbBox.addItem(itemList);
         }
     }
 
-    public static void ComboBoxInsertItemsProducts(String collectionName, String itemId, String itemName, JComboBox cmbBox, MongoDatabase database) {
+    public static void ComboBoxInsertItems(MongoCollection collection, String itemId, String itemName, JComboBox cmbBox) {
         ArrayList<String> listId, listName, listIdAndName;
-        listId = BsonDownloadDocument.ObtainListItem(database.getCollection(collectionName), itemId);
-        listName = BsonDownloadDocument.ObtainListItem(database.getCollection(collectionName), itemName);
+        listId = BsonDownloadDocument.ObtainListItem(collection, itemId);
+        listName = BsonDownloadDocument.ObtainListItem(collection, itemName);
         listIdAndName = JoinLists(listId, listName);
 
         for (String itemList : listIdAndName) {
@@ -77,6 +78,10 @@ public class Methods {
             newList.add(i, list1.get(i).toString() + " --> " + list2.get(i).toString());
         }
         return newList;
+    }
+
+    public static ArrayList<Consumer> getConsumers(MongoDatabase database) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

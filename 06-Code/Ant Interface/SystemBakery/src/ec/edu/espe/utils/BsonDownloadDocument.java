@@ -14,8 +14,11 @@ import org.bson.Document;
  */
 public class BsonDownloadDocument {
     
-    
-    
+    public static MongoCollection ObtainCollection(MongoDatabase database, String collectionName){
+        MongoCollection collection;
+        collection = database.getCollection(collectionName);
+        return collection;
+    }
     
     public static ArrayList ObtainListItem(MongoCollection collection,String findItem){
         ArrayList items;

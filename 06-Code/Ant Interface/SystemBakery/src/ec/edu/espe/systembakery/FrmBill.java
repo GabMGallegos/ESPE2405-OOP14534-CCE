@@ -4,17 +4,26 @@
  */
 package ec.edu.espe.systembakery;
 
+import ec.edu.espe.systembakery.model.Bills;
+import ec.edu.espe.systembakery.model.Consumer;
+import ec.edu.espe.systembakery.model.Product;
+import java.util.ArrayList;
+
 /**
  *
  * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
  */
 public class FrmBill extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmBill
-     */
-    public FrmBill() {
+    private static Consumer consumer;
+    private static ArrayList<Product> products;
+    private static Bills bills;
+    
+    public FrmBill(Consumer consumer, ArrayList<Product> products, Bills bills) {
         initComponents();
+        this.consumer = consumer;
+        this.products = products;
+        this.bills = bills;
     }
 
     /**
@@ -429,7 +438,7 @@ public class FrmBill extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmBill().setVisible(true);
+                new FrmBill(consumer, products, bills).setVisible(true);
             }
         });
     }

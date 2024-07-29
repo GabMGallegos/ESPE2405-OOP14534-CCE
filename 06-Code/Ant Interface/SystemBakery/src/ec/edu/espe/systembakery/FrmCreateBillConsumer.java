@@ -36,7 +36,9 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
     private static MongoDatabase database;
     private DefaultTableModel dtmProductList;
     private String[] productPurchaseList = new String[5];
-    private MongoCollection mongoProductCollection;
+    private MongoCollection productCollection;
+    private MongoCollection consumerCollection;
+    private MongoCollection billCollection;
     private ArrayList<Consumer> consumers = new ArrayList<>();
     private ArrayList<Product> products = new ArrayList<>();
     private Bills consumerBill = new Bills();
@@ -49,8 +51,13 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
     
     public void InitializeDatabase(MongoDatabase database){
         dtmProductList = (DefaultTableModel) tblProductList.getModel();
-        Methods.ComboBoxInsertItemsPeople("Consumers", "Nombres", cmbConsumerName,database);
-        Methods.ComboBoxInsertItemsProducts("Products", "Id", "Nombre", cmbProductId,database);
+        
+        consumerCollection = BsonDownloadDocument.ObtainCollection(database,"Products");
+        productCollection = BsonDownloadDocument.ObtainCollection(database, "Consumers");
+        billCollection = BsonDownloadDocument.ObtainCollection(database, "Bills");
+        
+        Methods.ComboBoxInsertItems(consumerCollection, "Nombres", cmbConsumerName);
+        Methods.ComboBoxInsertItems(productCollection, "Id", "Nombre", cmbProductId);
         btnEditProductList.setVisible(false);
     }
 
@@ -423,7 +430,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         firstPartCmbProductId = cmbProductId.getSelectedItem().toString().split(" --> ")[0];
         verificationProductId = firstPartCmbProductId.matches("^[A-Z]\\d{3}$");
         verificationProductAmount = txtProductAmount.getText().matches("^\\d{1,2}$");
-
+        
         try {
 
             if (verificationConsumerName && verificationRucCi && verificationEmitionDate && verificationProductId && verificationProductAmount) {
@@ -432,7 +439,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 lblErrorEmitionDate.setText("");
                 lblErrorProductId.setText("");
                 lblErrorProductAmount.setText("");
-                Methods.addElemenToTable(getDatabase(), mongoProductCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
+                Methods.addElemenToTable(getDatabase(), productCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
             } else {
                 if(!verificationConsumerName){
                     lblErrorConsumer.setText("Elija un cliente de la lista");
