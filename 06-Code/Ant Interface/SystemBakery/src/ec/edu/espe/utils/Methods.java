@@ -19,11 +19,11 @@ import org.bson.Document;
  */
 public class Methods {
 
-    public static void addElemenToTable(MongoDatabase database, MongoCollection collection, String firstPartCmbProductId,
+    public static void addElemenToTable(MongoCollection collection, String firstPartCmbProductId,
             JTextField txtProductAmount, String[] productPurchaseList, DefaultTableModel dtmProductList) {
-        collection = database.getCollection("Products");
+        float totalPrice;
         MongoCursor<Document> cursor = collection.find().iterator();
-
+        
         try {
 
             while (cursor.hasNext()) {
@@ -36,7 +36,10 @@ public class Methods {
                     productPurchaseList[2] = txtProductAmount.getText().trim();
                     //add method to rest in the MongoDB document
                     productPurchaseList[3] = document.getString("Precio U.");
-                    productPurchaseList[4] = "4";//realizar calculo para el total
+                    
+                    totalPrice = Float.parseFloat(productPurchaseList[2]) * Float.parseFloat(productPurchaseList[3]);
+                    
+                    productPurchaseList[4] = "" + totalPrice;
 
                     dtmProductList.addRow(productPurchaseList);
 
