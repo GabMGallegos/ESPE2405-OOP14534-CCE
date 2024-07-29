@@ -20,6 +20,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -33,8 +34,10 @@ import org.bson.Document;
 public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printable {
 
  
-    private static MongoDatabase database;
+    private static MongoDatabase dataB;
     private DefaultTableModel dtmProductList;
+//    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//    String date = dateFormat.format(this.dcDate.getDate());
     private String[] productPurchaseList = new String[5];
     private MongoCollection productCollection;
     private MongoCollection consumerCollection;
@@ -45,15 +48,15 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
     
     public FrmCreateBillConsumer(MongoDatabase database) {
         initComponents();
-        this.database = database;
-        InitializeDatabase(this.database);
+        this.dataB = database;
+        InitializeDatabase(this.dataB);
     }
     
     public void InitializeDatabase(MongoDatabase database){
         dtmProductList = (DefaultTableModel) tblProductList.getModel();
         
-        consumerCollection = BsonDownloadDocument.ObtainCollection(database,"Products");
-        productCollection = BsonDownloadDocument.ObtainCollection(database, "Consumers");
+        consumerCollection = BsonDownloadDocument.ObtainCollection(database,"Consumers");
+        productCollection = BsonDownloadDocument.ObtainCollection(database, "Products");
         billCollection = BsonDownloadDocument.ObtainCollection(database, "Bills");
         
         Methods.ComboBoxInsertItems(consumerCollection, "Nombres", cmbConsumerName);
@@ -80,14 +83,13 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         lblPurchaseOrderNumber = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtOrderDate = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtRucCi = new javax.swing.JTextField();
         cmbConsumerName = new javax.swing.JComboBox<>();
         lblErrorConsumer = new javax.swing.JLabel();
         lblErrorCI = new javax.swing.JLabel();
-        lblErrorEmitionDate = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        dcDate = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -127,14 +129,14 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(107, 107, 107)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPurchaseOrderNumber)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -154,13 +156,14 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
 
         jLabel3.setText("Cliente:");
 
-        jLabel4.setText("Fecha de Emisión:");
-
-        txtOrderDate.setBackground(new java.awt.Color(204, 204, 204));
-
         jLabel5.setText("RUC / CI:");
 
         txtRucCi.setBackground(new java.awt.Color(204, 204, 204));
+        txtRucCi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRucCiActionPerformed(evt);
+            }
+        });
 
         cmbConsumerName.setBackground(new java.awt.Color(204, 204, 204));
         cmbConsumerName.setEditable(true);
@@ -170,7 +173,10 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
 
         lblErrorCI.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblErrorEmitionDate.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel4.setText("Fecha de Emisión:");
+
+        dcDate.setDateFormatString("dd/MM/yyyy");
+        dcDate.setMaxSelectableDate(new java.util.Date(253370786512000L));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,42 +187,41 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbConsumerName, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblErrorConsumer, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblErrorConsumer, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cmbConsumerName, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRucCi, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblErrorCI, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblErrorCI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(218, 218, 218))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtRucCi, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtOrderDate))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblErrorEmitionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(dcDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(7, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblErrorConsumer, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-                    .addComponent(lblErrorEmitionDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblErrorCI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cmbConsumerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRucCi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtOrderDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dcDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblErrorConsumer, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
+                            .addComponent(lblErrorCI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(cmbConsumerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(txtRucCi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -355,7 +360,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(btnEnterToOrderList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
                 .addComponent(btnPrintBill)
                 .addContainerGap())
         );
@@ -373,21 +378,21 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(49, 49, 49))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 147, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,21 +404,21 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 841, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
         );
 
         pack();
@@ -425,7 +430,6 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         
         verificationConsumerName = cmbConsumerName.getSelectedItem().toString().matches("^[A-Z][a-z]+ [A-Z][a-z]+$");
         verificationRucCi = txtRucCi.getText().matches("^\\d{10}$");
-        verificationEmitionDate = true;
         //split and take the first of cmbProductId
         firstPartCmbProductId = cmbProductId.getSelectedItem().toString().split(" --> ")[0];
         verificationProductId = firstPartCmbProductId.matches("^[A-Z]\\d{3}$");
@@ -433,13 +437,13 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         
         try {
 
-            if (verificationConsumerName && verificationRucCi && verificationEmitionDate && verificationProductId && verificationProductAmount) {
+            if (verificationConsumerName && verificationRucCi && verificationProductId && verificationProductAmount) {
                 lblErrorConsumer.setText("");
                 lblErrorCI.setText("");
-                lblErrorEmitionDate.setText("");
+                
                 lblErrorProductId.setText("");
                 lblErrorProductAmount.setText("");
-                Methods.addElemenToTable(getDatabase(), productCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
+                Methods.addElemenToTable(productCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
             } else {
                 if(!verificationConsumerName){
                     lblErrorConsumer.setText("Elija un cliente de la lista");
@@ -449,10 +453,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                     lblErrorCI.setText("Escriba correctamente el C.I.");
                     txtRucCi.requestFocus();
                 }
-                if(!verificationEmitionDate){
-                    lblErrorEmitionDate.setText("Ingrese una fecha correcta");
-                    txtOrderDate.requestFocus();
-                }
+                
                 if(!verificationProductId){
                     lblErrorProductId.setText("Elija una opción no vacía de la lista");
                     cmbProductId.requestFocus();
@@ -478,7 +479,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
                 printerJob.print();
             }
             
-            txtOrderDate.setText("");
+            
             txtProductAmount.setText("");
             txtRucCi.setText("");
             cmbConsumerName.setSelectedIndex(0);
@@ -502,6 +503,10 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         
         
     }//GEN-LAST:event_btnEditProductListActionPerformed
+
+    private void txtRucCiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRucCiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRucCiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -548,7 +553,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCreateBillConsumer(database).setVisible(true);
+                new FrmCreateBillConsumer(dataB).setVisible(true);
             }
         });
     }
@@ -560,6 +565,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
     private javax.swing.JButton btnPrintBill;
     private javax.swing.JComboBox<String> cmbConsumerName;
     private javax.swing.JComboBox<String> cmbProductId;
+    private com.toedter.calendar.JDateChooser dcDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -576,12 +582,10 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblErrorCI;
     private javax.swing.JLabel lblErrorConsumer;
-    private javax.swing.JLabel lblErrorEmitionDate;
     private javax.swing.JLabel lblErrorProductAmount;
     private javax.swing.JLabel lblErrorProductId;
     private javax.swing.JLabel lblPurchaseOrderNumber;
     private javax.swing.JTable tblProductList;
-    private javax.swing.JTextField txtOrderDate;
     private javax.swing.JTextField txtProductAmount;
     private javax.swing.JTextField txtRucCi;
     // End of variables declaration//GEN-END:variables
@@ -643,17 +647,5 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
         this.consumers = consumers;
     }
 
-    /**
-     * @return the database
-     */
-    public MongoDatabase getDatabase() {
-        return database;
-    }
-
-    /**
-     * @param database the database to set
-     */
-    public void setDatabase(MongoDatabase database) {
-        this.database = database;
-    }
+    
 }
