@@ -8,12 +8,14 @@ import ec.edu.espe.utils.JsonGenerator;
  */
 public class Consumer {
 
+    private String cI;
     private String consumerName;
     private BigDecimal cash;
     private Bills bill;
     private KindOfPayment.PaymentType paymentType;
 
-    public Consumer(String consumerName, BigDecimal cash, Bills bill, KindOfPayment.PaymentType paymentType) {
+    public Consumer(String cI, String consumerName, BigDecimal cash, Bills bill, KindOfPayment.PaymentType paymentType) {
+        this.cI = cI;
         if (consumerName == null || consumerName.isEmpty()) {
             throw new IllegalArgumentException("Consumer name cannot be empty");
         }
@@ -103,5 +105,19 @@ public class Consumer {
             // (Optional) you can add additional logic here
         }
         JsonGenerator.generateBillJson(bill);
+    }
+
+    /**
+     * @return the cI
+     */
+    public String getcI() {
+        return cI;
+    }
+
+    /**
+     * @param cI the cI to set
+     */
+    public void setcI(String cI) {
+        this.cI = cI;
     }
 }

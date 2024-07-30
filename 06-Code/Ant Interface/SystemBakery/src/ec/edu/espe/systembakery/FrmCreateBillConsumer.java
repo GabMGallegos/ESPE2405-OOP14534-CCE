@@ -23,6 +23,7 @@ import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
@@ -42,7 +43,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     private MongoCollection productCollection;
     private MongoCollection consumerCollection;
     private MongoCollection billCollection;
-    private ArrayList<Consumer> consumers = new ArrayList<>();
+    private Consumer consumer = new Consumer();
     private ArrayList<Product> products = new ArrayList<>();
     private Bills consumerBill = new Bills();
     
@@ -472,7 +473,10 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
 
     private void btnPrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintBillActionPerformed
         try {
-            FrmBill bill = new FrmBill();
+            consumer = Methods.ObtainData(cmbConsumerName.getSelectedItem().toString(), consumerCollection);
+            
+            FrmBill bill = new FrmBill(consumer,dtmProductList,consumerBill);
+            
             PrinterJob printerJob = PrinterJob.getPrinterJob();
             printerJob.setPrintable(bill);
             boolean top = printerJob.printDialog();
@@ -623,19 +627,15 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
         this.consumerBill = consumerBill;
     }
 
-    /**
-     * @return the consumers
-     */
-    public ArrayList<Consumer> getConsumers() {
-        return consumers;
+    public Consumer getConsumer() {
+        return consumer;
     }
 
-    /**
-     * @param consumers the consumers to set
-     */
-    public void setConsumers(ArrayList<Consumer> consumers) {
-        this.consumers = consumers;
+    public void setConsumer(Consumer consumer) {
+        this.consumer = consumer;
     }
+
+    
 
     
 }

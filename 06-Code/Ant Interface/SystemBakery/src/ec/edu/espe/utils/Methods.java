@@ -4,7 +4,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.systembakery.model.Consumer;
+import ec.edu.espe.systembakery.model.KindOfPayment;
 import java.awt.Cursor;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -82,9 +84,32 @@ public class Methods {
         }
         return newList;
     }
+    
+    public static Consumer ObtainData(String  consumerName, MongoCollection collection){
+        Consumer consumer = new Consumer();
+        MongoCursor<Document> cursor = collection.find().iterator();
+        
+        try {
 
-    public static ArrayList<Consumer> getConsumers(MongoDatabase database) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            while (cursor.hasNext()) {
+                Document document = cursor.next();
+                String namedItem = document.get("Nombres",consumerName);
+
+                if (consumerName.equals(namedItem)) {
+                    consumer.setcI(document.getString("CI"));
+//                    consumer.setBill(document.getString("Facturas"));
+                    consumer.setCash(new BigDecimal(document.getString("Dinero")));
+                    consumer.setConsumerName(document.getString("Nombres"));
+                    consumer.setPaymentType(KindOfPayment.PaymentType.CASH);
+                    return consumer;
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al subir tabla");
+        } finally {
+            cursor.close();
+        }
+        return null;
     }
 
 }
