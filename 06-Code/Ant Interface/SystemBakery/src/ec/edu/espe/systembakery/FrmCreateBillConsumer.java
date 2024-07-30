@@ -22,6 +22,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,8 +38,6 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
  
     private static MongoDatabase dataB;
     private DefaultTableModel dtmProductList;
-//    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//    String date = dateFormat.format(this.dcDate.getDate());
     private String[] productPurchaseList = new String[5];
     private MongoCollection productCollection;
     private MongoCollection consumerCollection;
@@ -474,8 +473,9 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     private void btnPrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintBillActionPerformed
         try {
             consumer = Methods.ObtainData(cmbConsumerName.getSelectedItem().toString(), consumerCollection);
+            Date date = dcDate.getDate();
             
-            FrmBill bill = new FrmBill(consumer,dtmProductList,consumerBill);
+            FrmBill bill = new FrmBill(consumer,dtmProductList,consumerBill,date);
             
             PrinterJob printerJob = PrinterJob.getPrinterJob();
             printerJob.setPrintable(bill);

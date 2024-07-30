@@ -12,7 +12,10 @@ import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,15 +25,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmBill extends javax.swing.JFrame implements Printable {
 
+    private static Date billDate;
     private static Consumer consumer;
-    private static DefaultTableModel tableModel;
+    private static DefaultTableModel productTable, dtmProductTablePrint;
     private static Bills bills;
 
-    public FrmBill(Consumer consumer, DefaultTableModel tableModel, Bills bills) {
+    public FrmBill(Consumer consumer, DefaultTableModel productTable, Bills bills, Date billDate) {
         initComponents();
         this.consumer = consumer;
-        this.tableModel = tableModel;
+        this.productTable = productTable;
         this.bills = bills;
+        this.billDate = billDate;
+        dtmProductTablePrint = (DefaultTableModel) tblProductTablePrint.getModel();
     }
 
     /**
@@ -60,7 +66,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProductTablePrint = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         lblTotalPrice = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -120,13 +126,13 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblEmitionDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblEmitionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblEmitionTime))
                     .addComponent(lblDateInLetters, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -141,7 +147,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                         .addComponent(jLabel38)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPurchaseOrderNumber)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +187,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("=======================================");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductTablePrint.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
             },
@@ -189,7 +195,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProductTablePrint);
 
         jLabel7.setText("USD                                              $");
 
@@ -442,7 +448,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmBill(consumer, tableModel, bills).setVisible(true);
+                new FrmBill(consumer, productTable, bills, billDate).setVisible(true);
             }
         });
     }
@@ -480,7 +486,6 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblConsumerName;
     private javax.swing.JLabel lblConsumerRucOrCi;
     private javax.swing.JLabel lblDateInLetters;
@@ -493,6 +498,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
     private javax.swing.JLabel lblSubtotalZeroIVA;
     private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JPanel pnlPageToPrint;
+    private javax.swing.JTable tblProductTablePrint;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -500,6 +506,15 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         lblConsumerName.setText(consumer.getConsumerName());
         lblConsumerRucOrCi.setText(consumer.getcI());
         lblPaymentType.setText(consumer.getPaymentType().toString());
+        
+        lblEmitionTime.setText(billDate.toString().split(" ")[3]);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        lblEmitionDate.setText(dateFormat.format(billDate));
+        dateFormat = new SimpleDateFormat("d MMM y");
+        String date = dateFormat.format(billDate);
+        lblDateInLetters.setText(date);
+        
+        dtmProductTablePrint = productTable;
         
         if (pageIndex > 0) {
             return NO_SUCH_PAGE;
