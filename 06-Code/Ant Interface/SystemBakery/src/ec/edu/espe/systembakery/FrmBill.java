@@ -7,25 +7,32 @@ package ec.edu.espe.systembakery;
 import ec.edu.espe.systembakery.model.Bills;
 import ec.edu.espe.systembakery.model.Consumer;
 import ec.edu.espe.systembakery.model.Product;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
 import java.util.ArrayList;
 
 /**
  *
  * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
  */
-public class FrmBill extends javax.swing.JFrame {
+public class FrmBill extends javax.swing.JFrame implements Printable {
 
-    private static Consumer consumer;
-    private static ArrayList<Product> products;
-    private static Bills bills;
-    
-    public FrmBill(Consumer consumer, ArrayList<Product> products, Bills bills) {
+//    private static Consumer consumer;
+//    private static ArrayList<Product> products;
+//    private static Bills bills;
+    public FrmBill() {
         initComponents();
-        this.consumer = consumer;
-        this.products = products;
-        this.bills = bills;
     }
 
+//    public FrmBill(Consumer consumer, ArrayList<Product> products, Bills bills) {
+//        initComponents();
+//        this.consumer = consumer;
+//        this.products = products;
+//        this.bills = bills;
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,14 +42,14 @@ public class FrmBill extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlPageToPrint = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
+        lblEmitionDate = new javax.swing.JLabel();
+        lblDateInLetters = new javax.swing.JLabel();
+        lblEmitionTime = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
@@ -68,9 +75,9 @@ public class FrmBill extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        lblSubtotalZeroIVA = new javax.swing.JLabel();
+        lblSubtotalFifteenIVA = new javax.swing.JLabel();
+        lblIVA = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -79,11 +86,11 @@ public class FrmBill extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
+        lblPaid = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPageToPrint.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -93,47 +100,47 @@ public class FrmBill extends javax.swing.JFrame {
 
         jLabel3.setText("Dirección:");
 
-        jLabel32.setText("jLabel32");
+        jLabel32.setText("Napo, entre Loja y Guayas");
 
-        jLabel33.setText("*Fecha de emisión");
+        lblEmitionDate.setText("*Fecha de emisión");
 
-        jLabel34.setText("*Fecha en Texto");
+        lblDateInLetters.setText("*Fecha en Texto");
 
-        jLabel35.setText("*Hora de emisión");
+        lblEmitionTime.setText("*Hora de emisión");
 
         jLabel36.setText("RUC:");
 
-        jLabel37.setText("jLabel37");
+        jLabel37.setText("0809675634001");
 
         jLabel38.setText("FACTURA:");
 
-        lblPurchaseOrderNumber.setText("No. 000-000-000000000");
+        lblPurchaseOrderNumber.setText("No. 000-000-000000001");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel33)
+                        .addComponent(lblEmitionDate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel35))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel38)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPurchaseOrderNumber))
+                        .addComponent(lblEmitionTime))
+                    .addComponent(lblDateInLetters, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel36)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel37))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel32))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel38)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPurchaseOrderNumber)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -143,10 +150,10 @@ public class FrmBill extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33)
-                    .addComponent(jLabel35))
+                    .addComponent(lblEmitionDate)
+                    .addComponent(lblEmitionTime))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel34)
+                .addComponent(lblDateInLetters)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
@@ -210,15 +217,15 @@ public class FrmBill extends javax.swing.JFrame {
 
         jLabel17.setText("jLabel17");
 
-        jLabel18.setText("jLabel18");
+        jLabel18.setText("0.00");
 
         jLabel19.setText("jLabel19");
 
-        jLabel20.setText("jLabel20");
+        lblSubtotalZeroIVA.setText("jLabel20");
 
-        jLabel21.setText("jLabel21");
+        lblSubtotalFifteenIVA.setText("jLabel21");
 
-        jLabel22.setText("jLabel22");
+        lblIVA.setText("jLabel22");
 
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("=======================================");
@@ -238,7 +245,7 @@ public class FrmBill extends javax.swing.JFrame {
 
         jLabel30.setText("Pago:");
 
-        jLabel31.setText("jLabel31");
+        lblPaid.setText("jLabel31");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -248,17 +255,17 @@ public class FrmBill extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSubtotalZeroIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSubtotalFifteenIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -308,7 +315,7 @@ public class FrmBill extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel30)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblPaid, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -348,15 +355,15 @@ public class FrmBill extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel20))
+                    .addComponent(lblSubtotalZeroIVA))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel15)
-                    .addComponent(jLabel21))
+                    .addComponent(lblSubtotalFifteenIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel22))
+                    .addComponent(lblIVA))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -374,20 +381,20 @@ public class FrmBill extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jLabel31))
+                    .addComponent(lblPaid))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlPageToPrintLayout = new javax.swing.GroupLayout(pnlPageToPrint);
+        pnlPageToPrint.setLayout(pnlPageToPrintLayout);
+        pnlPageToPrintLayout.setHorizontalGroup(
+            pnlPageToPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlPageToPrintLayout.setVerticalGroup(
+            pnlPageToPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPageToPrintLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -398,11 +405,11 @@ public class FrmBill extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPageToPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPageToPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -438,7 +445,7 @@ public class FrmBill extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmBill(consumer, products, bills).setVisible(true);
+                new FrmBill().setVisible(true);
             }
         });
     }
@@ -456,9 +463,6 @@ public class FrmBill extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -468,11 +472,7 @@ public class FrmBill extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -482,12 +482,97 @@ public class FrmBill extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblDateInLetters;
+    private javax.swing.JLabel lblEmitionDate;
+    private javax.swing.JLabel lblEmitionTime;
+    private javax.swing.JLabel lblIVA;
+    private javax.swing.JLabel lblPaid;
     private javax.swing.JLabel lblPurchaseOrderNumber;
+    private javax.swing.JLabel lblSubtotalFifteenIVA;
+    private javax.swing.JLabel lblSubtotalZeroIVA;
     private javax.swing.JLabel lblTotalPrice;
+    private javax.swing.JPanel pnlPageToPrint;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+        
+
+        if (pageIndex > 0) {
+            return NO_SUCH_PAGE;
+        }
+        Graphics2D gd = (Graphics2D) graphics;
+        gd.translate(pageFormat.getImageableX() + 30, pageFormat.getImageableY() + 30);
+        gd.scale(1.0, 1.0);
+
+        pnlPageToPrint.printAll(graphics);
+        return PAGE_EXISTS;
+    }
+
+    /**
+     * @param lblDateInLetters the lblDateInLetters to set
+     */
+    public void setLblDateInLetters(javax.swing.JLabel lblDateInLetters) {
+        this.lblDateInLetters = lblDateInLetters;
+    }
+
+    /**
+     * @param lblEmitionDate the lblEmitionDate to set
+     */
+    public void setLblEmitionDate(javax.swing.JLabel lblEmitionDate) {
+        this.lblEmitionDate = lblEmitionDate;
+    }
+
+    /**
+     * @param lblEmitionTime the lblEmitionTime to set
+     */
+    public void setLblEmitionTime(javax.swing.JLabel lblEmitionTime) {
+        this.lblEmitionTime = lblEmitionTime;
+    }
+
+    /**
+     * @param lblIVA the lblIVA to set
+     */
+    public void setLblIVA(javax.swing.JLabel lblIVA) {
+        this.lblIVA = lblIVA;
+    }
+
+    /**
+     * @param lblPaid the lblPaid to set
+     */
+    public void setLblPaid(javax.swing.JLabel lblPaid) {
+        this.lblPaid = lblPaid;
+    }
+
+    /**
+     * @param lblPurchaseOrderNumber the lblPurchaseOrderNumber to set
+     */
+    public void setLblPurchaseOrderNumber(javax.swing.JLabel lblPurchaseOrderNumber) {
+        this.lblPurchaseOrderNumber = lblPurchaseOrderNumber;
+    }
+
+    /**
+     * @param lblSubtotalFifteenIVA the lblSubtotalFifteenIVA to set
+     */
+    public void setLblSubtotalFifteenIVA(javax.swing.JLabel lblSubtotalFifteenIVA) {
+        this.lblSubtotalFifteenIVA = lblSubtotalFifteenIVA;
+    }
+
+    /**
+     * @param lblSubtotalZeroIVA the lblSubtotalZeroIVA to set
+     */
+    public void setLblSubtotalZeroIVA(javax.swing.JLabel lblSubtotalZeroIVA) {
+        this.lblSubtotalZeroIVA = lblSubtotalZeroIVA;
+    }
+
+    /**
+     * @param lblTotalPrice the lblTotalPrice to set
+     */
+    public void setLblTotalPrice(javax.swing.JLabel lblTotalPrice) {
+        this.lblTotalPrice = lblTotalPrice;
+    }
 }

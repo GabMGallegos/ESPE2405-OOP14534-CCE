@@ -31,7 +31,7 @@ import org.bson.Document;
  *
  * @author CodeCrafting Engineers
  */
-public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printable {
+public class FrmCreateBillConsumer extends javax.swing.JFrame  {
 
  
     private static MongoDatabase dataB;
@@ -472,8 +472,9 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
 
     private void btnPrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintBillActionPerformed
         try {
+            FrmBill bill = new FrmBill();
             PrinterJob printerJob = PrinterJob.getPrinterJob();
-            printerJob.setPrintable(this);
+            printerJob.setPrintable(bill);
             boolean top = printerJob.printDialog();
             if(top){
                 printerJob.print();
@@ -590,18 +591,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame implements Printab
     private javax.swing.JTextField txtRucCi;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-        if (pageIndex > 0) {
-            return NO_SUCH_PAGE;
-        }
-        Graphics2D gd = (Graphics2D)graphics;
-        gd.translate(pageFormat.getImageableX() + 30, pageFormat.getImageableY() + 30);
-        gd.scale(1.0, 1.0);
-        
-        jPanel3.printAll(graphics);
-        return PAGE_EXISTS;
-    }
+    
 
     
 

@@ -23,17 +23,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="pnlPageToPrint" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="pnlPageToPrint" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="pnlPageToPrint">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -69,30 +69,30 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" pref="330" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEmitionDate" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEmitionTime" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Component id="lblDateInLetters" min="-2" pref="92" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel32" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel34" min="-2" pref="92" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblPurchaseOrderNumber" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel37" min="-2" pref="43" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -106,11 +106,11 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEmitionDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEmitionTime" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblDateInLetters" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -147,20 +147,20 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel32">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel32"/>
+                <Property name="text" type="java.lang.String" value="Napo, entre Loja y Guayas"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel33">
+            <Component class="javax.swing.JLabel" name="lblEmitionDate">
               <Properties>
                 <Property name="text" type="java.lang.String" value="*Fecha de emisi&#xf3;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel34">
+            <Component class="javax.swing.JLabel" name="lblDateInLetters">
               <Properties>
                 <Property name="text" type="java.lang.String" value="*Fecha en Texto"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel35">
+            <Component class="javax.swing.JLabel" name="lblEmitionTime">
               <Properties>
                 <Property name="text" type="java.lang.String" value="*Hora de emisi&#xf3;n"/>
               </Properties>
@@ -172,7 +172,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel37">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel37"/>
+                <Property name="text" type="java.lang.String" value="0809675634001"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel38">
@@ -182,7 +182,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblPurchaseOrderNumber">
               <Properties>
-                <Property name="text" type="java.lang.String" value="No. 000-000-000000000"/>
+                <Property name="text" type="java.lang.String" value="No. 000-000-000000001"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -201,19 +201,19 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel20" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="lblSubtotalZeroIVA" min="-2" pref="43" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel21" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="lblSubtotalFifteenIVA" min="-2" pref="43" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel22" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="lblIVA" min="-2" pref="43" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel23" alignment="0" max="32767" attributes="0"/>
@@ -277,7 +277,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel31" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="lblPaid" min="-2" pref="43" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -323,17 +323,17 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSubtotalZeroIVA" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSubtotalFifteenIVA" min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblIVA" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
@@ -355,7 +355,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPaid" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="41" max="32767" attributes="0"/>
                   </Group>
@@ -504,7 +504,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel18"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
@@ -512,17 +512,17 @@
                 <Property name="text" type="java.lang.String" value="jLabel19"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel20">
+            <Component class="javax.swing.JLabel" name="lblSubtotalZeroIVA">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel20"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel21">
+            <Component class="javax.swing.JLabel" name="lblSubtotalFifteenIVA">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel21"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel22">
+            <Component class="javax.swing.JLabel" name="lblIVA">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel22"/>
               </Properties>
@@ -569,7 +569,7 @@
                 <Property name="text" type="java.lang.String" value="Pago:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel31">
+            <Component class="javax.swing.JLabel" name="lblPaid">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jLabel31"/>
               </Properties>
