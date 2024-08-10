@@ -38,7 +38,6 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
  
     private static MongoDatabase dataB;
     private DefaultTableModel dtmProductList;
-    private String[] productPurchaseList = new String[5];
     private MongoCollection productCollection;
     private MongoCollection consumerCollection;
     private MongoCollection billCollection;
@@ -53,7 +52,14 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     }
     
     public void InitializeDatabase(MongoDatabase database){
-        dtmProductList = (DefaultTableModel) tblProductList.getModel();
+        dtmProductList = new DefaultTableModel();
+        dtmProductList.addColumn("Id");
+        dtmProductList.addColumn("Artículo");
+        dtmProductList.addColumn("Cantidad");
+        dtmProductList.addColumn("Precio U.");
+        dtmProductList.addColumn("Precio Total");
+        //dtmProductList = (DefaultTableModel) tblProductList.getModel();
+        tblProductList.setModel(dtmProductList);
         
         consumerCollection = BsonDownloadDocument.ObtainCollection(database,"Consumers");
         productCollection = BsonDownloadDocument.ObtainCollection(database, "Products");
@@ -309,7 +315,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        tblProductList.setBackground(new java.awt.Color(155, 155, 124));
+        tblProductList.setBackground(new java.awt.Color(255, 204, 102));
         tblProductList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -443,7 +449,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
                 
                 lblErrorProductId.setText("");
                 lblErrorProductAmount.setText("");
-                Methods.addElemenToTable(productCollection, firstPartCmbProductId, txtProductAmount, productPurchaseList, dtmProductList);
+                Methods.addElemenToTable(productCollection, firstPartCmbProductId, txtProductAmount, dtmProductList);
             } else {
                 if(!verificationConsumerName){
                     lblErrorConsumer.setText("Elija un cliente de la lista");
@@ -472,6 +478,8 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
 
     private void btnPrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintBillActionPerformed
         try {
+            //int selectedRow = 
+            
             consumer = Methods.ObtainData(cmbConsumerName.getSelectedItem().toString(), consumerCollection);
             Date date = dcDate.getDate();
             

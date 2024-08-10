@@ -22,8 +22,9 @@ import org.bson.Document;
 public class Methods {
 
     public static void addElemenToTable(MongoCollection collection, String firstPartCmbProductId,
-            JTextField txtProductAmount, String[] productPurchaseList, DefaultTableModel dtmProductList) {
+            JTextField txtProductAmount, DefaultTableModel dtmProductList) {
         float totalPrice;
+        String[] productPurchaseList = new String[5];
         MongoCursor<Document> cursor = collection.find().iterator();
         
         try {

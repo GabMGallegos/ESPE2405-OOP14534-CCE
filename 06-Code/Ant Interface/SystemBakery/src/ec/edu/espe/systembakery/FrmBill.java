@@ -36,7 +36,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         this.productTable = productTable;
         this.bills = bills;
         this.billDate = billDate;
-        dtmProductTablePrint = (DefaultTableModel) tblProductTablePrint.getModel();
+        tblProductTablePrint.setModel(productTable);
     }
 
     /**
