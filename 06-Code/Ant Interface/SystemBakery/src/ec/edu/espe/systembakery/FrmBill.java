@@ -140,7 +140,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel36)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel37))
+                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -247,8 +247,9 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         lblPaymentType.setText("jLabel31");
 
         txtAreaProductsPrint.setColumns(20);
+        txtAreaProductsPrint.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtAreaProductsPrint.setRows(5);
-        txtAreaProductsPrint.setBorder(null);
+        txtAreaProductsPrint.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane2.setViewportView(txtAreaProductsPrint);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -287,9 +288,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel19))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane2)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -510,6 +509,9 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         String date = dateFormat.format(billDate);
         lblDateInLetters.setText(date);
         
+        setTableInTextArea();
+        
+        
         if (pageIndex > 0) {
             return NO_SUCH_PAGE;
         }
@@ -519,6 +521,21 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
 
         pnlPageToPrint.printAll(graphics);
         return PAGE_EXISTS;
+    }
+    
+    public void setTableInTextArea(){
+        DefaultTableModel dtmProduct = (DefaultTableModel) productTable;
+        int row = dtmProduct.getRowCount();
+        int col = dtmProduct.getColumnCount();
+        Object [][] tableData = new Object[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                tableData[i][j] = dtmProduct.getValueAt(i, j);
+                txtAreaProductsPrint.append((String) tableData[i][j] + "          ");
+            }
+            txtAreaProductsPrint.append("\n");
+        }
+        
     }
 
     /**

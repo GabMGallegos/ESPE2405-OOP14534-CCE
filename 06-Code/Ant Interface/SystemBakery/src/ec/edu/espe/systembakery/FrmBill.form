@@ -82,7 +82,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel37" min="-2" pref="93" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -234,10 +234,7 @@
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jScrollPane2" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -526,9 +523,14 @@
                 <Component class="javax.swing.JTextArea" name="txtAreaProductsPrint">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="12" style="1"/>
+                    </Property>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
+                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                        <EmptyBorder/>
+                      </Border>
                     </Property>
                   </Properties>
                 </Component>
