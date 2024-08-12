@@ -4,6 +4,7 @@ package ec.edu.espe.utils;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.systembakery.model.Consumer;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.bson.Document;
@@ -14,13 +15,13 @@ import org.bson.Document;
  */
 public class BsonDownloadDocument {
     
-    public static MongoCollection ObtainCollection(MongoDatabase database, String collectionName){
+    public static MongoCollection getCollection(MongoDatabase database, String collectionName){
         MongoCollection collection;
         collection = database.getCollection(collectionName);
         return collection;
     }
     
-    public static ArrayList ObtainListItem(MongoCollection collection,String findItem){
+    public static ArrayList getListItem(MongoCollection collection,String findItem){
         ArrayList items;
         items = new ArrayList();
         MongoCursor<Document> cursor = collection.find().iterator();
