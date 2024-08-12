@@ -6,6 +6,7 @@ package ec.edu.espe.systembakery;
 
 import com.mongodb.client.MongoDatabase;
 import javax.swing.JOptionPane;
+import javax.swing.text.Document;
 
 /**
  *
@@ -139,14 +140,28 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblDisguiseMouseClicked
 
     private void btnStartSectionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartSectionMouseClicked
-        String usuario, contraseña=null;
-        usuario=txtUser.getText();
-        contraseña=txtPassword.getText();
-        if(usuario.equals("admin") && contraseña.equals("admin")){
-            JOptionPane.showMessageDialog(this, "Login completed...");
-            FrmBakery frmBakery = new FrmBakery(database);
-            this.setVisible(false);
-            frmBakery.setVisible(true);
+        String usuario = txtUser.getText();
+        String contraseña = txtPassword.getText();
+
+        // Encriptar la contraseña utilizando SHA-256
+        String contraseñaEncriptada = methodosCostumer.encryptSHA256(contraseña);
+
+        if (usuario.equals("admin") && contraseñaEncriptada.equals(methodosCostumer.encryptSHA256("admin"))) {
+
+            Costumer costumer = new Costumer(usuario, contraseñaEncriptada);
+            try {
+                MongoCollection<Document> collection = database.getCollection("Costumer");
+                Document doc = new Document("user", costumer.getUser())
+                        .append("password", costumer.getPassword());
+                collection.insertOne(doc);
+                JOptionPane.showMessageDialog(this, "Login completed...");
+                FrmBakery frmBakery = new FrmBakery(database);
+                this.setVisible(false);
+                frmBakery.setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }else{
             JOptionPane.showMessageDialog(this, "Datos erroneos");
             this.txtPassword.setText("");
