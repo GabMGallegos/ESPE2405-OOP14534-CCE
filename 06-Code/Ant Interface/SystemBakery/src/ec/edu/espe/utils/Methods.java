@@ -56,19 +56,19 @@ public class Methods {
         }
     }
 
-    public static void ComboBoxInsertItems(MongoCollection collection, String item, JComboBox cmbBox) {
+    public static void insertItemsComboBox(MongoCollection collection, String item, JComboBox cmbBox) {
         ArrayList<String> list;
-        list = BsonDownloadDocument.ObtainListItem(collection, item);
+        list = BsonDownloadDocument.getListItem(collection, item);
 
         for (String itemList : list) {
             cmbBox.addItem(itemList);
         }
     }
 
-    public static void ComboBoxInsertItems(MongoCollection collection, String itemId, String itemName, JComboBox cmbBox) {
+    public static void insertItemsComboBox(MongoCollection collection, String itemId, String itemName, JComboBox cmbBox) {
         ArrayList<String> listId, listName, listIdAndName;
-        listId = BsonDownloadDocument.ObtainListItem(collection, itemId);
-        listName = BsonDownloadDocument.ObtainListItem(collection, itemName);
+        listId = BsonDownloadDocument.getListItem(collection, itemId);
+        listName = BsonDownloadDocument.getListItem(collection, itemName);
         listIdAndName = JoinLists(listId, listName);
 
         for (String itemList : listIdAndName) {
@@ -86,7 +86,7 @@ public class Methods {
         return newList;
     }
     
-    public static Consumer ObtainData(String  consumerName, MongoCollection collection){
+    public static Consumer getConsumer(String  consumerName, MongoCollection collection){
         Consumer consumer = new Consumer();
         MongoCursor<Document> cursor = collection.find().iterator();
         
@@ -94,19 +94,19 @@ public class Methods {
 
             while (cursor.hasNext()) {
                 Document document = cursor.next();
-                String namedItem = document.get("Nombres",consumerName);
+                String namedItem = document.get("Nombre",consumerName);
 
                 if (consumerName.equals(namedItem)) {
                     consumer.setcI(document.getString("CI"));
-//                    consumer.setBill(document.getString("Facturas"));
+                    //consumer.setBill(document.getString("Facturas"));
                     consumer.setCash(new BigDecimal(document.getString("Dinero")));
-                    consumer.setConsumerName(document.getString("Nombres"));
+                    consumer.setConsumerName(document.getString("Nombre"));
                     consumer.setPaymentType(KindOfPayment.PaymentType.CASH);
                     return consumer;
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al subir tabla");
+            JOptionPane.showMessageDialog(null, "Error al obtener al consumidor");
         } finally {
             cursor.close();
         }
