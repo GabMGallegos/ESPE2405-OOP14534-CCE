@@ -61,12 +61,12 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
         //dtmProductList = (DefaultTableModel) tblProductList.getModel();
         tblProductList.setModel(dtmProductList);
         
-        consumerCollection = BsonDownloadDocument.ObtainCollection(database,"Consumers");
-        productCollection = BsonDownloadDocument.ObtainCollection(database, "Products");
-        billCollection = BsonDownloadDocument.ObtainCollection(database, "Bills");
+        consumerCollection = BsonDownloadDocument.getCollection(database,"Consumers");
+        productCollection = BsonDownloadDocument.getCollection(database, "Products");
+        billCollection = BsonDownloadDocument.getCollection(database, "Bills");
         
-        Methods.ComboBoxInsertItems(consumerCollection, "Nombres", cmbConsumerName);
-        Methods.ComboBoxInsertItems(productCollection, "Id", "Nombre", cmbProductId);
+        Methods.insertItemsComboBox(consumerCollection, "Nombre", cmbConsumerName);
+        Methods.insertItemsComboBox(productCollection, "Id", "Nombre", cmbProductId);
         btnEditProductList.setVisible(false);
     }
 
@@ -164,16 +164,17 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
 
         jLabel5.setText("RUC / CI:");
 
+        txtRucCi.setEditable(false);
         txtRucCi.setBackground(new java.awt.Color(204, 204, 204));
-        txtRucCi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRucCiActionPerformed(evt);
-            }
-        });
 
         cmbConsumerName.setBackground(new java.awt.Color(204, 204, 204));
         cmbConsumerName.setEditable(true);
-        cmbConsumerName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cmbConsumerName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        cmbConsumerName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbConsumerNameActionPerformed(evt);
+            }
+        });
 
         lblErrorConsumer.setForeground(new java.awt.Color(255, 0, 0));
 
@@ -480,7 +481,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
         try {
             //int selectedRow = 
             
-            consumer = Methods.ObtainData(cmbConsumerName.getSelectedItem().toString(), consumerCollection);
+            consumer = Methods.getConsumer(cmbConsumerName.getSelectedItem().toString(), consumerCollection);
             Date date = dcDate.getDate();
             
             FrmBill bill = new FrmBill(consumer,dtmProductList,consumerBill,date);
@@ -517,9 +518,17 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
         
     }//GEN-LAST:event_btnEditProductListActionPerformed
 
-    private void txtRucCiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRucCiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRucCiActionPerformed
+    private void cmbConsumerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbConsumerNameActionPerformed
+        String consumerSelected = (String) cmbConsumerName.getSelectedItem();
+        boolean verifString = consumerSelected.equals("");
+        
+        if(verifString){
+            txtRucCi.setText("");
+        }else{
+            consumer = Methods.getConsumer(consumerSelected, consumerCollection);
+            txtRucCi.setText(consumer.getcI());
+        }
+    }//GEN-LAST:event_cmbConsumerNameActionPerformed
 
     /**
      * @param args the command line arguments
