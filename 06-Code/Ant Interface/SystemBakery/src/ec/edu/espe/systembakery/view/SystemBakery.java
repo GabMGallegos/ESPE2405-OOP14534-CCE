@@ -11,10 +11,13 @@ public class SystemBakery {
         Conection conn = new Conection();
         MongoDatabase database;
 
-        if (conn != null) {
+        try {
             conn = conn.createConection();
             database = conn.getMongoDatabase();
 
+            if (database == null) {
+                throw new Exception("Database connection is null.");
+            }
             // Create and display the splash screen
             FrmSystemBakerySplash splash = new FrmSystemBakerySplash();
             splash.setVisible(true);
@@ -42,7 +45,7 @@ public class SystemBakery {
                 login.setVisible(true);
                 splash.dispose();
             });
-        } else {
+        }catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Connection Error", "CONNECTION", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
