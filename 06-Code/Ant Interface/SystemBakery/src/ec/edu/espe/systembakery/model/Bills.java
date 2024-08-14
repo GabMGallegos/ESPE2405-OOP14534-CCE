@@ -15,7 +15,7 @@ public class Bills {
     private BigDecimal amount;
     private String consumerName;
     private LocalDateTime date;
-    private String paymentType;
+    KindOfPayment.PaymentType paymentType;
 
     public Bills(int billNumber, String consumerName, LocalDateTime date) {
         if (billNumber <= 0) {
@@ -123,11 +123,14 @@ public class Bills {
         this.date = date;
     }
 
-    public String getPaymentType() {
+    public KindOfPayment.PaymentType getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(String paymentType) {
+    public void setPaymentType(KindOfPayment.PaymentType paymentType) {
+        if (paymentType == null) {
+            throw new IllegalArgumentException("Payment type cannot be null");
+        }
         this.paymentType = paymentType;
     }
 }

@@ -8,6 +8,7 @@ import ec.edu.espe.systembakery.model.KindOfPayment;
 import java.awt.Cursor;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -37,12 +38,10 @@ public class Methods {
                     productPurchaseList[0] = document.getString("Id");
                     productPurchaseList[1] = document.getString("Nombre");
                     productPurchaseList[2] = txtProductAmount.getText().trim();
-                    //add method to rest in the MongoDB document
                     productPurchaseList[3] = document.getString("Precio U.");
-                    
-                    totalPrice = Float.parseFloat(productPurchaseList[2]) * Float.parseFloat(productPurchaseList[3]);
-                    
-                    productPurchaseList[4] = "" + totalPrice;
+                    totalPrice = Math.round( (Float.parseFloat(productPurchaseList[2]) 
+                            * Float.parseFloat(productPurchaseList[3])) * 100)/100f;
+                    productPurchaseList[4] = String.format(Locale.US,"%.2f",totalPrice);
 
                     dtmProductList.addRow(productPurchaseList);
 
@@ -98,8 +97,7 @@ public class Methods {
 
                 if (consumerName.equals(namedItem)) {
                     consumer.setcI(document.getString("CI"));
-                    //consumer.setBill(document.getString("Facturas"));
-                    consumer.setCash(new BigDecimal(document.getString("Dinero")));
+                    consumer.setBillsId(new ArrayList<>(document.getList("Facturas", String.class)));
                     consumer.setConsumerName(document.getString("Nombre"));
                     consumer.setPaymentType(KindOfPayment.PaymentType.CASH);
                     return consumer;

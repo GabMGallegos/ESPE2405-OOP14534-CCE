@@ -126,7 +126,7 @@ public class FileManager {
 
                         Bills bill = new Bills(billNumber, consumerName, date);
                         bill.setAmount(amount);
-                        bill.setPaymentType(paymentType);
+                        //bill.setPaymentType(paymentType);
 
                         bills.add(bill);
                     }
