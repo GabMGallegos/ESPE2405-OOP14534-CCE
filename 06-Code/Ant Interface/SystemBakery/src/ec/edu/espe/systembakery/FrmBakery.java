@@ -578,15 +578,15 @@ public class FrmBakery extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9MouseClicked
 
     private void mnuitSignOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuitSignOffActionPerformed
-        String botones[] = {"CAMBIAR", "CANCELAR"};
-        int eleccion = JOptionPane.showOptionDialog(this, "¿Desea cambiar de usuario?", "Cambio de Usuario",
-                0, JOptionPane.QUESTION_MESSAGE, null, botones, this);
-        if (eleccion == JOptionPane.YES_OPTION) {
+        int eleccion = JOptionPane.showConfirmDialog(this, 
+            "¿Está seguro de cerrar sesión?","",
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE);
+        if (eleccion == JOptionPane.YES_NO_OPTION) {
             FrmLogin login = new FrmLogin(database);
             this.dispose();
             login.setVisible(true);
         } else if (eleccion == JOptionPane.NO_OPTION) {
-            System.out.println("Se cancelo el cierre");
         }
     }//GEN-LAST:event_mnuitSignOffActionPerformed
 
