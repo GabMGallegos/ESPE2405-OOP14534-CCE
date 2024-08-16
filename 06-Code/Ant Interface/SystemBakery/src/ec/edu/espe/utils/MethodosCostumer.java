@@ -8,31 +8,39 @@ import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.systembakery.model.Costumer;
-import java.security.MessageDigest;
-import java.util.Arrays;
-import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import javax.swing.JOptionPane;
 import org.bson.Document;
+import org.bson.conversions.Bson;
+import com.mongodb.client.model.Filters;
+
+import java.util.Base64;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author leydi
  */
-public class MethodosCostumer implements ICostumer{
-    
+public class MethodosCostumer implements ICostumer {
+
     Conection conn = new Conection();
     MongoDatabase database;
     private MongoCollection<Document> coleccion;
-    private MongoCollection<Document> coleccion2;
+    private static final String ALGORITHM = "AES";
+    private static final int KEY_SIZE = 128;
+    private SecretKey secretKey;
 
-    public MethodosCostumer() {
+    public MethodosCostumer() throws Exception {
         if (conn != null) {
             this.conn = conn.createConection();
             this.database = conn.getMongoDatabase();
             this.coleccion = database.getCollection("Costumer");
         }
+        KeyGenerator keyGen = KeyGenerator.getInstance(ALGORITHM);
+        keyGen.init(KEY_SIZE);
+        this.secretKey = keyGen.generateKey();
+
     }
 
     private void closeConnection() {
@@ -42,23 +50,19 @@ public class MethodosCostumer implements ICostumer{
             JOptionPane.showMessageDialog(null, "Error closing connection: " + ex.toString());
         }
     }
-    public String encryptSHA256(String cadena) {
-        String encriptacion = "";
-        try {
-            MessageDigest sha = MessageDigest.getInstance("SHA-256");
-            byte[] hash = sha.digest(cadena.getBytes("UTF-8"));
-            StringBuilder hexString = new StringBuilder();
 
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            encriptacion = hexString.toString();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error when encrypting");
-        }
-        return encriptacion;
+    public String encrypt(String data) throws Exception {
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        byte[] encrypted = cipher.doFinal(data.getBytes());
+        return Base64.getEncoder().encodeToString(encrypted);
+    }
+
+    public String decrypt(String encryptedData) throws Exception {
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+        byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(encryptedData));
+        return new String(decrypted);
     }
 
     @Override
@@ -76,5 +80,29 @@ public class MethodosCostumer implements ICostumer{
             closeConnection();
         }
         return true;
+    }
+
+    @Override
+    public boolean verifyCostumer(Costumer costumer) {
+        try {
+            // Encriptar user y password para la verificación
+            String encryptedUser = encrypt(costumer.getUser());
+            String encryptedPassword = encrypt(costumer.getPassword());
+
+            // Buscar un documento que coincida con el usuario encriptado
+            Bson filter = Filters.and(Filters.eq("user", encryptedUser), Filters.eq("password", encryptedPassword));
+            Document found = coleccion.find(filter).first();
+
+            // Si se encuentra el documento, los valores coinciden
+            return found != null;
+        } catch (MongoException ex) {
+            JOptionPane.showMessageDialog(null, "Error in MongoDB operation: " + ex.toString());
+            return false;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error verifying data: " + ex.toString());
+            return false;
+        } finally {
+            closeConnection();
+        }
     }
 }

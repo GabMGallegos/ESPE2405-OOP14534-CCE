@@ -12,4 +12,5 @@ import ec.edu.espe.systembakery.model.Costumer;
  */
 public interface ICostumer {
     public boolean GetIntroCostumer(Costumer costumer);
+    public boolean verifyCostumer(Costumer costumer);
 }

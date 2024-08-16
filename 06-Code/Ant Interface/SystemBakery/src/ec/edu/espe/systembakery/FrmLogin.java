@@ -23,7 +23,6 @@ public class FrmLogin extends javax.swing.JFrame {
     public FrmLogin(MongoDatabase database) {
         initComponents();
         this.database = database;
-        methodosCostumer = new MethodosCostumer();
     }
 
     /**
@@ -145,39 +144,65 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblDisguiseMouseClicked
 
     private void btnStartSectionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartSectionMouseClicked
-        String usuario = txtUser.getText();
-        String contraseña = txtPassword.getText();
+        try {
+            String user = txtUser.getText();
+            String password = new String(txtPassword.getPassword());
 
-        // Encriptar la contraseña utilizando SHA-256
-        String contraseñaEncriptada = methodosCostumer.encryptSHA256(contraseña);
+            Costumer costumer = new Costumer(user, password);
+            MethodosCostumer methodosCostumer = new MethodosCostumer();
 
-        if (usuario.equals("admin") && contraseñaEncriptada.equals(methodosCostumer.encryptSHA256("admin"))) {
+            boolean isVerified = methodosCostumer.verifyCostumer(costumer);
 
-            Costumer costumer = new Costumer(usuario, contraseñaEncriptada);
-            try {
-                MongoCollection<org.bson.Document> collection = database.getCollection("Costumer");
-                org.bson.Document doc = new org.bson.Document("user", costumer.getUser())
-                        .append("password", costumer.getPassword());
-                collection.insertOne(doc);
-                JOptionPane.showMessageDialog(this, "Login completed...");
-                FrmBakery frmBakery = new FrmBakery(database);
-                this.setVisible(false);
-                frmBakery.setVisible(true);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al guardar en la base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+            if (isVerified) {
+                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
+                // Proceder con el siguiente paso
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Datos erroneos");
-            this.txtPassword.setText("");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.toString());
         }
-        
     }//GEN-LAST:event_btnStartSectionMouseClicked
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
 
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrmLogin(database).setVisible(true);
+            }
+        });
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStartSection;
