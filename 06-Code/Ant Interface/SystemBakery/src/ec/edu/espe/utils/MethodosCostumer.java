@@ -11,6 +11,8 @@ import ec.edu.espe.systembakery.model.Costumer;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import com.mongodb.client.model.Filters;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import java.util.Base64;
 import javax.crypto.Cipher;
@@ -51,18 +53,18 @@ public class MethodosCostumer implements ICostumer {
         }
     }
 
-    public String encrypt(String data) throws Exception {
-        Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        byte[] encrypted = cipher.doFinal(data.getBytes());
-        return Base64.getEncoder().encodeToString(encrypted);
-    }
-
-    public String decrypt(String encryptedData) throws Exception {
-        Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(encryptedData));
-        return new String(decrypted);
+    public String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedPassword = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedPassword) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error hashing password", e);
+        }
     }
 
     @Override
@@ -85,24 +87,37 @@ public class MethodosCostumer implements ICostumer {
     @Override
     public boolean verifyCostumer(Costumer costumer) {
         try {
-            // Encriptar user y password para la verificación
-            String encryptedUser = encrypt(costumer.getUser());
-            String encryptedPassword = encrypt(costumer.getPassword());
+        // Hash the input password to compare with stored hash
+        String hashedPassword = hashPassword(costumer.getPassword());
 
-            // Buscar un documento que coincida con el usuario encriptado
-            Bson filter = Filters.and(Filters.eq("user", encryptedUser), Filters.eq("password", encryptedPassword));
-            Document found = coleccion.find(filter).first();
+        // Print both the hashed input password and the stored password for debugging
+        System.out.println("Hashed Input Password: " + hashedPassword);
 
-            // Si se encuentra el documento, los valores coinciden
-            return found != null;
-        } catch (MongoException ex) {
-            JOptionPane.showMessageDialog(null, "Error in MongoDB operation: " + ex.toString());
-            return false;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error verifying data: " + ex.toString());
-            return false;
-        } finally {
-            closeConnection();
+        // Buscar un documento que coincida con el usuario y la contraseña hasheada
+        Bson filter = Filters.eq("user", costumer.getUser());
+        Document found = coleccion.find(filter).first();
+
+        if (found != null) {
+            String storedPassword = found.getString("password");
+            System.out.println("Stored Password: " + storedPassword);
+
+            // Compare both hashes
+            if (hashedPassword.equals(storedPassword)) {
+                return true; // Passwords match
+            } else {
+                System.out.println("Passwords do not match.");
+                return false; // Passwords don't match
+            }
+        } else {
+            System.out.println("User not found.");
+            return false; // User not found
         }
+
+    } catch (MongoException ex) {
+        JOptionPane.showMessageDialog(null, "Error in MongoDB operation: " + ex.toString());
+        return false;
+    } finally {
+        closeConnection();
     }
+        }
 }

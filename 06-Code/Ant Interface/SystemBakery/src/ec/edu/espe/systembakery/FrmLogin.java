@@ -154,8 +154,10 @@ public class FrmLogin extends javax.swing.JFrame {
             boolean isVerified = methodosCostumer.verifyCostumer(costumer);
 
             if (isVerified) {
-                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso");
-                // Proceder con el siguiente paso
+                JOptionPane.showMessageDialog(this, "Login completed...");
+                FrmBakery frmBakery = new FrmBakery(database);
+                this.setVisible(false);
+                frmBakery.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
             }
