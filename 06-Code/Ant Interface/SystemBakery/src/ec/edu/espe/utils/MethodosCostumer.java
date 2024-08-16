@@ -87,13 +87,7 @@ public class MethodosCostumer implements ICostumer {
     @Override
     public boolean verifyCostumer(Costumer costumer) {
         try {
-        // Hash the input password to compare with stored hash
         String hashedPassword = hashPassword(costumer.getPassword());
-
-        // Print both the hashed input password and the stored password for debugging
-        System.out.println("Hashed Input Password: " + hashedPassword);
-
-        // Buscar un documento que coincida con el usuario y la contraseña hasheada
         Bson filter = Filters.eq("user", costumer.getUser());
         Document found = coleccion.find(filter).first();
 
@@ -103,14 +97,14 @@ public class MethodosCostumer implements ICostumer {
 
             // Compare both hashes
             if (hashedPassword.equals(storedPassword)) {
-                return true; // Passwords match
+                return true; 
             } else {
                 System.out.println("Passwords do not match.");
-                return false; // Passwords don't match
+                return false; 
             }
         } else {
             System.out.println("User not found.");
-            return false; // User not found
+            return false; 
         }
 
     } catch (MongoException ex) {
