@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import ec.edu.espe.systembakery.model.Product;
-import ec.edu.espe.systembakery.model.Bills;
+import ec.edu.espe.systembakery.model.Bill;
 import ec.edu.espe.systembakery.model.Supplier;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -47,7 +47,7 @@ public class FileManager {
         }
     }
 
-    public static void saveOrderToCSV(Bills bill) {
+    public static void saveOrderToCSV(Bill bill) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/orders.csv", true))) {
             writer.write(bill.toCSV());
             writer.newLine();
@@ -101,7 +101,7 @@ public class FileManager {
         }
     }
 
-    public static void saveBillsToCSV(Bills bill) {
+    public static void saveBillsToCSV(Bill bill) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("resources/bills.csv", true))) {
             writer.write(bill.toCSV());
             writer.newLine();
@@ -110,7 +110,7 @@ public class FileManager {
         }
     }
 
-    public static void loadBillsFromCSV(List<Bills> bills) {
+    public static void loadBillsFromCSV(List<Bill> bills) {
         try (BufferedReader reader = new BufferedReader(new FileReader("resources/bills.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -124,11 +124,11 @@ public class FileManager {
                         String paymentType = parts[3];
                         LocalDateTime date = LocalDateTime.parse(parts[4]);
 
-                        Bills bill = new Bills(billNumber, consumerName, date);
-                        bill.setAmount(amount);
+                        //Bill bill = new Bill(billNumber, consumerName, date);
+                        //bill.setAmount(amount);
                         //bill.setPaymentType(paymentType);
 
-                        bills.add(bill);
+                        //bills.add(bill);
                     }
                 }
             }

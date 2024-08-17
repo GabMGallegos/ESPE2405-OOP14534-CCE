@@ -2,7 +2,7 @@ package ec.edu.espe.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ec.edu.espe.systembakery.model.Bills;
+import ec.edu.espe.systembakery.model.Bill;
 import ec.edu.espe.systembakery.model.Stock;
 import ec.edu.espe.systembakery.model.Supplier;
 import java.io.FileWriter;
@@ -26,7 +26,7 @@ public class JsonGenerator {
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
             .create();
 
-    public static void generateBillJson(Bills bill) {
+    public static void generateBillJson(Bill bill) {
         try (FileWriter writer = new FileWriter(FILE_BILL, true)) { // Append mode
             gson.toJson(bill, writer);
             System.out.println("JSON file generated successfully.");

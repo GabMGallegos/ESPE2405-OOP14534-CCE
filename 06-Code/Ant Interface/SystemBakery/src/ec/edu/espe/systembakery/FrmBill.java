@@ -4,7 +4,7 @@
  */
 package ec.edu.espe.systembakery;
 
-import ec.edu.espe.systembakery.model.Bills;
+import ec.edu.espe.systembakery.model.Bill;
 import ec.edu.espe.systembakery.model.Consumer;
 import ec.edu.espe.systembakery.model.Product;
 import java.awt.Color;
@@ -30,10 +30,10 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
 
     private static Date billDate;
     private static Consumer consumer;
-    private static Bills bills;
+    private static Bill bills;
     private static DefaultTableModel productTable;
 
-    public FrmBill(Consumer consumer, DefaultTableModel productTable, Bills bills, Date billDate) {
+    public FrmBill(Consumer consumer, DefaultTableModel productTable, Bill bills, Date billDate) {
         initComponents();
         this.consumer = consumer;
         this.productTable = productTable;

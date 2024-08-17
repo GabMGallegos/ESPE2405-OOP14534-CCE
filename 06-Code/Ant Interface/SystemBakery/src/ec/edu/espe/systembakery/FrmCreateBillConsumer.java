@@ -7,7 +7,7 @@ package ec.edu.espe.systembakery;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.systembakery.model.Bills;
+import ec.edu.espe.systembakery.model.Bill;
 import ec.edu.espe.systembakery.model.Consumer;
 import ec.edu.espe.systembakery.model.Product;
 import ec.edu.espe.utils.BsonDownloadDocument;
@@ -43,7 +43,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     private MongoCollection billCollection;
     private Consumer consumer = new Consumer();
     private ArrayList<Product> products = new ArrayList<>();
-    private Bills consumerBill = new Bills();
+    private Bill consumerBill = new Bill();
     
     public FrmCreateBillConsumer(MongoDatabase database) {
         initComponents();
@@ -632,14 +632,14 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     /**
      * @return the consumerBill
      */
-    public Bills getConsumerBill() {
+    public Bill getConsumerBill() {
         return consumerBill;
     }
 
     /**
      * @param consumerBill the consumerBill to set
      */
-    public void setConsumerBill(Bills consumerBill) {
+    public void setConsumerBill(Bill consumerBill) {
         this.consumerBill = consumerBill;
     }
 
