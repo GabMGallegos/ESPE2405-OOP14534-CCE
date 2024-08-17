@@ -6,62 +6,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @autor CODE_CRAFTING_ENGINEERS
+ * @autor Adrian Padilla CODE_CRAFTING_ENGINEERS
  */
-public class Bills {
+public class Bill {
 
     private int billNumber;
-    private List<Product> delivery;
+    private List<Product> products;
     private BigDecimal amount;
     private String consumerName;
     private LocalDateTime date;
-    KindOfPayment.PaymentType paymentType;
+    private Payment payment;
 
-    public Bills(int billNumber, String consumerName, LocalDateTime date) {
-        if (billNumber <= 0) {
-            throw new IllegalArgumentException("The invoice number must be positive");
-        }
-        if (consumerName == null || consumerName.isEmpty()) {
-            throw new IllegalArgumentException("Consumer name cannot be empty");
-        }
-        if (date == null) {
-            throw new IllegalArgumentException("Date cannot be null");
-        }
+    public Bill(int billNumber, String consumerName, LocalDateTime date, Payment payment) {
+        validateBillNumber(billNumber);
+        validateConsumerName(consumerName);
+        validateDate(date);
 
         this.billNumber = billNumber;
         this.consumerName = consumerName;
         this.date = date;
-        this.delivery = new ArrayList<>();
+        this.products = new ArrayList<>();
         this.amount = BigDecimal.ZERO;
-    }
-
-    public Bills() {
+        this.payment = payment;
     }
 
     public void addProduct(Product product, int quantity) {
-        if (product == null) {
-            throw new IllegalArgumentException("The product cannot be null");
-        }
-        product.setAmount(product.getAmount() - quantity);
-        delivery.add(product);
+        validateProduct(product);
+        product.reduceAmount(quantity);
+        products.add(product);
         amount = amount.add(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
     }
 
     public void removeProduct(Product product) {
-        if (delivery.remove(product)) {
+        if (products.remove(product)) {
             amount = amount.subtract(product.getPrice());
         }
     }
 
     @Override
     public String toString() {
-        return "Bills{" + "billNumber=" + billNumber + ", delivery=" + delivery + ", amount=" + amount + ", consumerName=" + consumerName + ", date=" + date + '}';
+        return "Bill{" + "billNumber=" + billNumber + ", products=" + products + ", amount=" + amount + ", consumerName=" + consumerName + ", date=" + date + ", payment=" + payment + '}';
     }
 
     public String toCSV() {
         StringBuilder csv = new StringBuilder();
-        csv.append(billNumber).append(",").append(amount).append(",").append(consumerName).append(",").append(paymentType).append(",").append(date).append("\n");
-        for (Product product : delivery) {
+        csv.append(billNumber).append(",").append(amount).append(",").append(consumerName).append(",").append(payment).append(",").append(date).append("\n");
+        for (Product product : products) {
             csv.append(product.getId()).append(",").append(product.getName()).append(",").append(product.getPrice()).append(",").append(product.getAmount()).append("\n");
         }
         return csv.toString();
@@ -71,66 +61,47 @@ public class Bills {
         return billNumber;
     }
 
-    public void setBillNumber(int billNumber) {
-        if (billNumber <= 0) {
-            throw new IllegalArgumentException("The invoice number must be positive");
-        }
-        this.billNumber = billNumber;
-    }
-
-    public List<Product> getDelivery() {
-        return new ArrayList<>(delivery);
-    }
-
-    public void setDelivery(List<Product> delivery) {
-        if (delivery == null) {
-            throw new IllegalArgumentException("The delivery list cannot be null");
-        }
-        this.delivery = new ArrayList<>(delivery);
-        this.amount = delivery.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+    public List<Product> getProducts() {
+        return new ArrayList<>(products);
     }
 
     public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
-        if (amount == null || amount.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("The amount cannot be negative");
-        }
-        this.amount = amount;
-    }
-
     public String getConsumerName() {
         return consumerName;
-    }
-
-    public void setConsumerName(String consumerName) {
-        if (consumerName == null || consumerName.isEmpty()) {
-            throw new IllegalArgumentException("Consumer name cannot be empty");
-        }
-        this.consumerName = consumerName;
     }
 
     public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public Payment getPayment() {
+        return payment;
+    }
+
+    private void validateBillNumber(int billNumber) {
+        if (billNumber <= 0) {
+            throw new IllegalArgumentException("The invoice number must be positive");
+        }
+    }
+
+    private void validateConsumerName(String consumerName) {
+        if (consumerName == null || consumerName.isEmpty()) {
+            throw new IllegalArgumentException("Consumer name cannot be empty");
+        }
+    }
+
+    private void validateDate(LocalDateTime date) {
         if (date == null) {
             throw new IllegalArgumentException("Date cannot be null");
         }
-        this.date = date;
     }
 
-    public KindOfPayment.PaymentType getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(KindOfPayment.PaymentType paymentType) {
-        if (paymentType == null) {
-            throw new IllegalArgumentException("Payment type cannot be null");
+    private void validateProduct(Product product) {
+        if (product == null) {
+            throw new IllegalArgumentException("The product cannot be null");
         }
-        this.paymentType = paymentType;
     }
 }
