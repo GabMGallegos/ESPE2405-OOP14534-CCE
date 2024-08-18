@@ -13,9 +13,6 @@ import org.bson.conversions.Bson;
 import com.mongodb.client.model.Filters;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import java.util.Base64;
-import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.swing.JOptionPane;
@@ -93,13 +90,10 @@ public class MethodosCostumer implements ICostumer {
 
         if (found != null) {
             String storedPassword = found.getString("password");
-            System.out.println("Stored Password: " + storedPassword);
-
-            // Compare both hashes
+            
             if (hashedPassword.equals(storedPassword)) {
                 return true; 
             } else {
-                System.out.println("Passwords do not match.");
                 return false; 
             }
         } else {

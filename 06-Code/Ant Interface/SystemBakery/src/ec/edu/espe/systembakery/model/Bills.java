@@ -8,16 +8,16 @@ import java.util.List;
 /**
  * @autor Adrian Padilla CODE_CRAFTING_ENGINEERS
  */
-public class Bill {
+public class Bills {
 
     private int billNumber;
     private List<Product> products;
     private BigDecimal amount;
     private String consumerName;
     private LocalDateTime date;
-    private Payment payment;
+    private KindOfPayment.PaymentType payment;
 
-    public Bill(int billNumber, String consumerName, LocalDateTime date, Payment payment) {
+    public Bills(int billNumber, String consumerName, LocalDateTime date, KindOfPayment.PaymentType payment) {
         validateBillNumber(billNumber);
         validateConsumerName(consumerName);
         validateDate(date);
