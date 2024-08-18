@@ -1,6 +1,8 @@
-package ec.edu.espe.systembakery.view;
+package ec.edu.espe.systembakery;
 
 import com.mongodb.client.MongoDatabase;
+import ec.edu.espe.systembakery.view.FrmLogin;
+import ec.edu.espe.systembakery.view.FrmSystemBakerySplash;
 import ec.edu.espe.utils.Conection;
 import javax.swing.JOptionPane;
 
