@@ -1,5 +1,5 @@
 
-package ec.edu.espe.systembakery;
+package ec.edu.espe.systembakery.view;
 
 /**
  *
@@ -62,7 +62,6 @@ public class FrmCreatePurchaseOrder extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 204));
-        setPreferredSize(new java.awt.Dimension(780, 415));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 

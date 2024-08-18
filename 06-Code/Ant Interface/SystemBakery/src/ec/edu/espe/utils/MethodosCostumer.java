@@ -97,7 +97,6 @@ public class MethodosCostumer implements ICostumer {
                 return false; 
             }
         } else {
-            System.out.println("User not found.");
             return false; 
         }
 

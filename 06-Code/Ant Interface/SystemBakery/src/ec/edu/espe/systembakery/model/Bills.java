@@ -77,7 +77,7 @@ public class Bills {
         return date;
     }
 
-    public Payment getPayment() {
+    public KindOfPayment.PaymentType getPayment() {
         return payment;
     }
 

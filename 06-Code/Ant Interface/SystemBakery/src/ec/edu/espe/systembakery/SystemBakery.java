@@ -1,7 +1,6 @@
 package ec.edu.espe.systembakery.view;
 
 import com.mongodb.client.MongoDatabase;
-import ec.edu.espe.systembakery.*;
 import ec.edu.espe.utils.Conection;
 import javax.swing.JOptionPane;
 

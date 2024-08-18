@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ec.edu.espe.systembakery;
+package ec.edu.espe.systembakery.view;
 
 import com.mongodb.client.MongoDatabase;
 import javax.swing.JOptionPane;
@@ -307,13 +307,9 @@ public class FrmBakery extends javax.swing.JFrame {
         });
 
         mnuAddProducts.setText("Agregar Productos");
-        mnuAddProducts.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                mnuAddProductsMenuSelected(evt);
+        mnuAddProducts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuAddProductsMouseClicked(evt);
             }
         });
         mnuProduct.add(mnuAddProducts);
@@ -352,25 +348,17 @@ public class FrmBakery extends javax.swing.JFrame {
         });
 
         mnuAddSuppliers.setText("Agregar Proveedor");
-        mnuAddSuppliers.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                mnuAddSuppliersMenuSelected(evt);
+        mnuAddSuppliers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuAddSuppliersMouseClicked(evt);
             }
         });
         mnuSuppliers.add(mnuAddSuppliers);
 
         mnuCosultSuppliers.setText("Consultar Proveedor");
-        mnuCosultSuppliers.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                mnuCosultSuppliersMenuSelected(evt);
+        mnuCosultSuppliers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuCosultSuppliersMouseClicked(evt);
             }
         });
         mnuSuppliers.add(mnuCosultSuppliers);
@@ -482,6 +470,11 @@ public class FrmBakery extends javax.swing.JFrame {
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Eliminar usuarios");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jCheckBoxMenuItem1);
 
         mnuSetting.add(jMenu2);
@@ -511,32 +504,6 @@ public class FrmBakery extends javax.swing.JFrame {
     private void itmMakeBillToConsumerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itmMakeBillToConsumerMouseClicked
         showFrmBillMenu();
     }//GEN-LAST:event_itmMakeBillToConsumerMouseClicked
-
-    private void mnuAddSuppliersMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnuAddSuppliersMenuSelected
-        showFrmAddSupplier();
-    }//GEN-LAST:event_mnuAddSuppliersMenuSelected
-
-    private void mnuCosultSuppliersMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnuCosultSuppliersMenuSelected
-        if (jTabbedPane1.getSelectedComponent() == jPanel6) {
-            jTabbedPane1.setSelectedComponent(jPanel2);
-        } else {
-            FrmSearchSupplier bill = new FrmSearchSupplier(database);
-            jPanel6.add( bill.getContentPane());
-            bill.setVisible(false);
-            jTabbedPane1.setSelectedComponent(jPanel6);
-        }
-    }//GEN-LAST:event_mnuCosultSuppliersMenuSelected
-
-    private void mnuAddProductsMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_mnuAddProductsMenuSelected
-        if (jTabbedPane1.getSelectedComponent() == jPanel7) {
-            jTabbedPane1.setSelectedComponent(jPanel2);
-        } else {
-            FrmAddNewProduct bill = new FrmAddNewProduct(database);
-            jPanel7.add( bill.getContentPane());
-            bill.setVisible(false);
-            jTabbedPane1.setSelectedComponent(jPanel7);
-        }
-    }//GEN-LAST:event_mnuAddProductsMenuSelected
 
     private void jMenu3MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu3MenuSelected
         if (jTabbedPane1.getSelectedComponent() == jPanel8) {
@@ -589,6 +556,37 @@ public class FrmBakery extends javax.swing.JFrame {
         } else if (eleccion == JOptionPane.NO_OPTION) {
         }
     }//GEN-LAST:event_mnuitSignOffActionPerformed
+
+    private void mnuAddSuppliersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuAddSuppliersMouseClicked
+        showFrmAddSupplier();
+    }//GEN-LAST:event_mnuAddSuppliersMouseClicked
+
+    private void mnuCosultSuppliersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuCosultSuppliersMouseClicked
+        if (jTabbedPane1.getSelectedComponent() == jPanel6) {
+            jTabbedPane1.setSelectedComponent(jPanel2);
+        } else {
+            FrmSearchSupplier bill = new FrmSearchSupplier(database);
+            jPanel6.add( bill.getContentPane());
+            bill.setVisible(false);
+            jTabbedPane1.setSelectedComponent(jPanel6);
+        }
+    }//GEN-LAST:event_mnuCosultSuppliersMouseClicked
+
+    private void mnuAddProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuAddProductsMouseClicked
+
+        if (jTabbedPane1.getSelectedComponent() == jPanel7) {
+            jTabbedPane1.setSelectedComponent(jPanel2);
+        } else {
+            FrmAddNewProduct bill = new FrmAddNewProduct(database);
+            jPanel7.add( bill.getContentPane());
+            bill.setVisible(false);
+            jTabbedPane1.setSelectedComponent(jPanel7);
+        }
+    }//GEN-LAST:event_mnuAddProductsMouseClicked
+
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -336,7 +336,7 @@
                     <Property name="text" type="java.lang.String" value="Agregar Productos"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="mnuAddProductsMenuSelected"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuAddProductsMouseClicked"/>
                   </Events>
                 </Menu>
                 <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
@@ -376,7 +376,7 @@
                     <Property name="text" type="java.lang.String" value="Agregar Proveedor"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="mnuAddSuppliersMenuSelected"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuAddSuppliersMouseClicked"/>
                   </Events>
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="mnuCosultSuppliers">
@@ -384,7 +384,7 @@
                     <Property name="text" type="java.lang.String" value="Consultar Proveedor"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="mnuCosultSuppliersMenuSelected"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuCosultSuppliersMouseClicked"/>
                   </Events>
                 </Menu>
               </SubComponents>
@@ -519,6 +519,9 @@
                         <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="Eliminar usuarios"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem1ActionPerformed"/>
+                      </Events>
                     </MenuItem>
                   </SubComponents>
                 </Menu>

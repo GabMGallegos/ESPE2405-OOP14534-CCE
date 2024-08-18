@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ec.edu.espe.systembakery;
+package ec.edu.espe.systembakery.view;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
