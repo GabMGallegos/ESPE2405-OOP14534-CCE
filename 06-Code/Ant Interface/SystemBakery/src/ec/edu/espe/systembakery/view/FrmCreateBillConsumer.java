@@ -5,23 +5,20 @@
 package ec.edu.espe.systembakery.view;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.systembakery.model.Bill;
 import ec.edu.espe.systembakery.model.Consumer;
 import ec.edu.espe.systembakery.model.Product;
 import ec.edu.espe.utils.BsonDownloadDocument;
 import ec.edu.espe.utils.Methods;
+import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.bson.Document;
 
 /**
  *
@@ -42,26 +39,41 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     public FrmCreateBillConsumer(MongoDatabase database) {
         initComponents();
         this.dataB = database;
-        InitializeDatabase(this.dataB);
+        createProductTable();
+        limitCalendar();
+        initializeDatabase(this.dataB);
     }
-    
-    public void InitializeDatabase(MongoDatabase database){
+
+    private void limitCalendar() {
+        Date today = new Date();
+        dcDate.setMaxSelectableDate(today);
+    }
+
+    public void initializeDatabase(MongoDatabase database) {
+        getCollections(database);
+        insertInComboBox();
+        btnEditProductList.setVisible(false);
+    }
+
+    private void insertInComboBox() {
+        Methods.insertItemsComboBox(consumerCollection, "Nombre", cmbConsumerName);
+        Methods.insertItemsComboBox(productCollection, "Id", "Nombre", cmbProductId);
+    }
+
+    private void getCollections(MongoDatabase database) {
+        consumerCollection = BsonDownloadDocument.getCollection(database, "Consumers");
+        productCollection = BsonDownloadDocument.getCollection(database, "Products");
+        billCollection = BsonDownloadDocument.getCollection(database, "Bills");
+    }
+
+    private void createProductTable() {
         dtmProductList = new DefaultTableModel();
         dtmProductList.addColumn("Id");
         dtmProductList.addColumn("Artículo");
         dtmProductList.addColumn("Cantidad");
         dtmProductList.addColumn("Precio U.");
         dtmProductList.addColumn("Valor");
-        //dtmProductList = (DefaultTableModel) tblProductList.getModel();
         tblProductList.setModel(dtmProductList);
-        
-        consumerCollection = BsonDownloadDocument.getCollection(database,"Consumers");
-        productCollection = BsonDownloadDocument.getCollection(database, "Products");
-        billCollection = BsonDownloadDocument.getCollection(database, "Bills");
-        
-        Methods.insertItemsComboBox(consumerCollection, "Nombre", cmbConsumerName);
-        Methods.insertItemsComboBox(productCollection, "Id", "Nombre", cmbProductId);
-        btnEditProductList.setVisible(false);
     }
 
     
@@ -90,6 +102,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
         lblErrorCI = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         dcDate = new com.toedter.calendar.JDateChooser();
+        lblErrorDate = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -196,23 +209,29 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblErrorCI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(218, 218, 218))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtRucCi, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dcDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblErrorCI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(97, 97, 97)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblErrorDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dcDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dcDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblErrorDate, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dcDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblErrorConsumer, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
                             .addComponent(lblErrorCI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -428,78 +447,114 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnterToOrderListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterToOrderListActionPerformed
-        boolean verificationConsumerName, verificationRucCi, verificationEmitionDate, verificationProductId, verificationProductAmount;
-        String firstPartCmbProductId;
-        
-        verificationConsumerName = cmbConsumerName.getSelectedItem().toString().matches("^[A-Z][a-z]+ [A-Z][a-z]+$");
-        verificationRucCi = txtRucCi.getText().matches("^\\d{10}$");
-        firstPartCmbProductId = cmbProductId.getSelectedItem().toString().split(" --> ")[0];
-        verificationProductId = firstPartCmbProductId.matches("^[A-Z]\\d{3}$");
-        verificationProductAmount = txtProductAmount.getText().matches("^\\d{1,2}$");
-        
-        try {
-
-            if (verificationConsumerName && verificationRucCi && verificationProductId && verificationProductAmount) {
-                lblErrorConsumer.setText("");
-                lblErrorCI.setText("");
-                
-                lblErrorProductId.setText("");
-                lblErrorProductAmount.setText("");
-                Methods.addElemenToTable(productCollection, firstPartCmbProductId, txtProductAmount, dtmProductList);
-            } else {
-                if(!verificationConsumerName){
-                    lblErrorConsumer.setText("Elija un cliente de la lista");
-                    cmbConsumerName.requestFocus();
-                }
-                if(!verificationRucCi){
-                    lblErrorCI.setText("Escriba correctamente el C.I.");
-                    txtRucCi.requestFocus();
-                }
-                
-                if(!verificationProductId){
-                    lblErrorProductId.setText("Elija una opción no vacía de la lista");
-                    cmbProductId.requestFocus();
-                }
-                if(!verificationProductAmount){
-                    lblErrorProductAmount.setText("Debe ser menos de 99 objetos");
-                    txtProductAmount.requestFocus();
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString());
+        if (checkFieldAttributes()) {
+            String firstPartCmbProductId = getProductId();
+            Methods.addElemenToTable(productCollection, firstPartCmbProductId, txtProductAmount, dtmProductList);
         }
-        
-        
     }//GEN-LAST:event_btnEnterToOrderListActionPerformed
 
+    private boolean checkFieldAttributes() throws HeadlessException {
+        if (!checkConsumer()) {
+            lblErrorConsumer.setText("Elija un cliente de la lista");
+            cmbConsumerName.requestFocus();
+            return false;
+        } else {
+            lblErrorConsumer.setText("");
+        }
+        if (!checkRucCi()) {
+            lblErrorCI.setText("Escriba correctamente el C.I.");
+            txtRucCi.requestFocus();
+            return false;
+        } else {
+            lblErrorCI.setText("");
+        }
+        if (!checkDate()) {
+            lblErrorDate.setText("Use el calendario");
+            dcDate.requestFocus();
+            return false;
+        } else {
+            lblErrorDate.setText("");
+        }
+
+        if (!checkProductId()) {
+            lblErrorProductId.setText("Elija una opción no vacía de la lista");
+            cmbProductId.requestFocus();
+            return false;
+        } else {
+            lblErrorProductId.setText("");
+        }
+        if (!checkProductAmount()) {
+            lblErrorProductAmount.setText("Debe ser menos de 99 objetos");
+            txtProductAmount.requestFocus();
+            return false;
+        } else {
+            lblErrorProductAmount.setText("");
+        }
+        return true;
+    }
+
+    private String getProductId() {
+        return cmbProductId.getSelectedItem().toString().split(" --> ")[0];
+    }
+
+    private boolean checkProductAmount() {
+        return txtProductAmount.getText().matches("^\\d{1,2}$");
+    }
+
+    private boolean checkDate() {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return dateFormat.format(dcDate.getDate()).matches("^(0[1-9]|[1-2][0-9]|3[0-1])/(0[1-9]|1[0-2])/\\d{4}$");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean checkProductId() {
+        String firstPartCmbProductId = getProductId();
+        return firstPartCmbProductId.matches("^[A-Z]\\d{3}$");
+    }
+
+    private boolean checkRucCi() {
+        return txtRucCi.getText().matches("^\\d{10}$");
+    }
+
+    private boolean checkConsumer() {
+        return cmbConsumerName.getSelectedItem().toString().matches("^[A-Z][a-z]+ [A-Z][a-z]+$");
+    }
+    
     private void btnPrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintBillActionPerformed
         try {
-            consumer = Methods.getConsumer(cmbConsumerName.getSelectedItem().toString(), consumerCollection);
-            Date date = dcDate.getDate();
-            
-            FrmBill bill = new FrmBill(consumer,dtmProductList,consumerBill,date);
-            
-            PrinterJob printerJob = PrinterJob.getPrinterJob();
-            printerJob.setPrintable(bill);
-            boolean top = printerJob.printDialog();
-            if(top){
-                printerJob.print();
+            if (checkFieldAttributes()) {
+                consumer = Methods.getConsumer(cmbConsumerName.getSelectedItem().toString(), consumerCollection);
+                Date date = dcDate.getDate();
+
+                FrmBill bill = new FrmBill(consumer, dtmProductList, consumerBill, date);
+
+                PrinterJob printerJob = PrinterJob.getPrinterJob();
+                printerJob.setPrintable(bill);
+                boolean top = printerJob.printDialog();
+                if (top) {
+                    printerJob.print();
+                }
+
+                cleanFields();
             }
-            
-            
-            txtProductAmount.setText("");
-            txtRucCi.setText("");
-            cmbConsumerName.setSelectedIndex(0);
-            cmbProductId.setSelectedIndex(0);
-            dtmProductList.getDataVector().removeAllElements();
-            tblProductList.updateUI();
-            
-            
         } catch (PrinterException e) {
-            JOptionPane.showMessageDialog(null, "Error de Impresión","Error: \n" + e,JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error de Impresión", "Error: \n" + e, JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnPrintBillActionPerformed
 
+    private void cleanFields() {
+        txtProductAmount.setText("");
+        txtRucCi.setText("");
+        cmbConsumerName.setSelectedIndex(0);
+        cmbProductId.setSelectedIndex(0);
+        dtmProductList.getDataVector().removeAllElements();
+        tblProductList.updateUI();
+        dcDate.setDate(null);
+    }
+    
     private void btnDeleteProductInTheListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductInTheListActionPerformed
         if(tblProductList.getSelectedRow() != -1)
             dtmProductList.removeRow(tblProductList.getSelectedRow());
@@ -597,6 +652,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblErrorCI;
     private javax.swing.JLabel lblErrorConsumer;
+    private javax.swing.JLabel lblErrorDate;
     private javax.swing.JLabel lblErrorProductAmount;
     private javax.swing.JLabel lblErrorProductId;
     private javax.swing.JLabel lblPurchaseOrderNumber;
