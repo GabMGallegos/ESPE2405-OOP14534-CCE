@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package ec.edu.espe.systembakery.view;
 
 import com.mongodb.client.MongoDatabase;
@@ -470,11 +466,6 @@ public class FrmBakery extends javax.swing.JFrame {
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("Eliminar usuarios");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
-            }
-        });
         jMenu2.add(jCheckBoxMenuItem1);
 
         mnuSetting.add(jMenu2);
@@ -583,10 +574,6 @@ public class FrmBakery extends javax.swing.JFrame {
             jTabbedPane1.setSelectedComponent(jPanel7);
         }
     }//GEN-LAST:event_mnuAddProductsMouseClicked
-
-    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
