@@ -9,10 +9,13 @@ import com.mongodb.client.MongoDatabase;
 import java.lang.Integer;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import ec.edu.espe.utils.ProductDatabase;
 /**
  *
  * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
  */
+
+
 public class FrmAddNewProduct extends javax.swing.JFrame {
 
     private static MongoDatabase database;
@@ -22,8 +25,9 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
      * @param database MongoDB database instance
      */
     public FrmAddNewProduct(MongoDatabase database) {
-        initComponents();
-        this.database = database;
+    initComponents();
+    FrmAddNewProduct.database = database;
+    this.productDatabase = new ProductDatabase(database);
     }
 
     /**
@@ -57,8 +61,6 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
         txtStockCuantity = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtProductName = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        txtProductOutput = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -183,7 +185,7 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
@@ -223,49 +225,35 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
         txtProductName.setBackground(new java.awt.Color(204, 204, 204));
         txtProductName.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Salida de Producto");
-
-        txtProductOutput.setBackground(new java.awt.Color(204, 204, 204));
-        txtProductOutput.setForeground(new java.awt.Color(0, 0, 0));
-        txtProductOutput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtProductOutputActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(15, 15, 15)
-                            .addComponent(jLabel9))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel10)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel3))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGap(2, 2, 2)
-                            .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel9))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtProductOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(txtSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(txtStockCuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
-                            .addComponent(txtExistence, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtExistence, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -285,10 +273,6 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtProductOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtStockCuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,7 +280,7 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtExistence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 27, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -339,14 +323,10 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+private ProductDatabase productDatabase;
     private void txtSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSupplierActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSupplierActionPerformed
-
-    private void txtProductOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductOutputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtProductOutputActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -367,29 +347,29 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
         String existenceProduc=txtExistence.getText().trim();
         String productName=txtProductName.getText().trim();
         Date dateOutput=jDateChooser2.getDate();
-        String productOutput=txtProductOutput.getText().trim();
         String stockCuantity=txtStockCuantity.getText().trim();
         String supplier=txtSupplier.getText().trim();
         Date incomeDate= jDateChooser1.getDate();
+            
+ this.productDatabase.saveProduct(supplier, existenceProduc, productName, 
+                                     incomeDate, stockCuantity, dateOutput);
+   
         
-        
-        
-        MongoCollection colection = database.getCollection("Products");
-        org.bson.Document documento = new org.bson.Document("Proveedor:", txtSupplier.getText())
-                .append("Existencias:", txtExistence.getText())
-                .append("Nombre Producto:", txtProductName.getText())
-                .append("Fecha Ingreso:", jDateChooser1.getDate())
-                .append("Cantidad en Stock:", txtStockCuantity.getText())
-                .append("Salida de Producto:", txtProductOutput.getText())
-                .append("Fecha de Salida", jDateChooser2.getDate());
-        
-        try {
-            int existence = Integer.parseInt(txtExistence.getText());
-            colection.insertOne(documento);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingrese solo enteros!!");
-            //txtExistenceFocusGained(evt);
-        }
+//       MongoCollection colection = database.getCollection("Products");
+//        org.bson.Document documento = new org.bson.Document("Proveedor:", txtSupplier.getText())
+//                .append("Existencias:", txtExistence.getText())
+//                .append("Nombre Producto:", txtProductName.getText())
+//                .append("Fecha Ingreso:", jDateChooser1.getDate())
+//                .append("Cantidad en Stock:", txtStockCuantity.getText())
+//                .append("Salida de Producto:", txtProductOutput.getText())
+//                .append("Fecha de Salida", jDateChooser2.getDate());
+//        
+//        try {
+//            int existence = Integer.parseInt(txtExistence.getText());
+//            colection.insertOne(documento);
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Ingrese solo enteros!!");
+//        }
         
     }//GEN-LAST:event_btnSaveProductActionPerformed
 
@@ -441,7 +421,6 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -460,7 +439,6 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField txtExistence;
     private javax.swing.JTextField txtProductName;
-    private javax.swing.JTextField txtProductOutput;
     private javax.swing.JTextField txtStockCuantity;
     private javax.swing.JTextField txtSupplier;
     // End of variables declaration//GEN-END:variables
