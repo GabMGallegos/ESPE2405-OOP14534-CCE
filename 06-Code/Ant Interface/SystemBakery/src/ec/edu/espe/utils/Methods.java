@@ -4,6 +4,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import ec.edu.espe.systembakery.model.Consumer;
 import ec.edu.espe.systembakery.model.KindOfPayment;
+import ec.edu.espe.systembakery.model.Product;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.JComboBox;
@@ -18,11 +21,14 @@ import org.bson.Document;
  */
 public class Methods {
 
-    public static void addElemenToTable(MongoCollection collection, String firstPartCmbProductId,
+    public static Product addElemenToTable(MongoCollection collection, String firstPartCmbProductId,
             JTextField txtProductAmount, DefaultTableModel dtmProductList) {
         float totalPrice;
+        Product product = new Product();
         String[] productPurchaseList = new String[5];
         MongoCursor<Document> cursor = collection.find().iterator();
+        BigDecimal price;
+        LocalDate date = LocalDate.now();
         
         try {
 
@@ -38,16 +44,22 @@ public class Methods {
                     totalPrice = Math.round( (Float.parseFloat(productPurchaseList[2]) 
                             * Float.parseFloat(productPurchaseList[3])) * 100)/100f;
                     productPurchaseList[4] = String.format(Locale.US,"%.2f",totalPrice);
-
+                    
+                    product.setId(Integer.parseInt(productPurchaseList[0]));
+                    product.setName(productPurchaseList[1]);
+                    product.setAmount(Integer.parseInt(productPurchaseList[2]));
+                    product.setPrice(price = new BigDecimal(productPurchaseList[3]));
+                    product.setDate(date);
+                    
                     dtmProductList.addRow(productPurchaseList);
-
-                    break;
+                    return product;
                 }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al subir tabla");
         } finally {
             cursor.close();
+            return null;
         }
     }
 

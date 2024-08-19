@@ -78,9 +78,9 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        lblSubtotalWithoutDiscounts = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        lblSubtotal = new javax.swing.JLabel();
         lblSubtotalZeroIVA = new javax.swing.JLabel();
         lblSubtotalFifteenIVA = new javax.swing.JLabel();
         lblIVA = new javax.swing.JLabel();
@@ -214,11 +214,11 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
 
         jLabel16.setText("I V A       US             %15  :");
 
-        jLabel17.setText("jLabel17");
+        lblSubtotalWithoutDiscounts.setText("jLabel17");
 
         jLabel18.setText("0.00");
 
-        jLabel19.setText("jLabel19");
+        lblSubtotal.setText("jLabel19");
 
         lblSubtotalZeroIVA.setText("jLabel20");
 
@@ -274,7 +274,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel17))
+                                .addComponent(lblSubtotalWithoutDiscounts))
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -287,7 +287,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel19))
+                                .addComponent(lblSubtotal))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -339,7 +339,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel17))
+                    .addComponent(lblSubtotalWithoutDiscounts))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -347,7 +347,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel19))
+                    .addComponent(lblSubtotal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -457,9 +457,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -489,7 +487,9 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
     private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblPaymentType;
     private javax.swing.JLabel lblPurchaseOrderNumber;
+    private javax.swing.JLabel lblSubtotal;
     private javax.swing.JLabel lblSubtotalFifteenIVA;
+    private javax.swing.JLabel lblSubtotalWithoutDiscounts;
     private javax.swing.JLabel lblSubtotalZeroIVA;
     private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JPanel pnlPageToPrint;

@@ -52,7 +52,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     public void initializeDatabase(MongoDatabase database) {
         getCollections(database);
         insertInComboBox();
-        btnEditProductList.setVisible(false);
+        btnDiscardBill.setVisible(false);
     }
 
     private void insertInComboBox() {
@@ -108,7 +108,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
         jLabel8 = new javax.swing.JLabel();
         txtProductAmount = new javax.swing.JTextField();
         cmbProductId = new javax.swing.JComboBox<>();
-        btnEditProductList = new javax.swing.JButton();
+        btnDiscardBill = new javax.swing.JButton();
         btnDeleteProductInTheList = new javax.swing.JButton();
         lblErrorProductAmount = new javax.swing.JLabel();
         lblErrorProductId = new javax.swing.JLabel();
@@ -257,11 +257,11 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
         cmbProductId.setEditable(true);
         cmbProductId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
-        btnEditProductList.setBackground(new java.awt.Color(255, 204, 153));
-        btnEditProductList.setText("Editar Lista");
-        btnEditProductList.addActionListener(new java.awt.event.ActionListener() {
+        btnDiscardBill.setBackground(new java.awt.Color(255, 204, 153));
+        btnDiscardBill.setText("Descartar Factura");
+        btnDiscardBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditProductListActionPerformed(evt);
+                btnDiscardBillActionPerformed(evt);
             }
         });
 
@@ -284,28 +284,27 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmbProductId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtProductAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnDeleteProductInTheList)))
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbProductId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(btnEditProductList)))
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtProductAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnDeleteProductInTheList))
                         .addGap(0, 15, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblErrorProductId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lblErrorProductAmount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnDiscardBill, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,7 +322,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
                     .addComponent(jLabel8)
                     .addComponent(txtProductAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnEditProductList)
+                .addComponent(btnDiscardBill)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDeleteProductInTheList)
                 .addContainerGap(12, Short.MAX_VALUE))
@@ -553,18 +552,25 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
         dtmProductList.getDataVector().removeAllElements();
         tblProductList.updateUI();
         dcDate.setDate(null);
+        
+        products.clear();
     }
     
     private void btnDeleteProductInTheListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductInTheListActionPerformed
-        if(tblProductList.getSelectedRow() != -1)
-            dtmProductList.removeRow(tblProductList.getSelectedRow());
+        if(tblProductList.getSelectedRow() != -1){
+            int row = tblProductList.getSelectedRow();
+            products.remove(row);
+            dtmProductList.removeRow(row);
+        }
     }//GEN-LAST:event_btnDeleteProductInTheListActionPerformed
 
-    private void btnEditProductListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProductListActionPerformed
-        
-        
-        
-    }//GEN-LAST:event_btnEditProductListActionPerformed
+    private void btnDiscardBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiscardBillActionPerformed
+       boolean option = JOptionPane.showConfirmDialog(null, "Realmente desea borrar TODA la factura", "Borrar Factura",
+                JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION;
+        if(option){
+            cleanFields();
+        }
+    }//GEN-LAST:event_btnDiscardBillActionPerformed
 
     private void cmbConsumerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbConsumerNameActionPerformed
         String consumerSelected = (String) cmbConsumerName.getSelectedItem();
@@ -630,7 +636,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteProductInTheList;
-    private javax.swing.JButton btnEditProductList;
+    private javax.swing.JButton btnDiscardBill;
     private javax.swing.JButton btnEnterToOrderList;
     private javax.swing.JButton btnPrintBill;
     private javax.swing.JComboBox<String> cmbConsumerName;
@@ -661,47 +667,4 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     private javax.swing.JTextField txtRucCi;
     // End of variables declaration//GEN-END:variables
 
-    
-
-    
-
-    /**
-     * @return the products
-     */
-    public ArrayList<Product> getProducts() {
-        return products;
-    }
-
-    /**
-     * @param products the products to set
-     */
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-    }
-
-    /**
-     * @return the consumerBill
-     */
-    public Bill getConsumerBill() {
-        return consumerBill;
-    }
-
-    /**
-     * @param consumerBill the consumerBill to set
-     */
-    public void setConsumerBill(Bill consumerBill) {
-        this.consumerBill = consumerBill;
-    }
-
-    public Consumer getConsumer() {
-        return consumer;
-    }
-
-    public void setConsumer(Consumer consumer) {
-        this.consumer = consumer;
-    }
-
-    
-
-    
 }
