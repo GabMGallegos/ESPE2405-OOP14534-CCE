@@ -5,16 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @autor CODE_CRAFTING_ENGINEERS
+ * @autor Adrian Padilla CODE_CRAFTING_ENGINEERS
  */
 public class Stock {
 
-    private List<Product> products = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product) {
-        if (product == null) {
-            throw new IllegalArgumentException("The product cannot be null");
-        }
+        validateProduct(product);
         if (products.contains(product)) {
             throw new IllegalArgumentException("The product already exists in stock");
         }
@@ -22,16 +20,15 @@ public class Stock {
     }
 
     public void removeProduct(Product product) {
+        validateProduct(product);
         products.remove(product);
     }
 
     public Product findProductById(int productId) {
-        for (Product product : products) {
-            if (product.getId() == productId) {
-                return product;
-            }
-        }
-        return null;
+        return products.stream()
+                .filter(product -> product.getId() == productId)
+                .findFirst()
+                .orElse(null);
     }
 
     public List<Product> getProducts() {
@@ -39,10 +36,9 @@ public class Stock {
     }
 
     public void setProducts(List<Product> products) {
-        if (products == null) {
-            throw new IllegalArgumentException("The product list cannot be null");
-        }
-        this.products = new ArrayList<>(products);
+        validateProductList(products);
+        this.products.clear();
+        this.products.addAll(products);
     }
 
     public int getTotalQuantity() {
@@ -60,5 +56,17 @@ public class Stock {
         return "List Stock \n" + "Products:" + products
                 + "\ntotalQuantity=" + getTotalQuantity()
                 + "\ntotalValue=$" + getTotalValue();
+    }
+
+    private void validateProduct(Product product) {
+        if (product == null) {
+            throw new IllegalArgumentException("The product cannot be null");
+        }
+    }
+
+    private void validateProductList(List<Product> products) {
+        if (products == null) {
+            throw new IllegalArgumentException("The product list cannot be null");
+        }
     }
 }
