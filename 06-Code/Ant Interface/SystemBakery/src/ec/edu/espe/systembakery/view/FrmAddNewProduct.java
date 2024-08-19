@@ -4,12 +4,11 @@
  */
 package ec.edu.espe.systembakery.view;
 
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import java.lang.Integer;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import ec.edu.espe.utils.ProductDatabase;
+import ec.edu.espe.utils.FieldCleaner;
 /**
  *
  * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
@@ -27,6 +26,7 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
     public FrmAddNewProduct(MongoDatabase database) {
     initComponents();
     FrmAddNewProduct.database = database;
+    this.fieldCleaner = new FieldCleaner();
     this.productDatabase = new ProductDatabase(database);
     }
 
@@ -323,7 +323,8 @@ public class FrmAddNewProduct extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private ProductDatabase productDatabase;
+    private ProductDatabase productDatabase;
+    private FieldCleaner fieldCleaner;
     private void txtSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSupplierActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSupplierActionPerformed
@@ -344,33 +345,21 @@ private ProductDatabase productDatabase;
     }
     
         
-        String existenceProduc=txtExistence.getText().trim();
-        String productName=txtProductName.getText().trim();
-        Date dateOutput=jDateChooser2.getDate();
-        String stockCuantity=txtStockCuantity.getText().trim();
-        String supplier=txtSupplier.getText().trim();
-        Date incomeDate= jDateChooser1.getDate();
+        String existenceProduc = txtExistence.getText().trim();
+        String productName     = txtProductName.getText().trim();
+        Date dateOutput        = jDateChooser2.getDate();
+        String stockQuantity   = txtStockCuantity.getText().trim();
+        String supplier        = txtSupplier.getText().trim();
+        Date incomeDate        = jDateChooser1.getDate();
             
  this.productDatabase.saveProduct(supplier, existenceProduc, productName, 
-                                     incomeDate, stockCuantity, dateOutput);
-   
+                                     incomeDate, stockQuantity, dateOutput);
+ 
+ 
+   this.fieldCleaner.clearFields(txtExistence,txtProductName,txtStockCuantity,
+           txtSupplier,jDateChooser1,jDateChooser2, stockQuantity, supplier);
         
-//       MongoCollection colection = database.getCollection("Products");
-//        org.bson.Document documento = new org.bson.Document("Proveedor:", txtSupplier.getText())
-//                .append("Existencias:", txtExistence.getText())
-//                .append("Nombre Producto:", txtProductName.getText())
-//                .append("Fecha Ingreso:", jDateChooser1.getDate())
-//                .append("Cantidad en Stock:", txtStockCuantity.getText())
-//                .append("Salida de Producto:", txtProductOutput.getText())
-//                .append("Fecha de Salida", jDateChooser2.getDate());
-//        
-//        try {
-//            int existence = Integer.parseInt(txtExistence.getText());
-//            colection.insertOne(documento);
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Ingrese solo enteros!!");
-//        }
-        
+  
     }//GEN-LAST:event_btnSaveProductActionPerformed
 
     private void txtExistenceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtExistenceFocusGained

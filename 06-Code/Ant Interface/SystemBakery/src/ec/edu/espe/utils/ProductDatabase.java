@@ -5,15 +5,23 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import javax.swing.JOptionPane;
 import java.util.Date;
+import ec.edu.espe.utils.FieldCleaner;
+
+/**
+ *
+ * @author David Pilaguano, Lenovo , DCCO-ESPE
+ */
 
 public class ProductDatabase {
     private MongoDatabase database;
-
+    
     public ProductDatabase(MongoDatabase database) {
         this.database = database;
+        this.fieldCleaner = new FieldCleaner();
     }
-
-    public void saveProduct(String supplier, String existence, String productName, 
+    private FieldCleaner fieldCleaner;
+    
+    public void saveProduct(String supplier, String existenceProduct, String productName, 
                             Date incomeDate, String stockQuantity,  
                             Date dateOutput) {
         if (database == null) {
@@ -23,16 +31,17 @@ public class ProductDatabase {
 
         MongoCollection<Document> collection = database.getCollection("Products");
         Document document = new Document("Proveedor", supplier)
-                .append("Existencias", existence)
+                .append("Existencias", existenceProduct)
                 .append("Nombre Producto", productName)
                 .append("Fecha Ingreso", incomeDate)
                 .append("Cantidad en Stock", stockQuantity)
                 .append("Fecha de Salida", dateOutput);
 
         try {
-            int existenceInt = Integer.parseInt(existence);
+            int existenceInt = Integer.parseInt(existenceProduct);
             collection.insertOne(document);
             JOptionPane.showMessageDialog(null, "Producto guardado con éxito.");
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Ingrese solo enteros en el campo de existencias.");
         } catch (Exception e) {

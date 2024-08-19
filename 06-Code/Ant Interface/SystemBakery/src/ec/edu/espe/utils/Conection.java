@@ -4,8 +4,6 @@
  */
 package ec.edu.espe.utils;
 
-import com.mongodb.MongoException;
-import com.mongodb.client.MongoDatabase;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;

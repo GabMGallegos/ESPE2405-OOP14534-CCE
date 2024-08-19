@@ -2,16 +2,12 @@ package ec.edu.espe.utils;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
 import ec.edu.espe.systembakery.model.Consumer;
 import ec.edu.espe.systembakery.model.KindOfPayment;
-import java.awt.Cursor;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;

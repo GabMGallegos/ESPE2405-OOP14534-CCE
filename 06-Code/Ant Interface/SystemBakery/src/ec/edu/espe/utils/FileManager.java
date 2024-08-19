@@ -124,11 +124,6 @@ public class FileManager {
                         String paymentType = parts[3];
                         LocalDateTime date = LocalDateTime.parse(parts[4]);
 
-                        //Bill bill = new Bill(billNumber, consumerName, date);
-                        //bill.setAmount(amount);
-                        //bill.setPaymentType(paymentType);
-
-                        //bills.add(bill);
                     }
                 }
             }
