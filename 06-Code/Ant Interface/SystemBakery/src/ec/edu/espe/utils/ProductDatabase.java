@@ -19,6 +19,7 @@ public class ProductDatabase {
         this.database = database;
         this.fieldCleaner = new FieldCleaner();
     }
+    
     private FieldCleaner fieldCleaner;
     
     public void saveProduct(String supplier, String existenceProduct, String productName, 
