@@ -1,7 +1,10 @@
 package ec.edu.espe.utils;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Sorts.descending;
 import ec.edu.espe.systembakery.model.Consumer;
 import ec.edu.espe.systembakery.model.KindOfPayment;
 import ec.edu.espe.systembakery.model.Product;
@@ -60,6 +63,24 @@ public class Methods {
         } finally {
             cursor.close();
             return null;
+        }
+    }
+    
+    public static String getNextBillId(MongoDatabase database){
+        MongoCollection collection = BsonDownloadDocument.getCollection(database, "Bills");
+        FindIterable<Document> iterable = collection.find().sort(descending("id")).limit(1);
+        Document lastDocument = iterable.first();
+        
+        if (lastDocument != null) {
+            String id = lastDocument.getString("id");
+            int idNumber = Integer.parseInt(id.split("-")[2]);
+            int nextId = idNumber + 1;
+            int idDigits = String.valueOf(Math.abs(nextId)).length();
+            id = id.substring(0, id.length() - idDigits);
+            id = id + nextId;
+            return id;
+        } else {
+            return "000-000-000000001";
         }
     }
 
