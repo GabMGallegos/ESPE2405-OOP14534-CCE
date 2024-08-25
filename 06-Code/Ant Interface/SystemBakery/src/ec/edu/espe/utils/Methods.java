@@ -62,7 +62,7 @@ public class Methods {
             JOptionPane.showMessageDialog(null, "Error al subir tabla");
         } finally {
             cursor.close();
-            return null;
+            return product;
         }
     }
     

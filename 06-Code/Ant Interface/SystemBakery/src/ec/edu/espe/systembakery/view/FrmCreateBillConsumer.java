@@ -17,8 +17,14 @@ import java.awt.print.PrinterJob;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
+
+import static com.mongodb.client.model.Updates.set;
+import static com.mongodb.client.model.Updates.push;
+import static com.mongodb.client.model.Filters.eq;
 
 /**
  *
@@ -453,7 +459,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     private void btnEnterToOrderListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterToOrderListActionPerformed
         if (checkFieldAttributes()) {
             String firstPartCmbProductId = getProductId();
-            Methods.addElemenToTable(productCollection, firstPartCmbProductId, txtProductAmount, dtmProductList);
+            products.add(Methods.addElemenToTable(productCollection, firstPartCmbProductId, txtProductAmount, dtmProductList));
         }
     }//GEN-LAST:event_btnEnterToOrderListActionPerformed
 
@@ -516,7 +522,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
 
     private boolean checkProductId() {
         String firstPartCmbProductId = getProductId();
-        return firstPartCmbProductId.matches("^[A-Z]\\d{3}$");
+        return firstPartCmbProductId.matches("^\\d+$");
     }
 
     private boolean checkRucCi() {
@@ -534,7 +540,23 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
                 Date date = dcDate.getDate();
 
                 FrmBill bill = new FrmBill(consumer, dtmProductList, consumerBill, date);
-
+                
+                //Update Products amount
+                for (Product next : products) {
+                    Document filter = new Document("Id", ""+next.getId());
+                    Document document = (Document) productCollection.find(filter).first();
+                    int currentAmount = Integer.parseInt(document.getString("Cantidad"));
+                    int updateAmount = currentAmount - next.getAmount();
+                    productCollection.updateOne(filter, set("Cantidad",updateAmount+""));
+                }
+                
+                //Update consumer Array 
+                Document filter = new Document("CI", txtRucCi.getText());
+                consumerCollection.updateOne(filter, push("Facturas", lblBillId.getText()));
+                
+                //New Bill
+                
+                
                 PrinterJob printerJob = PrinterJob.getPrinterJob();
                 printerJob.setPrintable(bill);
                 boolean top = printerJob.printDialog();
