@@ -4,6 +4,7 @@
  */
 package ec.edu.espe.systembakery.view;
 
+import com.mongodb.client.MongoCollection;
 import ec.edu.espe.systembakery.model.Bill;
 import ec.edu.espe.systembakery.model.Consumer;
 import ec.edu.espe.systembakery.model.Product;
@@ -14,31 +15,38 @@ import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import org.bson.Document;
 
 /**
  *
  * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
  */
 public class FrmBill extends javax.swing.JFrame implements Printable {
-
+    
+    private static MongoCollection billCollection;
     private static Date billDate;
     private static Consumer consumer;
-    private static Bill bills;
+    private static Bill bill;
     private static DefaultTableModel productTable;
+    private BigDecimal totalSale;
 
-    public FrmBill(Consumer consumer, DefaultTableModel productTable, Bill bills, Date billDate) {
+    public FrmBill(Consumer consumer, DefaultTableModel productTable, Bill bill, Date billDate, MongoCollection billCollection) {
         initComponents();
         this.consumer = consumer;
         this.productTable = productTable;
-        this.bills = bills;
+        this.bill = bill;
         this.billDate = billDate;
+        this.billCollection = billCollection;
     }
 
     /**
@@ -93,8 +101,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         lblPaymentType = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtAreaProductsPrint = new javax.swing.JTextArea();
+        lblProductsPrint = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,7 +135,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +156,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                         .addComponent(jLabel38)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPurchaseOrderNumber)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +227,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
 
         lblSubtotal.setText("jLabel19");
 
-        lblSubtotalZeroIVA.setText("jLabel20");
+        lblSubtotalZeroIVA.setText("0.00");
 
         lblSubtotalFifteenIVA.setText("jLabel21");
 
@@ -246,75 +253,79 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
 
         lblPaymentType.setText("jLabel31");
 
-        txtAreaProductsPrint.setColumns(20);
-        txtAreaProductsPrint.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtAreaProductsPrint.setRows(5);
-        txtAreaProductsPrint.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jScrollPane2.setViewportView(txtAreaProductsPrint);
+        lblProductsPrint.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblProductsPrint.setText("Descripción de los productos");
+        lblProductsPrint.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblProductsPrint.setPreferredSize(null);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblProductsPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel28)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(137, 137, 137)
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblSubtotalWithoutDiscounts))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTotalPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblSubtotal))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                        .addGap(12, 12, 12)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblConsumerName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblConsumerRucOrCi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(6, 6, 6))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel30)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPaymentType, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblSubtotalFifteenIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblSubtotalZeroIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel9)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(137, 137, 137)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblSubtotalWithoutDiscounts))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblTotalPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblSubtotal)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblConsumerName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblConsumerRucOrCi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSubtotalFifteenIVA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSubtotalZeroIVA)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel30)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPaymentType, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,9 +335,9 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblProductsPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -380,7 +391,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
                     .addComponent(lblPaymentType))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlPageToPrintLayout = new javax.swing.GroupLayout(pnlPageToPrint);
@@ -443,7 +454,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmBill(consumer, productTable, bills, billDate).setVisible(true);
+                new FrmBill(consumer, productTable, bill, billDate, billCollection).setVisible(true);
             }
         });
     }
@@ -478,7 +489,6 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblConsumerName;
     private javax.swing.JLabel lblConsumerRucOrCi;
     private javax.swing.JLabel lblDateInLetters;
@@ -486,6 +496,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
     private javax.swing.JLabel lblEmitionTime;
     private javax.swing.JLabel lblIVA;
     private javax.swing.JLabel lblPaymentType;
+    private javax.swing.JLabel lblProductsPrint;
     private javax.swing.JLabel lblPurchaseOrderNumber;
     private javax.swing.JLabel lblSubtotal;
     private javax.swing.JLabel lblSubtotalFifteenIVA;
@@ -493,7 +504,6 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
     private javax.swing.JLabel lblSubtotalZeroIVA;
     private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JPanel pnlPageToPrint;
-    private javax.swing.JTextArea txtAreaProductsPrint;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -509,7 +519,28 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         String date = dateFormat.format(billDate);
         lblDateInLetters.setText(date);
         
-        setTableInTextArea();
+        setTableInJlabel();
+        bill.setTotalPrice(totalSale);
+        
+        //New Bill
+        Document billDocument = new Document("id", bill.getBillNumber())
+                .append("productos", convertProductsToDocuments(bill.getProducts()))
+                .append("precioTotal", bill.getTotalPrice())
+                .append("consumidor", bill.getConsumerName())
+                .append("fecha", bill.getDate())
+                .append("tipoDePago", bill.getPayment());
+        
+        billCollection.insertOne(billDocument);
+        
+        BigDecimal percentege = new BigDecimal("0.85");
+        lblTotalPrice.setText(totalSale.toString());
+        lblSubtotalWithoutDiscounts.setText(totalSale.multiply(percentege).setScale(2, RoundingMode.HALF_UP).toString());
+        lblSubtotal.setText(totalSale.multiply(percentege).setScale(2, RoundingMode.HALF_UP).toString());
+        
+        BigDecimal percentegeIVA = new BigDecimal("0.15");
+        
+        lblSubtotalFifteenIVA.setText(totalSale.multiply(percentege).setScale(2, RoundingMode.HALF_UP).toString());
+        lblIVA.setText(totalSale.multiply(percentegeIVA).setScale(2, RoundingMode.HALF_UP).toString());
         
         
         if (pageIndex > 0) {
@@ -523,20 +554,41 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         return PAGE_EXISTS;
     }
     
-    public void setTableInTextArea(){
-        DefaultTableModel dtmProduct = (DefaultTableModel) productTable;
-        int row = dtmProduct.getRowCount();
-        int col = dtmProduct.getColumnCount();
-        Object [][] tableData = new Object[row][col];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                tableData[i][j] = dtmProduct.getValueAt(i, j);
-                txtAreaProductsPrint.append((String) tableData[i][j] + "          ");
-            }
-            txtAreaProductsPrint.append("\n");
+    private List<Document> convertProductsToDocuments(List<Product> products) {
+        List<Document> productDocuments = new ArrayList<>();
+        for (Product product : products) {
+            Document productDocument = new Document("Id", product.getId())
+                    .append("Nombre", product.getName())
+                    .append("Cantidad", product.getAmount())
+                    .append("Precio U.", product.getPrice());
         }
         
+        return productDocuments;
     }
+    
+    
+    public void setTableInJlabel(){
+        float computeSale = 0;
+        StringBuilder builderText = new StringBuilder("<html><pre>");
+        for (int i = 0; i < productTable.getRowCount(); i++) {
+            for (int j = 0; j < productTable.getColumnCount(); j++) {
+                builderText.append(productTable.getValueAt(i, j).toString());
+                if (j == 4) {
+                    computeSale = computeSale + Float.parseFloat(productTable.getValueAt(i, j).toString());
+                }
+                if (j < productTable.getColumnCount() -1) {
+                    builderText.append("\t");
+                }
+            }
+            builderText.append("\n");
+        }
+        builderText.append("</pre></html>");
+        lblProductsPrint.setText(builderText.toString());
+        totalSale = new BigDecimal(Float.toString(computeSale));
+        totalSale = totalSale.setScale(2, RoundingMode.HALF_UP);
+    }
+    
+    
 
     /**
      * @param lblDateInLetters the lblDateInLetters to set
@@ -600,4 +652,6 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
     public void setLblTotalPrice(javax.swing.JLabel lblTotalPrice) {
         this.lblTotalPrice = lblTotalPrice;
     }
+
+    
 }

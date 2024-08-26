@@ -25,6 +25,9 @@ import org.bson.Document;
 import static com.mongodb.client.model.Updates.set;
 import static com.mongodb.client.model.Updates.push;
 import static com.mongodb.client.model.Filters.eq;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  *
@@ -41,6 +44,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
     private Consumer consumer = new Consumer();
     private ArrayList<Product> products = new ArrayList<>();
     private Bill consumerBill = new Bill();
+    private BigDecimal totalAmount;
     
     public FrmCreateBillConsumer(MongoDatabase database) {
         initComponents();
@@ -538,8 +542,16 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
             if (checkFieldAttributes()) {
                 consumer = Methods.getConsumer(cmbConsumerName.getSelectedItem().toString(), consumerCollection);
                 Date date = dcDate.getDate();
-
-                FrmBill bill = new FrmBill(consumer, dtmProductList, consumerBill, date);
+                //setProducts and Id
+                consumerBill.setProducts(products);
+                consumerBill.setBillNumber(lblBillId.getText());
+                consumerBill.setConsumerName(consumer.getConsumerName());
+                consumerBill.setDate(LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault()));
+                
+                
+                
+                //Print Bill
+                FrmBill bill = new FrmBill(consumer, dtmProductList, consumerBill, date, billCollection);
                 
                 //Update Products amount
                 for (Product next : products) {

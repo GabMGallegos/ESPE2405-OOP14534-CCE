@@ -10,15 +10,14 @@ import java.util.List;
  */
 public class Bill {
 
-    private int billNumber;
+    private String billNumber;
     private List<Product> products;
-    private BigDecimal amount;
+    private BigDecimal totalPrice;
     private String consumerName;
     private LocalDateTime date;
     private KindOfPayment payment;
 
-    public Bill(int billNumber, String consumerName, LocalDateTime date, KindOfPayment payment) {
-        validateBillNumber(billNumber);
+    public Bill(String billNumber, String consumerName, LocalDateTime date, KindOfPayment payment) {
         validateConsumerName(consumerName);
         validateDate(date);
 
@@ -26,7 +25,7 @@ public class Bill {
         this.consumerName = consumerName;
         this.date = date;
         this.products = new ArrayList<>();
-        this.amount = BigDecimal.ZERO;
+        this.totalPrice = BigDecimal.ZERO;
         this.payment = payment;
     }
 
@@ -37,30 +36,30 @@ public class Bill {
         validateProduct(product);
         product.setAmount(quantity);
         products.add(product);
-        amount = amount.add(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
+        totalPrice = totalPrice.add(product.getPrice().multiply(BigDecimal.valueOf(quantity)));
     }
 
     public void removeProduct(Product product) {
         if (products.remove(product)) {
-            amount = amount.subtract(product.getPrice());
+            totalPrice = totalPrice.subtract(product.getPrice());
         }
     }
 
     @Override
     public String toString() {
-        return "Bill{" + "billNumber=" + billNumber + ", products=" + products + ", amount=" + amount + ", consumerName=" + consumerName + ", date=" + date + ", payment=" + payment + '}';
+        return "Bill{" + "billNumber=" + billNumber + ", products=" + products + ", amount=" + totalPrice + ", consumerName=" + consumerName + ", date=" + date + ", payment=" + payment + '}';
     }
 
     public String toCSV() {
         StringBuilder csv = new StringBuilder();
-        csv.append(billNumber).append(",").append(amount).append(",").append(consumerName).append(",").append(payment).append(",").append(date).append("\n");
+        csv.append(billNumber).append(",").append(totalPrice).append(",").append(consumerName).append(",").append(payment).append(",").append(date).append("\n");
         for (Product product : products) {
             csv.append(product.getId()).append(",").append(product.getName()).append(",").append(product.getPrice()).append(",").append(product.getAmount()).append("\n");
         }
         return csv.toString();
     }
 
-    public int getBillNumber() {
+    public String getBillNumber() {
         return billNumber;
     }
 
@@ -68,8 +67,8 @@ public class Bill {
         return new ArrayList<>(products);
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
     }
 
     public String getConsumerName() {
@@ -82,12 +81,6 @@ public class Bill {
 
     public KindOfPayment getPayment() {
         return payment;
-    }
-
-    private void validateBillNumber(int billNumber) {
-        if (billNumber <= 0) {
-            throw new IllegalArgumentException("The invoice number must be positive");
-        }
     }
 
     private void validateConsumerName(String consumerName) {
@@ -106,5 +99,29 @@ public class Bill {
         if (product == null) {
             throw new IllegalArgumentException("The product cannot be null");
         }
+    }
+
+    public void setBillNumber(String billNumber) {
+        this.billNumber = billNumber;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setConsumerName(String consumerName) {
+        this.consumerName = consumerName;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public void setPayment(KindOfPayment payment) {
+        this.payment = payment;
     }
 }
