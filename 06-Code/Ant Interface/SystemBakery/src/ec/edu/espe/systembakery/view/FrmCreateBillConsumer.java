@@ -577,6 +577,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
                 }
 
                 cleanFields();
+                setBillId();
             }
         } catch (PrinterException e) {
             JOptionPane.showMessageDialog(null, "Error de Impresión", "Error: \n" + e, JOptionPane.INFORMATION_MESSAGE);

@@ -31,6 +31,7 @@ import org.bson.Document;
  *
  * @author Molina Gallegos Gabriel Anthony, CodeCrafting Engineers
  */
+
 public class FrmBill extends javax.swing.JFrame implements Printable {
     
     private static MongoCollection billCollection;
@@ -47,6 +48,9 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         this.bill = bill;
         this.billDate = billDate;
         this.billCollection = billCollection;
+        computeSale();
+        bill.setTotalPrice(totalSale);
+        updateBill();
     }
 
     /**
@@ -520,17 +524,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         lblDateInLetters.setText(date);
         
         setTableInJlabel();
-        bill.setTotalPrice(totalSale);
         
-        //New Bill
-        Document billDocument = new Document("id", bill.getBillNumber())
-                .append("productos", convertProductsToDocuments(bill.getProducts()))
-                .append("precioTotal", bill.getTotalPrice())
-                .append("consumidor", bill.getConsumerName())
-                .append("fecha", bill.getDate())
-                .append("tipoDePago", bill.getPayment());
-        
-        billCollection.insertOne(billDocument);
         
         BigDecimal percentege = new BigDecimal("0.85");
         lblTotalPrice.setText(totalSale.toString());
@@ -561,6 +555,7 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
                     .append("Nombre", product.getName())
                     .append("Cantidad", product.getAmount())
                     .append("Precio U.", product.getPrice());
+            productDocuments.add(productDocument);
         }
         
         return productDocuments;
@@ -568,14 +563,10 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
     
     
     public void setTableInJlabel(){
-        float computeSale = 0;
         StringBuilder builderText = new StringBuilder("<html><pre>");
         for (int i = 0; i < productTable.getRowCount(); i++) {
             for (int j = 0; j < productTable.getColumnCount(); j++) {
                 builderText.append(productTable.getValueAt(i, j).toString());
-                if (j == 4) {
-                    computeSale = computeSale + Float.parseFloat(productTable.getValueAt(i, j).toString());
-                }
                 if (j < productTable.getColumnCount() -1) {
                     builderText.append("\t");
                 }
@@ -584,7 +575,15 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
         }
         builderText.append("</pre></html>");
         lblProductsPrint.setText(builderText.toString());
-        totalSale = new BigDecimal(Float.toString(computeSale));
+        
+    }
+    
+    public void computeSale(){
+        float sale = 0;
+        for (int i = 0; i < productTable.getRowCount(); i++) {
+            sale = sale + Float.parseFloat(productTable.getValueAt(i, 4).toString());
+        }
+        totalSale = new BigDecimal(Float.toString(sale));
         totalSale = totalSale.setScale(2, RoundingMode.HALF_UP);
     }
     
@@ -651,6 +650,17 @@ public class FrmBill extends javax.swing.JFrame implements Printable {
      */
     public void setLblTotalPrice(javax.swing.JLabel lblTotalPrice) {
         this.lblTotalPrice = lblTotalPrice;
+    }
+
+    private void updateBill() {
+        Document billDocument = new Document("id", bill.getBillNumber())
+                .append("productos", convertProductsToDocuments(bill.getProducts()))
+                .append("precioTotal", bill.getTotalPrice())
+                .append("consumidor", bill.getConsumerName())
+                .append("fecha", bill.getDate())
+                .append("tipoDePago", bill.getPayment());
+        
+        billCollection.insertOne(billDocument);
     }
 
     
