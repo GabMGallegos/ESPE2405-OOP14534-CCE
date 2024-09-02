@@ -23,7 +23,8 @@ import javax.swing.JOptionPane;
  */
 public class MethodosCostumer implements ICostumer {
 
-    Conection conn = new Conection();
+    Conection conn = Conection.getInstance();
+    
     MongoDatabase database;
     private MongoCollection<Document> coleccion;
     private static final String ALGORITHM = "AES";

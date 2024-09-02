@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class SystemBakery {
 
     public static void main(String[] args) {
-        Conection conn = new Conection();
+        Conection conn = Conection.getInstance();
         MongoDatabase database;
 
         try {

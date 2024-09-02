@@ -553,14 +553,7 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
                 //Print Bill
                 FrmBill bill = new FrmBill(consumer, dtmProductList, consumerBill, date, billCollection);
                 
-                //Update Products amount
-                for (Product next : products) {
-                    Document filter = new Document("Id", ""+next.getId());
-                    Document document = (Document) productCollection.find(filter).first();
-                    int currentAmount = Integer.parseInt(document.getString("Cantidad"));
-                    int updateAmount = currentAmount - next.getAmount();
-                    productCollection.updateOne(filter, set("Cantidad",updateAmount+""));
-                }
+                updateProductAmount();
                 
                 //Update consumer Array 
                 Document filter = new Document("CI", txtRucCi.getText());
@@ -583,6 +576,17 @@ public class FrmCreateBillConsumer extends javax.swing.JFrame  {
             JOptionPane.showMessageDialog(null, "Error de Impresión", "Error: \n" + e, JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnPrintBillActionPerformed
+
+    private void updateProductAmount() throws NumberFormatException {
+        //Update Products amount
+        for (Product next : products) {
+            Document filter = new Document("Id", ""+next.getId());
+            Document document = (Document) productCollection.find(filter).first();
+            int currentAmount = Integer.parseInt(document.getString("Cantidad"));
+            int updateAmount = currentAmount - next.getAmount();
+            productCollection.updateOne(filter, set("Cantidad",updateAmount+""));
+        }
+    }
 
     private void cleanFields() {
         txtProductAmount.setText("");

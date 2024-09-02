@@ -28,12 +28,21 @@ public class Conection {
     private MongoDatabase mongoDatabase;
     private MongoClient mongoClient;
 
+    private static Conection instance;
+    
     public Conection(MongoDatabase mongoDatabase, MongoClient mongoClient) {
         this.mongoDatabase = mongoDatabase;
         this.mongoClient = mongoClient;
     }
     
-    public Conection() {
+    private Conection() {
+    }
+    //singleton
+    public static Conection getInstance(){
+        if(instance == null){
+            instance = new Conection();
+        }
+        return instance;
     }
     
     public Conection createConection() {

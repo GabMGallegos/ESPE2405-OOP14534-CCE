@@ -13,9 +13,9 @@ public class FrmAddSupplier extends javax.swing.JFrame {
     /**
      * Creates new form addSupplier
      */
-    public FrmAddSupplier() {
+    public FrmAddSupplier(MongoDatabase database) {
         initComponents();
-        FrmAddSupplier.database = database;
+        this.database = database;
     }
 
     /**
@@ -324,7 +324,7 @@ public class FrmAddSupplier extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAddSupplier().setVisible(true);
+                new FrmAddSupplier(database).setVisible(true);
             }
         });
     }
